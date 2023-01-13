@@ -1,5 +1,4 @@
 {
-  "version": "3.0.1-alpha",
   "name": "bamfura/core",
   "description": "The API & platform builder, build your apps 10x faster even more, it's open source & 100% free !",
   "keywords": [
@@ -56,7 +55,8 @@
       "email": "hello@uatech.co.id"
     }
   ],
-  "minimum-stability": "alpha",
+  "minimum-stability": "dev",
+    "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "Uasoft\\Badaso\\": "src/"
