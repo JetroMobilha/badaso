@@ -51,12 +51,12 @@
   },
   "authors": [
     {
-      "name": "UASOFT",
-      "email": "hello@uatech.co.id"
+      "name": "Bamfura",
+      "email": "geral@bamfura.com"
     }
   ],
   "minimum-stability": "dev",
-    "prefer-stable": true,
+  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "Uasoft\\Badaso\\": "src/"
