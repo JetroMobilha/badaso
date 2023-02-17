@@ -333,11 +333,7 @@ abstract class Controller extends BaseController
             }
             
 
-            try {
-                $model->save();
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
+            $model->save();
 
             
             foreach ($multi_select as $key => $sync_data) {
@@ -473,11 +469,8 @@ abstract class Controller extends BaseController
                     }
                 }
             }
-            try {
-                $model->save();
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
+
+            $model->save();
 
             foreach ($multi_select as $key => $sync_data) {
                 try {

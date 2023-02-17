@@ -150,11 +150,7 @@ class AdminCommand extends Command
             $user->password = Hash::make($password);
            
 
-            try {
-                $user->save();
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
+            $user->save();
 
             $role = $this->getAdministratorRole();
 
