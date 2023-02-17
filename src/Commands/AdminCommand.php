@@ -148,7 +148,13 @@ class AdminCommand extends Command
             $user->email = $email;
             $user->email_verified_at = date('Y-m-d H:i:s');
             $user->password = Hash::make($password);
-            $user->save();
+           
+
+            try {
+                $user->save();
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
 
             $role = $this->getAdministratorRole();
 
