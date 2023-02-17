@@ -149,18 +149,27 @@ class AdminCommand extends Command
             $user->email_verified_at = date('Y-m-d H:i:s');
             $user->password = Hash::make($password);
             $user->save();
-/*
+
             $role = $this->getAdministratorRole();
 
             $user_role = new UserRole();
             $user_role->user_id = $user->id;
             $user_role->role_id = $role->id;
             $user_role->save();
-*/
+
             return $user;
         } else {
             $user = User::where('email', $email)->first();
 
+            $role = $this->getAdministratorRole();
+            $user_role = UserRole::where('user_id',$user->id)->where('role_id',$role->id)->first();
+
+            if (is_null($user_role)) {
+                $user_role = new UserRole();
+                $user_role->user_id = $user->id;
+                $user_role->role_id = $role->id;
+                $user_role->save();
+            }
             return $user;
         }
     }
