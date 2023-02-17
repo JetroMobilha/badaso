@@ -331,7 +331,15 @@ abstract class Controller extends BaseController
                     ];
                 }
             }
-            $model->save();
+            
+
+            try {
+                $model->save();
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+
+            
             foreach ($multi_select as $key => $sync_data) {
                 try {
                     $model->belongsToMany(
@@ -465,7 +473,11 @@ abstract class Controller extends BaseController
                     }
                 }
             }
-            $model->save();
+            try {
+                $model->save();
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
 
             foreach ($multi_select as $key => $sync_data) {
                 try {
