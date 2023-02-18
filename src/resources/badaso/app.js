@@ -228,7 +228,7 @@ try {
 }
 
 const i18n = new VueI18n({
-  locale: "id",
+  locale: "pt",
   fallbackLocale: "en",
   messages: lang.i18n,
 });

@@ -148,8 +148,8 @@ class BadasoSetup extends Command
                 <<<'EOT'
 
         // Badaso
-        mix.js("vendor/badaso/core/src/resources/badaso/app.js", "public/js/badaso.js")
-            .sass("vendor/badaso/core/src/resources/badaso/assets/scss/style.scss", "public/css/badaso.css")
+        mix.js("vendor/bamfura/core/src/resources/badaso/app.js", "public/js/badaso.js")
+            .sass("vendor/bamfura/core/src/resources/badaso/assets/scss/style.scss", "public/css/badaso.css")
             .vue()
         EOT;
 
