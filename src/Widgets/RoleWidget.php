@@ -17,9 +17,15 @@ class RoleWidget implements WidgetInterface
         return 'browse_roles';
     }
 
+    public function getType(): string
+    {
+        return  WidgetInterface::PADRAO;
+    }
+
     public function run($params = null)
     {
         return [
+            'type' => $this->getType(),
             'label' => 'Role',
             'icon' => 'accessibility',
             'value' => Role::count(),

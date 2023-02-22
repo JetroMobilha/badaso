@@ -17,9 +17,15 @@ class PermissionWidget implements WidgetInterface
         return 'browse_permissions';
     }
 
+    public function getType(): string
+    {
+        return  WidgetInterface::PADRAO;
+    }
+
     public function run($params = null)
     {
         return [
+            'type' => $this->getType(),
             'label' => 'Permission',
             'icon' => 'lock',
             'value' => Permission::count(),
