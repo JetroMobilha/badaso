@@ -103,9 +103,9 @@ class TabelaWidget implements WidgetInterface
         $records = [];
 
         if ($order_field) {
-            $data = $model::query()->select($fields)->orderBy($order_field, $order_direction);
+            $data = $model::select($fields)->orderBy($order_field, $order_direction);
         } else {
-            $data = $model::query()->select($fields);
+            $data = $model::select($fields);
         }
         // soft delete implement
         $is_soft_delete = $data_type->is_soft_delete;
