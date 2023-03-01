@@ -9,6 +9,7 @@ Route::group(['prefix' => $api_route_prefix, 'namespace' => 'Uasoft\Badaso\Contr
     Route::group(['prefix' => 'v1'], function () {
         Route::group(['prefix' => 'dashboard'], function () {
             Route::get('/', 'BadasoDashboardController@index')->middleware(\config('badaso.middleware.authenticate'));
+            Route::get('/table', 'BadasoDashboardController@getDataWidget')->middleware(\config('badaso.middleware.authenticate'));
         });
 
         Route::group(['prefix' => 'data'], function () {

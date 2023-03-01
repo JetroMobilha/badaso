@@ -6,7 +6,7 @@
       :vs-lg="col"
       vs-xs="12"
     >
-      <vs-card v-if="data.type=='padrao'" class="widget__content">
+      <vs-card v-if="data.type=='padrao'" class="widget__content" :style="{ height:'400px'}">
         <div class="widget__icon-container">
           <vs-icon
             v-if="data.icon"
@@ -24,7 +24,7 @@
         >
       </vs-card>
 
-      <vs-card v-if="data.type=='grafico'" class="widget__content">
+      <vs-card v-if="data.type=='grafico'" class="widget__content" :style="{ height:'400px'}">
         <div class="widget__icon-container">
           <vs-icon
             v-if="data.icon"
@@ -42,23 +42,18 @@
         >
       </vs-card>
 
-      <vs-card v-if="data.type=='tabela'" class="widget__content">
-        <div class="widget__icon-container">
-          <vs-icon
-            v-if="data.icon"
-            class="widget__icon"
-            :icon="data.icon"
-          ></vs-icon>
-          <h4 class="mb-1">{{ data.value }}</h4>
-          <span>{{ data.label }}</span>
-        </div>
-        <vs-progress
-          class="widget__progress-bar"
-          :percent="getPercent(data.value, data.max)"
-          :color="getProgressBarColor(data.value, data.max)"
-          >primary</vs-progress
+      <vs-card v-if="data.type=='tabela'" class="widget__content" :style="{ height:'400px'}">
+        <badaso-table-dash-board
+        :nome="data.nome"
+        :label="data.label"
+        :icon="data.icon"
+        :type="data.type"
+        :style="{ height:'400px'}"
         >
+        </badaso-table-dash-board>
       </vs-card>
+
+
     </vs-col>
   </vs-row>
 </template>

@@ -22,6 +22,18 @@ class RoleWidget implements WidgetInterface
         return  WidgetInterface::PADRAO;
     }
 
+    public function getNome():string{
+        return WidgetInterface::NOME;
+    }
+
+    public function getNomeDisplay():string{
+        return WidgetInterface::NOME;;
+    }
+
+    public function getDados(){
+        return null;
+    }
+
     public function run($params = null)
     {
         return [

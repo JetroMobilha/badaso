@@ -49,6 +49,7 @@ return [
         'Uasoft\\Badaso\\Widgets\\UserWidget',
         'Uasoft\\Badaso\\Widgets\\RoleWidget',
         'Uasoft\\Badaso\\Widgets\\PermissionWidget',
+        'Uasoft\\Badaso\\Widgets\\TabelaWidget',
     ],
     'whitelist' => [
         'web' => [],

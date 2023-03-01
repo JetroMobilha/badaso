@@ -12,4 +12,10 @@ export default {
     const url = ep + qs;
     return resource.get(url);
   },
+  table(data) {
+    const ep = apiPrefix + "/v1/dashboard/table";
+    const qs = QueryString(data);
+    const url = ep + qs;
+    return resource.get(url);
+  },
 };

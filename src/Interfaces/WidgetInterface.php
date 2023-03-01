@@ -11,11 +11,19 @@ interface WidgetInterface
     const TABELA = "tabela";
     const GRAFICO = "grafica";
     const PADRAO = "padrao";
+    const CALENDARIO = "calendario";
+    const NOME = "Widget";
 
 
     public function getPermissions();
 
     public function getType():string;
+
+    public function getNome():string;
+
+    public function getDados();
+
+    public function getNomeDisplay():string;
 
     public function run($params = null);
 }
