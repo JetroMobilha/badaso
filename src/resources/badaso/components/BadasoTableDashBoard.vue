@@ -17,26 +17,25 @@
             :description-connector="$t('crudGenerated.footer.descriptionConnector')"
             :description-body="$t('crudGenerated.footer.descriptionBody')"
           >
-            <template slot="thead">
-              <vs-th
-                v-for="(dataRow, index) in dataType.dataRows"
-                :key="index"
-                :sort-key="$caseConvert.stringSnakeToCamel(dataRow.field)"
-              >
-                <template v-if="dataRow.browse == 1">
-                  {{ dataRow.displayName }}
-                </template>
+            <template slot="thead"
+              v-for="(dataRow, index) in dataType.dataRows"
+              :key="index"
+              :sort-key="$caseConvert.stringSnakeToCamel(dataRow.field)"
+            >
+              <vs-th v-if="dataRow.browse == 1">
+                {{ dataRow.displayName }}
               </vs-th>
               <vs-th> {{ $t("crudGenerated.header.action") }} </vs-th>
             </template>
 
-            <template slot-scope="{ data }">
+            <template slot-scope="{ data }"
+              :data="record"
+              :key="index"
+              v-for="(record, index) in data"
+              :state="idsOfflineDeleteRecord.includes(record.id.toString())?'danger':'default'"
+            >
               <vs-tr
-                :data="record"
-                :key="index"
-                v-for="(record, index) in data"
-                :state="idsOfflineDeleteRecord.includes(record.id.toString())?'danger':'default'"
-              >
+                >
                 <template
                   v-if="!idsOfflineDeleteRecord.includes(record.id.toString()) || !isOnline"
                 >
