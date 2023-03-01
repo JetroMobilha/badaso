@@ -49,13 +49,13 @@ class TabelaWidget implements WidgetInterface
         return WidgetInterface::NOME;;
     }
 
-    public function getLimit(){return null;}
+    public function getLimit(){return 0;}
 
-    public function getPage(){return null;}
+    public function getPage(){return 1;}
 
-    public function getOrderField(){return null;}
+    public function getOrderField(){return '';}
 
-    public function getOrderDirection(){return null;}
+    public function getOrderDirection(){return '';}
 
     public function run($params = null)
     {
@@ -74,10 +74,10 @@ class TabelaWidget implements WidgetInterface
         $data_type->data_rows = $data_type->dataRows;
 
         $builder_params = [
-            'limit'           => isset($this->getLimit()) ? $this->getLimit() : 10,
-            'page'            => isset($this->getPage()) ? $this->getPage() : null,
-            'order_field'     => isset($this->getOrderField()) ? $this->getOrderField() : $data_type->order_column,
-            'order_direction' => isset($this->getOrderDirection()) ? $this->getOrderDirection() : $data_type->order_direction,
+            'limit'           => $this->getLimit()> 0 ? $this->getLimit() : 10,
+            'page'            => $this->getPage()> 1 ? $this->getPage() : 1,
+            'order_field'     => empty($this->getOrderField()) ? $this->getOrderField() : $data_type->order_column,
+            'order_direction' => empty($this->getOrderDirection()) ? $this->getOrderDirection() : $data_type->order_direction,
             'filter_key'      =>  null,
             'filter_operator' => 'containts',
             'filter_value'    => '',
