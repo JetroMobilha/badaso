@@ -48,11 +48,11 @@ class BadasoDashboardController extends Controller
                 if ($widget_class instanceof WidgetInterface && isset($request->nome) && $widget_class->getNome()==$request->nome ) {
                     $permissions = $widget_class->getPermissions();
                     if (is_null($permissions)) {
-                        $data[] = $widget_class->getDados();
+                        $data = $widget_class->getDados();
                     } else {
                         $allowed = AuthenticatedUser::isAllowedTo($permissions);
                         if ($allowed) {
-                            $data[] = $widget_class->getDados();
+                            $data = $widget_class->getDados();
                         }
                     }
                 }

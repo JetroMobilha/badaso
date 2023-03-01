@@ -3,11 +3,10 @@
     <vs-col vs-lg="12">
       <vs-card>
         <div slot="header">
-          <h3>{{ dataType.displayNameSingular }}</h3>
+          <h3>{{label }}</h3>
         </div>
         <div>
           <badaso-table
-            v-if="dataType.serverSide !== 1"
             v-model="selected"
             pagination
             :max-items="descriptionItems[0]"
