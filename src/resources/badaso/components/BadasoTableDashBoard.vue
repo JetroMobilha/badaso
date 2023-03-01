@@ -208,7 +208,7 @@ export default {
   data: () => ({
     errors: {},
     data: {},
-    descriptionItems: [10, 50, 100],
+    descriptionItems: [5],
     selected: [],
     records: [],
     dataType: [],

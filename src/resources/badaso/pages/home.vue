@@ -86,9 +86,9 @@ export default {
           this.$closeLoader();
           this.dashboardData = response.data;
           if (this.dashboardData.length >= 4) {
-            this.col = 4;
+            this.col = 6;
           } else if (this.dashboardData.length == 3) {
-            this.col = 4;
+            this.col = 6;
           } else {
             this.col = 6;
           }
