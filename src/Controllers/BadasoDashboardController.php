@@ -45,7 +45,7 @@ class BadasoDashboardController extends Controller
             $data = [];
             foreach ($widgets as $widget) {
                 $widget_class = new $widget();
-                if ($widget_class instanceof WidgetInterface && isset($request->nome) && $widget->getNome()==$request->nome ) {
+                if ($widget_class instanceof WidgetInterface && isset($request->nome) && $widget_class->getNome()==$request->nome ) {
                     $permissions = $widget_class->getPermissions();
                     if (is_null($permissions)) {
                         $data[] = $widget_class->getDados();

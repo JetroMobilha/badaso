@@ -6,7 +6,7 @@
       :vs-lg="col"
       vs-xs="12"
     >
-      <vs-card v-if="data.type=='padrao'" class="widget__content" :style="{ height:'400px'}">
+      <vs-card v-if="data.type=='padrao'" class="widget__content">
         <div class="widget__icon-container">
           <vs-icon
             v-if="data.icon"
@@ -42,16 +42,15 @@
         >
       </vs-card>
 
-      <vs-card v-if="data.type=='tabela'" class="widget__content" :style="{ height:'400px'}">
-        <badaso-table-dash-board
+      <badaso-table-dash-board
+        :style="{ height:'400px'}"
+        v-if="data.type=='tabela'"
         :nome="data.nome"
         :label="data.label"
         :icon="data.icon"
         :type="data.type"
-        :style="{ height:'400px'}"
         >
         </badaso-table-dash-board>
-      </vs-card>
 
 
     </vs-col>
@@ -87,7 +86,7 @@ export default {
           this.$closeLoader();
           this.dashboardData = response.data;
           if (this.dashboardData.length >= 4) {
-            this.col = 3;
+            this.col = 4;
           } else if (this.dashboardData.length == 3) {
             this.col = 4;
           } else {
