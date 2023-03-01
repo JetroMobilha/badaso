@@ -2,11 +2,8 @@
   <vs-row>   
     <vs-col vs-lg="12">
       <vs-card>
-        <div slot="header">
-          <h3>{{label }}</h3>
-        </div>
         <div>
-          <badaso-table
+          <badaso-table-board
             v-model="selected"
             pagination
             :max-items="descriptionItems[0]"
@@ -20,6 +17,10 @@
             :description-body="$t('crudGenerated.footer.descriptionBody')"
             multiple
           >
+            <template slot="nome">
+              <h3>{{label}}</h3>
+            </template>
+            
             <template slot="thead">
               <vs-th
                 v-for="(dataRow, index) in dataType.dataRows"
@@ -184,7 +185,7 @@
                 </template>
               </vs-tr>
             </template>
-          </badaso-table>
+          </badaso-table-board>
         </div>
       </vs-card>
     </vs-col>
