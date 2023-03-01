@@ -2,8 +2,12 @@
   <vs-row>   
     <vs-col vs-lg="12">
       <vs-card>
+        <div slot="header">
+          <h3>{{ dataType.displayNameSingular }}</h3>
+        </div>
         <div>
-          <badaso-table-board
+          <badaso-table
+            v-if="dataType.serverSide !== 1"
             v-model="selected"
             pagination
             :max-items="descriptionItems[0]"
@@ -15,12 +19,7 @@
             :description-title="$t('crudGenerated.footer.descriptionTitle')"
             :description-connector="$t('crudGenerated.footer.descriptionConnector')"
             :description-body="$t('crudGenerated.footer.descriptionBody')"
-            multiple
           >
-            <template slot="nome">
-              <h3>{{label}}</h3>
-            </template>
-            
             <template slot="thead">
               <vs-th
                 v-for="(dataRow, index) in dataType.dataRows"
@@ -185,7 +184,7 @@
                 </template>
               </vs-tr>
             </template>
-          </badaso-table-board>
+          </badaso-table>
         </div>
       </vs-card>
     </vs-col>
@@ -209,7 +208,7 @@ export default {
   data: () => ({
     errors: {},
     data: {},
-    descriptionItems: [5],
+    descriptionItems: [4],
     selected: [],
     records: [],
     dataType: [],
@@ -221,7 +220,7 @@ export default {
     totalItem: 0,
     filter: "",
     page: 1,
-    limit: 5,
+    limit: 10,
     orderField: "",
     orderDirection: "",
     rowPerPage: null,
