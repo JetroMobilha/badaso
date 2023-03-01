@@ -96,16 +96,16 @@ class TabelaWidget implements WidgetInterface
 
         $fields = array_diff(array_merge($fields, $ids), $field_manytomany);
 
-        $model = app($data_type->model_name);
+        $model = app($data_type->model_name::class);
         $order_field = $builder_params['order_field'];
         $order_direction = $builder_params['order_direction'];
 
         $records = [];
 
         if ($order_field) {
-            $data = $model::select($fields)->orderBy($order_field, $order_direction);
+            $data = $model::query()->select($fields)->orderBy($order_field, $order_direction);
         } else {
-            $data = $model::select($fields);
+            $data = $model::query()->select($fields);
         }
         // soft delete implement
         $is_soft_delete = $data_type->is_soft_delete;
