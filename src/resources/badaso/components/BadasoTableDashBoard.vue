@@ -2,17 +2,14 @@
   <vs-row>   
     <vs-col vs-lg="12">
       <vs-card>
-        <div slot="header">
-          <h3>{{ dataType.displayNameSingular }}</h3>
-        </div>
-        <div>
-          <badaso-table
+        <badaso-widget-table
             v-if="dataType.serverSide !== 1"
             v-model="selected"
             pagination
             :max-items="descriptionItems[0]"
             search
             :data="records"
+            :label="label"
             stripe
             description
             :description-items="descriptionItems"
@@ -184,8 +181,7 @@
                 </template>
               </vs-tr>
             </template>
-          </badaso-table>
-        </div>
+        </badaso-widget-table>
       </vs-card>
     </vs-col>
   </vs-row>
