@@ -74,7 +74,7 @@ class TabelaWidget implements WidgetInterface
         $data_type->data_rows = $data_type->dataRows;
 
         $builder_params = [
-            'limit'           => $this->getLimit()> 0 ? $this->getLimit() : 10,
+            'limit'           => $this->getLimit()> 0 ? $this->getLimit() :4,
             'page'            => $this->getPage()> 1 ? $this->getPage() : 1,
             'order_field'     => empty($this->getOrderField()) ? $this->getOrderField() : $data_type->order_column,
             'order_direction' => empty($this->getOrderDirection()) ? $this->getOrderDirection() : $data_type->order_direction,

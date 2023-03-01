@@ -220,7 +220,7 @@ export default {
     totalItem: 0,
     filter: "",
     page: 1,
-    limit: 10,
+    limit: 5,
     orderField: "",
     orderDirection: "",
     rowPerPage: null,
