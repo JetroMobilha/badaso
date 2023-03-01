@@ -96,7 +96,8 @@ class TabelaWidget implements WidgetInterface
 
         $fields = array_diff(array_merge($fields, $ids), $field_manytomany);
 
-        $model = app($data_type->model_name::class);
+        $ClassNome = $data_type->model_name;
+        $model = new  $ClassNome();
         $order_field = $builder_params['order_field'];
         $order_direction = $builder_params['order_direction'];
 
