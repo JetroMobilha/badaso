@@ -684,7 +684,7 @@ export default {
 
 <style scoped>
   .vs-con-table table {
-    font-size: .8rem;
+    font-size: .75rem;
     width: 100%;
     border-collapse: collapse;
 }
@@ -695,14 +695,14 @@ th {
     padding-bottom: 0px;
     border: 0;
     text-align: left;
-   font-size: .8rem;
+   font-size: .75rem;
 }
 
 th .sort-th, th .vs-table-text {
-    padding: 5px;
+    padding: 3px;
 }
 
 .vs-table--tbody-table .tr-values td {
-     padding: 5px;
+     padding: 2px;
 }
 </style>

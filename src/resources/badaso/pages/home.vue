@@ -3,7 +3,7 @@
     <vs-col
       v-for="(data, index) in dashboardData"
       :key="index"
-      :vs-lg="col"
+      :vs-lg="col margin-col"
       vs-xs="12"
     >
       <vs-card v-if="data.type=='padrao'" class="widget__content">
@@ -50,9 +50,7 @@
         :icon="data.icon"
         :type="data.type"
         >
-        </badaso-table-dash-board>
-
-
+      </badaso-table-dash-board>
     </vs-col>
   </vs-row>
 </template>
@@ -125,3 +123,15 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .margin-col{
+      margin-bottom: 0px;
+  }
+
+  @media (width <= 768px){
+      .margin-col{
+        margin-bottom: 50px;
+    }
+  }
+</style>
