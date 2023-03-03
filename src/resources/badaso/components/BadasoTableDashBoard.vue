@@ -346,7 +346,7 @@ export default {
         });
       }
 
-      console.log(this.$ref.widgettable.$ref.table);
+      console.log(this.$refs.widgettable.$refs.table);
     },
     deleteRecordDataPending(id) {
       try {
