@@ -428,28 +428,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-  .vs-con-table table {
-    font-size: .8rem;
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th {
-     padding: 0px 0px; 
-    padding-top: 0px;
-    padding-bottom: 0px;
-    border: 0;
-    text-align: left;
-   font-size: .8rem;
-}
-
-th .sort-th, th .vs-table-text {
-    padding: 5px;
-}
-
-.vs-table--tbody-table .tr-values td {
-    /* padding: 10px; */
-}
-</style>
