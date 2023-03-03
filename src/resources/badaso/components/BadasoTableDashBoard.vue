@@ -373,7 +373,6 @@ console.log(Array.from(this.$refs.widgettable.$refs.table.querySelectorAll('td')
     },
     getRowBrowse(dataRows) {
         return dataRows.filter(data => data.browse == 1);
-      } 
     },
     deleteRecordDataPending(id) {
       try {
