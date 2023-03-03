@@ -347,9 +347,9 @@ export default {
       }
 
       let elementoRemover= [];
-console.log(this.$refs.widgettable.$refs.table.querySelectorAll ('th'));
-console.log(this.$refs.widgettable.$refs.table.querySelectorAll ('td'));
-      this.$refs.widgettable.$refs.table.querySelectorAll ('th').forEach(element => {
+console.log(this.$refs.widgettable.$refs.table.getElementsByTagName ('th'));
+console.log(this.$refs.widgettable.$refs.table.getElementsByTagName ('td'));
+      this.$refs.widgettable.$refs.table.getElementsByTagName ('th').forEach(element => {
         let el = element.getElementsByTagName('div')
         if (el && el.innerHTML =='') {
           console.log(el);
@@ -357,7 +357,7 @@ console.log(this.$refs.widgettable.$refs.table.querySelectorAll ('td'));
         }
       });
 
-      this.$refs.widgettable.$refs.table.querySelectorAll ('td').forEach(element => {
+      this.$refs.widgettable.$refs.table.getElementsByTagName ('td').forEach(element => {
         let el = element.getElementsByTagName('span')
         if (el && el.innerHTML =='') {
           console.log(element);
