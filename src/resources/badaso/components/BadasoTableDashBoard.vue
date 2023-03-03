@@ -682,19 +682,4 @@ export default {
 };
 </script>
 
-<style scoped>
-  .vs-con-table table {
-    font-size: .8rem;
-    width: 100%;
-    border-collapse: collapse;
-}
 
-th {
-     padding: 0px 0px; 
-    padding-top: 0px;
-    padding-bottom: 0px;
-    border: 0;
-    text-align: left;
-   font-size: .8rem;
-}
-</style>

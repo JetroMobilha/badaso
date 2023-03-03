@@ -25,7 +25,7 @@
     </header>
     <div class="con-tablex vs-table--content">
       <div :style="styleConTbody" class="vs-con-tbody vs-table--tbody">
-        <table ref="table" class="vs-table vs-table--tbody-table">
+        <table ref="table" class="vs-table vs-table--tbody-table BadasoWidgetTable">
           <thead ref="thead" class="vs-table--thead">
             <tr>
               <th v-if="multiple || hasExpadableData" class="td-check">
@@ -428,3 +428,28 @@ export default {
   },
 };
 </script>
+
+<style>
+ .BadasoWidgetTable .vs-con-table table {
+    font-size: .8rem;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.BadasoWidgetTable th {
+     padding: 0px 0px; 
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border: 0;
+    text-align: left;
+   font-size: .8rem;
+}
+
+.BadasoWidgetTable th .sort-th, th .vs-table-text {
+    padding: 5px;
+}
+
+.BadasoWidgetTable .vs-table--tbody-table .tr-values td {
+     padding: 10px; 
+}
+</style>
