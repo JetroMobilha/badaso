@@ -125,12 +125,8 @@ export default {
 </script>
 
 <style scoped>
-  .margin-col{
-      margin-bottom: 0px;
-  }
-
   @media (width <= 768px){
-      .margin-col{
+      .vs-col{
         margin-bottom: 50px;
     }
   }
