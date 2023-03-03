@@ -16,7 +16,8 @@
             :description-title="$t('crudGenerated.footer.descriptionTitle')"
             :description-connector="$t('crudGenerated.footer.descriptionConnector')"
             :description-body="$t('crudGenerated.footer.descriptionBody')"
-          >
+            ref="widgettable"
+            >
             <template slot="thead">
               <vs-th
                 v-for="(dataRow, index) in dataType.dataRows"
@@ -227,6 +228,7 @@ export default {
     isMaintenance: false,
     showMaintenancePage: false,
     isShowDataRecycle: false,
+    widgettable:'',
   }),
   watch: {
     $route: function (to, from) {
@@ -343,6 +345,8 @@ export default {
           color: "danger",
         });
       }
+
+      console.log(this.$ref.widgettable.$ref.table);
     },
     deleteRecordDataPending(id) {
       try {
@@ -569,6 +573,9 @@ export default {
       }
     },
     openMaintenanceDialog() {
+      this.maintenanceDialog = true;
+    },
+    removerLinhas() {
       this.maintenanceDialog = true;
     },
     saveMaintenanceState() {
