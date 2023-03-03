@@ -699,13 +699,22 @@ th {
 
 th .sort-th, th .vs-table-text {
     padding: 3px;
+    white-space: nowrap; /* impede a quebra de linha */
+    overflow: hidden; /* oculta o texto que passa da largura do elemento */
+    text-overflow: ellipsis; /* adiciona reticências (...) ao final do texto oculto */
 }
 
 .vs-table--tbody-table .tr-values td {
      padding: 2px;
 }
 
-th div,td span {
+th div {
+  white-space: nowrap; /* impede a quebra de linha */
+  overflow: hidden; /* oculta o texto que passa da largura do elemento */
+  text-overflow: ellipsis; /* adiciona reticências (...) ao final do texto oculto */
+}
+
+th span {
   white-space: nowrap; /* impede a quebra de linha */
   overflow: hidden; /* oculta o texto que passa da largura do elemento */
   text-overflow: ellipsis; /* adiciona reticências (...) ao final do texto oculto */
