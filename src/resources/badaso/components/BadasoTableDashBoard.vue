@@ -141,7 +141,7 @@
                             name:'CrudGeneratedRead',
                             params:{
                               id: data[index].id,
-                              slug: nome,
+                              slug: table,
                             },
                           }"
                           v-if="isCanRead && $helper.isAllowedToModifyGeneratedCRUD( 'read', dataType.name ) && !isShowDataRecycle"
