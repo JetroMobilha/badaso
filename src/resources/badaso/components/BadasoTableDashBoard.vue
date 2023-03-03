@@ -697,6 +697,12 @@ th {
     font-size: .75rem;
 }
 
+th div {
+  white-space: nowrap; /* impede a quebra de linha */
+  overflow: hidden; /* oculta o texto que passa da largura do elemento */
+  text-overflow: ellipsis; /* adiciona reticências (...) ao final do texto oculto */
+}
+
 th .sort-th, th .vs-table-text {
     padding: 3px;
     white-space: nowrap; /* impede a quebra de linha */
