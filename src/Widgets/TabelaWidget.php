@@ -63,6 +63,7 @@ class TabelaWidget implements WidgetInterface
             'type' => $this->getType(),
             'nome' => $this->getNome(),
             'label' => $this->getNomeDisplay(),
+            'table' => $this->getTabela(),
             'icon' => 'person',
         ];
     }

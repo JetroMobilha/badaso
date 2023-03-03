@@ -50,6 +50,7 @@
         :label="data.label"
         :icon="data.icon"
         :type="data.type"
+        :table="data.table"
         >
       </badaso-table-dash-board>
     </vs-col>

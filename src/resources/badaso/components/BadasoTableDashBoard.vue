@@ -154,7 +154,7 @@
                             name: 'CrudGeneratedEdit',
                             params: {
                               id: data[index].id,
-                              slug: nome,
+                              slug: table,
                             },
                           }"
                           v-if="isCanEdit && $helper.isAllowedToModifyGeneratedCRUD('edit', dataType ) && !isShowDataRecycle"
@@ -187,6 +187,7 @@ export default {
     label:'',
     icon:'',
     type:'',
+    table:'',
   },
   data: () => ({
     errors: {},
