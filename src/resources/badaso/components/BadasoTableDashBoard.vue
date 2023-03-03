@@ -141,7 +141,7 @@
                             name:'CrudGeneratedRead',
                             params:{
                               id: data[index].id,
-                              slug: $route.params.slug,
+                              slug: nome,
                             },
                           }"
                           v-if="isCanRead && $helper.isAllowedToModifyGeneratedCRUD( 'read', dataType.name ) && !isShowDataRecycle"
@@ -154,27 +154,13 @@
                             name: 'CrudGeneratedEdit',
                             params: {
                               id: data[index].id,
-                              slug: $route.params.slug,
+                              slug: nome,
                             },
                           }"
                           v-if="isCanEdit && $helper.isAllowedToModifyGeneratedCRUD('edit', dataType ) && !isShowDataRecycle"
                           icon="edit"
                         >
                           Edit
-                        </badaso-dropdown-item>
-                        <badaso-dropdown-item
-                          icon="delete"
-                          @click="confirmDelete(data[index].id)"
-                          v-if="!idsOfflineDeleteRecord.includes(record.id.toString()) && $helper.isAllowedToModifyGeneratedCRUD('delete',dataType)"
-                        >
-                          Delete
-                        </badaso-dropdown-item>
-                        <badaso-dropdown-item
-                          @click="confirmDeleteDataPending(data[index].id)"
-                          icon="delete_outline"
-                          v-if="idsOfflineDeleteRecord.includes(record.id.toString()) && !isShowDataRecycle"
-                        >
-                              {{ $t("offlineFeature.crudGenerator.deleteDataPending") }}
                         </badaso-dropdown-item>
                       </vs-dropdown-menu>
                     </badaso-dropdown>
@@ -345,31 +331,6 @@ export default {
           color: "danger",
         });
       }
-
-      let elementoRemover= [];
-console.log(this.$refs.widgettable.$refs.table.querySelectorAll('th'));
-console.log(Array.from(this.$refs.widgettable.$refs.table.querySelectorAll('td')));
-      this.$refs.widgettable.$refs.table.querySelectorAll('th').forEach(element => {
-        let el = element.getElementsByTagName('div')
-        if (el && el.innerHTML =='') {
-          elementoRemover.push(element);
-        }
-        console.log(el);
-      });
-
-      this.$refs.widgettable.$refs.table.querySelectorAll('td').forEach(element => {
-        let el = element.getElementsByTagName('span')
-        if (el && el.innerHTML =='') {
-          elementoRemover.push(element);
-        }
-        console.log(element);
-      });
-
-      elementoRemover.forEach(element => {
-        console.log();
-        element.remove();
-      });
-    
     },
     getRowBrowse(dataRows) {
       if(dataRows!=undefined){
