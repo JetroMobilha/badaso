@@ -346,6 +346,27 @@ export default {
         });
       }
 
+      let elementoRemover= [];
+
+      this.$refs.widgettable.$refs.table.getElementsByTagName('th').forEach(element => {
+        let el = element.getElementsByTagName('div')
+        if (el && el.innerHTML === '') {
+          elementoRemover.push(element);
+        }
+      });
+
+      this.$refs.widgettable.$refs.table.getElementsByTagName('td').forEach(element => {
+        let el = element.getElementsByTagName('span')
+        if (el && el.innerHTML === '') {
+          elementoRemover.push(element);
+        }
+      });
+
+      elementoRemover.forEach(element => {
+        element.remove();
+      });
+       
+    
       console.log(this.$refs.widgettable.$refs.table.getElementsByTagName('th'));
     },
     deleteRecordDataPending(id) {
