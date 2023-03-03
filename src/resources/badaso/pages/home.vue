@@ -3,7 +3,7 @@
     <vs-col
       v-for="(data, index) in dashboardData"
       :key="index"
-      :vs-lg="col margin-col"
+      :vs-lg="col"
       vs-xs="12"
     >
       <vs-card v-if="data.type=='padrao'" class="widget__content">
