@@ -347,22 +347,22 @@ export default {
       }
 
       let elementoRemover= [];
-console.log(this.$refs.widgettable.$refs.table.getElementsByTagName ('th'));
-console.log(Array.from(this.$refs.widgettable.$refs.table.getElementsByTagName ('td')));
-      Array.from(this.$refs.widgettable.$refs.table.getElementsByTagName ('th')).forEach(element => {
+console.log(this.$refs.widgettable.$refs.table.querySelectorAll('th'));
+console.log(Array.from(this.$refs.widgettable.$refs.table.querySelectorAll('td')));
+      this.$refs.widgettable.$refs.table.querySelectorAll('th').forEach(element => {
         let el = element.getElementsByTagName('div')
         if (el && el.innerHTML =='') {
-          console.log(el);
           elementoRemover.push(element);
         }
+        console.log(el);
       });
 
-      Array.from(this.$refs.widgettable.$refs.table.getElementsByTagName ('td')).forEach(element => {
+      this.$refs.widgettable.$refs.table.querySelectorAll('td').forEach(element => {
         let el = element.getElementsByTagName('span')
         if (el && el.innerHTML =='') {
-          console.log(element);
           elementoRemover.push(element);
         }
+        console.log(element);
       });
 
       elementoRemover.forEach(element => {
