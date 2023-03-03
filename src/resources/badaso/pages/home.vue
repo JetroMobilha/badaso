@@ -4,7 +4,7 @@
       v-for="(data, index) in dashboardData"
       :key="index"
       :vs-lg="col"
-      :vs-sm="12"
+      vs-sm="12"
       vs-xs="12"
     >
       <vs-card v-if="data.type=='padrao'" class="widget__content">
