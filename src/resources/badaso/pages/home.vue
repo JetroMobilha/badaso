@@ -4,6 +4,7 @@
       v-for="(data, index) in dashboardData"
       :key="index"
       :vs-lg="col"
+      :vs-sm="12"
       vs-xs="12"
     >
       <vs-card v-if="data.type=='padrao'" class="widget__content">
@@ -127,7 +128,7 @@ export default {
 <style scoped>
   @media (width <= 768px){
       .vs-col{
-        margin-bottom: 50px;
+        margin-bottom: 100px;
     }
   }
 </style>
