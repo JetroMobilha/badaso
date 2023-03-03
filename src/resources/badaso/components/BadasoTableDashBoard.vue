@@ -20,7 +20,7 @@
             >
             <template slot="thead">
               <vs-th
-                v-for="(dataRow, index) in dataType.dataRows"
+                v-for="(dataRow, index) in getRowBrowse(dataType.dataRows)"
                 :key="index"
                 :sort-key="$caseConvert.stringSnakeToCamel(dataRow.field)"
               >
@@ -370,6 +370,10 @@ console.log(Array.from(this.$refs.widgettable.$refs.table.querySelectorAll('td')
         element.remove();
       });
     
+    },
+    getRowBrowse(dataRows) {
+        return dataRows.filter(data => data.browse == 1);
+      } 
     },
     deleteRecordDataPending(id) {
       try {
