@@ -128,7 +128,15 @@ export default {
 <style scoped>
   @media (width <= 768px){
       .vs-col{
-        margin-bottom: 100px;
+        margin-bottom: 80px;
     }
   }
+
+  .vs-row {
+        margin-bottom: 50px;
+    }
+
+  .vs-row > .vs-col {
+    padding: 0 5px;
+}
 </style>
