@@ -347,7 +347,8 @@ export default {
       }
 
       let elementoRemover= [];
-
+console.log(this.$refs.widgettable.$refs.table.querySelectorAll ('th'));
+console.log(this.$refs.widgettable.$refs.table.querySelectorAll ('td'));
       this.$refs.widgettable.$refs.table.querySelectorAll ('th').forEach(element => {
         let el = element.getElementsByTagName('div')
         if (el && el.innerHTML =='') {
