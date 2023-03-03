@@ -689,12 +689,12 @@ export default {
 }
 
 th {
-     padding: 0px 0px; 
+    padding: 0px 0px; 
     padding-top: 0px;
     padding-bottom: 0px;
     border: 0;
     text-align: left;
-   font-size: .75rem;
+    font-size: .75rem;
 }
 
 th .sort-th, th .vs-table-text {
@@ -703,5 +703,11 @@ th .sort-th, th .vs-table-text {
 
 .vs-table--tbody-table .tr-values td {
      padding: 2px;
+}
+
+th div,td span {
+  white-space: nowrap; /* impede a quebra de linha */
+  overflow: hidden; /* oculta o texto que passa da largura do elemento */
+  text-overflow: ellipsis; /* adiciona reticências (...) ao final do texto oculto */
 }
 </style>
