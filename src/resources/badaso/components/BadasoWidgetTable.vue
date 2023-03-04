@@ -428,12 +428,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-   
-  .vs-table--thead  tr th div {
-    white-space: nowrap; /* impede a quebra de linha */
-    overflow: hidden; /* oculta o texto que passa da largura do elemento */
-    text-overflow: ellipsis; /* adiciona reticências (...) ao final do texto oculto */
-  }
-</style>
