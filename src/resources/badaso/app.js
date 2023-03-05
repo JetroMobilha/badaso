@@ -6,7 +6,6 @@ import Vuelidate from "vuelidate";
 import VueGtag from "vue-gtag";
 import VueCal from 'vue-cal'
 import 'vue-cal/dist/vuecal.css'
-console.log(VueCal);
 import api from "./api/index";
 import handleError from "./api/handle-error";
 import resource from "./api/resource";
