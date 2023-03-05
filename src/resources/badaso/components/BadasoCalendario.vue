@@ -9,14 +9,14 @@
           class="vuecal--blue-theme"
         >
         </vue-cal>
-      </vs-card>
-      <div slot="footer">
+        <div slot="footer">
         <vs-row vs-justify="flex-end">
           <vs-button type="gradient" color="danger" icon="favorite"></vs-button>
           <vs-button color="primary" icon="turned_in_not"></vs-button>
           <vs-button color="rgb(230,230,230)" color-text="rgb(50,50,50)" icon="settings"></vs-button>
         </vs-row>
       </div>
+      </vs-card>
     </vs-col>
   </vs-row>
 </template>
