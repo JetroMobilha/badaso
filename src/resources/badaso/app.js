@@ -34,7 +34,7 @@ Vue.use(Datetime);
 Vue.component("datetime", Datetime);
 Vue.use(Vuelidate);
 
-Vue.component("vuecal", VueCal);
+Vue.component("VueCal", VueCal);
 
 // IDENTIFIED VARIABLE BROADCAST CHANNEL
 const broadcastChannelName = "sw-badaso-messages";

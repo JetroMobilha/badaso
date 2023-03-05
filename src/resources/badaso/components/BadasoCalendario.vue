@@ -7,7 +7,7 @@
         active-view="month" 
       />
         <vue-cal
-           
+          locale="pt-br"
           active-view="month"
           xsmall
         >
