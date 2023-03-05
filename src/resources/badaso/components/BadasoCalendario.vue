@@ -6,6 +6,12 @@
       :style="{ height:'400px'}"
         active-view="month" 
       />
+        <vue-cal
+           
+          active-view="month"
+          xsmall
+        >
+        </vue-cal>
       </vs-card>
     </vs-col>
   </vs-row>
