@@ -4,6 +4,8 @@ import VueI18n from "vue-i18n";
 import { Datetime } from "vue-datetime";
 import Vuelidate from "vuelidate";
 import VueGtag from "vue-gtag";
+import VueCal from 'vue-cal'
+import 'vue-cal/dist/vuecal.css'
 
 import api from "./api/index";
 import handleError from "./api/handle-error";
@@ -31,6 +33,8 @@ Vue.use(Datetime);
 // eslint-disable-next-line vue/multi-word-component-names
 Vue.component("datetime", Datetime);
 Vue.use(Vuelidate);
+
+Vue.component("vuecal", VueCal);
 
 // IDENTIFIED VARIABLE BROADCAST CHANNEL
 const broadcastChannelName = "sw-badaso-messages";

@@ -697,7 +697,7 @@ th {
     font-size: .75rem;
 }
 
-th .sort-th, th :deep(.vs-table-text)  {
+th :deep(.sort-th), th :deep(.vs-table-text)  {
     padding: 3px;
     white-space: nowrap; /* impede a quebra de linha */
     overflow: hidden; /* oculta o texto que passa da largura do elemento */

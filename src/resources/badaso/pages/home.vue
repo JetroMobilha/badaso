@@ -7,6 +7,18 @@
       vs-sm="12"
       vs-xs="12"
     >
+ 
+      <badaso-calendario
+        :style="{ height:'400px'}"
+        v-if="data.type=='calendario'"
+        :nome="data.nome"
+        :label="data.label"
+        :icon="data.icon"
+        :type="data.type"
+        :table="data.table"
+      >
+      </badaso-calendario>
+       
       <vs-card v-if="data.type=='padrao'" class="widget__content">
         <div class="widget__icon-container">
           <vs-icon
@@ -51,7 +63,7 @@
         :icon="data.icon"
         :type="data.type"
         :table="data.table"
-        >
+      >
       </badaso-table-dash-board>
     </vs-col>
   </vs-row>
