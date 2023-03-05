@@ -5,7 +5,6 @@
         <vue-cal
           locale="pt-br"
           active-view="month"
-          :style="{ height:'400px'}"
         >
         </vue-cal>
       </vs-card>
