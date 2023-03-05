@@ -3,7 +3,7 @@
     <vs-col vs-lg="12" >
       <vs-card >
         <vue-cal
-          :style="{ height:'360px'}"
+          :style="{ height:'370px'}"
           locale="pt-br"
           active-view="month"
         >
