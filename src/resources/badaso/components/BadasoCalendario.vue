@@ -1,8 +1,9 @@
 <template>
   <vs-row>   
     <vs-col vs-lg="12" >
-      <vs-card :style="{ height:'400px'}">
+      <vs-card >
         <vue-cal
+          :style="{ height:'400px'}"
           locale="pt-br"
           active-view="month"
         >
