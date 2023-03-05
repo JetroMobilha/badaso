@@ -46,6 +46,7 @@ return [
         ['value' => 'adminPanel', 'label' => 'Admin Panel'],
     ],
     'widgets' => [
+        'Uasoft\\Badaso\\Widgets\\CalendarioWidget',
         'Uasoft\\Badaso\\Widgets\\UserWidget',
         'Uasoft\\Badaso\\Widgets\\RoleWidget',
         'Uasoft\\Badaso\\Widgets\\PermissionWidget',

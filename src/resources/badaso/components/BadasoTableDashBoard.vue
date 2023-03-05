@@ -1,7 +1,7 @@
 <template>
   <vs-row>   
     <vs-col vs-lg="12">
-      <vs-card>
+      <vs-card :style="{ height:'400px'}">
         <badaso-widget-table
             v-if="dataType.serverSide !== 1"
             v-model="selected"

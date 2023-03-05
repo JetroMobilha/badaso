@@ -9,7 +9,6 @@
     >
  
       <badaso-calendario
-        :style="{ height:'400px'}"
         v-if="data.type=='calendario'"
         :nome="data.nome"
         :label="data.label"
@@ -56,7 +55,6 @@
       </vs-card>
 
       <badaso-table-dash-board
-        :style="{ height:'400px'}"
         v-if="data.type=='tabela'"
         :nome="data.nome"
         :label="data.label"
@@ -146,7 +144,7 @@ export default {
   }
 
   .vs-row {
-        margin-bottom: 50px;
+        margin-bottom: 30px;
     }
 
   .vs-row > .vs-col {
