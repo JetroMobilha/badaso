@@ -139,12 +139,12 @@ export default {
 <style scoped>
   @media (width <= 768px){
       .vs-col{
-        margin-bottom: 80px;
+        margin-bottom: 0px;
     }
   }
 
   .vs-row {
-        margin-bottom: 30px;
+        margin-bottom: 0px;
     }
 
   .vs-row > .vs-col {

@@ -3,9 +3,10 @@
     <vs-col vs-lg="12" >
       <vs-card >
         <vue-cal
-          :style="{ height:'370px'}"
+          :style="{ height:'380px'}"
           locale="pt-br"
           active-view="month"
+          class="vuecal--rounded-theme vuecal--blue-theme"
         >
         </vue-cal>
       </vs-card>
