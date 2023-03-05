@@ -6,7 +6,7 @@
           :style="{ height:'380px'}"
           locale="pt-br"
           active-view="month"
-          class="vuecal--rounded-theme vuecal--blue-theme"
+          class="vuecal--blue-theme"
         >
         </vue-cal>
       </vs-card>
