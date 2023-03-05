@@ -2,14 +2,10 @@
   <vs-row>   
     <vs-col vs-lg="12" >
       <vs-card :style="{ height:'400px'}">
-      <vue-cal 
-      :style="{ height:'400px'}"
-        active-view="month" 
-      />
         <vue-cal
           locale="pt-br"
           active-view="month"
-          xsmall
+          :style="{ height:'400px'}"
         >
         </vue-cal>
       </vs-card>
