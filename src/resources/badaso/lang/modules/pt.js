@@ -341,12 +341,12 @@ export default {
             "<p class='text-muted'>A ordem de  coluna será preenchida com números para classificar os dados se este campo for definido</p>",
         },
         orderDirection: {
-          title: "Direção da ordem",
+          title: "Direção da Ordem",
           value: {
             ascending: "Ascendente",
             descending: "Descendente",
           },
-          placeholder: "Direção da ordem",
+          placeholder: "Direção da Ordem",
         },
         defaultServerSideSearchField: {
           title: "Campo de pesquisa padrão do lado do servidor",
@@ -439,8 +439,8 @@ export default {
         orderDirection: {
           title: "Direção de Ordem",
           value: {
-            ascending: "Ascending",
-            descending: "descendente",
+            ascending: "Ascendente",
+            descending: "Descendente",
           },
           placeholder: "Direção de Ordem",
         },
