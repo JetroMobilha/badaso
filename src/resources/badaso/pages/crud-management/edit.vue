@@ -467,7 +467,7 @@
                     <td>
                       <badaso-code-editor
                         v-model="field.details"
-                        v-if="field.type !== 'relation'"
+                        v-if="field.type == 'relation'"
                       >
                       </badaso-code-editor>
                       <vs-button
