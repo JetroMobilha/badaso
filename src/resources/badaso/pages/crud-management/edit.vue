@@ -467,7 +467,6 @@
                     <td>
                       <badaso-code-editor
                         v-model="field.details"
-                        v-if="field.type == 'relation'"
                       >
                       </badaso-code-editor>
                       <vs-button
@@ -551,7 +550,7 @@
                           color="danger"
                           type="relief"
                           @click="dropItemOtherRelation(index)"
-                          v-if="field.relationType == 'belongs_to_many' || field.relationType == 'has_one' || field.relationType == 'has_many'"
+                          v-if="field.type =='relation' && (field.relationType == 'belongs_to_many' || field.relationType == 'has_one' || field.relationType == 'has_many')"
                       >
                         <vs-icon icon="delete"></vs-icon>
                       </vs-button>
