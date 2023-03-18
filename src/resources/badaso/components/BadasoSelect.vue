@@ -52,7 +52,7 @@ export default {
       default: "Select",
     },
     value: {
-      type: String,
+      type: String||Number,
       required: true,
       default: "",
     },
