@@ -3,9 +3,12 @@
 namespace Uasoft\Badaso;
 
 use Illuminate\Support\Str;
+use Uasoft\Badaso\Models\Categoria;
 use Uasoft\Badaso\Models\Configuration;
 use Uasoft\Badaso\Models\DataRow;
 use Uasoft\Badaso\Models\DataType;
+use Uasoft\Badaso\Models\Evento;
+use Uasoft\Badaso\Models\Grupo;
 use Uasoft\Badaso\Models\Menu;
 use Uasoft\Badaso\Models\MenuItem;
 use Uasoft\Badaso\Models\Permission;
@@ -27,6 +30,9 @@ class Badaso
         'Menu'           => Menu::class,
         'MenuItem'       => MenuItem::class,
         'Configuration'  => Configuration::class,
+        'Categoria'      => Categoria::class,
+        'Evento'         => Evento::class,
+        'Grupo'          => Grupo::class,
     ];
 
     protected $supported_component = [
@@ -73,6 +79,9 @@ class Badaso
 
     protected $protected_tables = [
         'activity_log',
+        'calcategorias',
+        'caleventos',
+        'calgrupos',
         'data_rows',
         'data_types',
         'migrations',

@@ -19,5 +19,6 @@ class BadasoSeeder extends Seeder
         $this->call(MenusSeeder::class);
         $this->call(FixedMenuItemSeeder::class);
         $this->call(ConfigurationsSeeder::class);
+        $this->call( CalendarioSeeder::class);
     }
 }

@@ -113,6 +113,7 @@ class BadasoSetup extends Command
         $decoded_json['dependencies']['vue-chartjs'] = '^3.4.2';
         $decoded_json['dependencies']['vue-color'] = '^2.7.1';
         $decoded_json['dependencies']['vue-datetime'] = '^1.0.0-beta.14';
+        $decoded_json['dependencies']['vue-dayjs-plugin'] = '^1.0.0';
         $decoded_json['dependencies']['vue-draggable-nested-tree'] = '^3.0.0-beta2';
         $decoded_json['dependencies']['vue-gtag'] = '^1.16.1';
         $decoded_json['dependencies']['vue-i18n'] = '^8.22.4';
