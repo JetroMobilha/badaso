@@ -34,8 +34,7 @@ class CalendarioWidget implements WidgetInterface
 
     public function getTabela(): string
     {
-        $prefix = config('badaso.database.prefix');
-        return  $prefix.'caleventos';
+        return 'caleventos';
     }
 
     public function getModel($model)
