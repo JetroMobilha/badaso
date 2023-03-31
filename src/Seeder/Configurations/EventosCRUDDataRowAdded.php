@@ -22,7 +22,7 @@ class EventosCRUDDataRowAdded extends Seeder
 
             $data_type = Badaso::model('DataType')::where('name', 'caleventos')->first();
 
-            $relacao = '{"relation_type":"belongs_to_many","destination_table":'.config('badaso.database.prefix').'"users","destination_table_column":"id","destination_table_display_column":"name"}';
+            $relacao = '{"relation_type":"belongs_to_many","destination_table":"'.config('badaso.database.prefix').'users","destination_table_column":"id","destination_table_display_column":"name"}';
 
             \DB::table(config('badaso.database.prefix').'data_rows')->insert(array (
                 0 => 
