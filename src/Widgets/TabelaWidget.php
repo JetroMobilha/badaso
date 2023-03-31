@@ -32,8 +32,8 @@ class TabelaWidget implements WidgetInterface
 
     public function getTabela(): string
     {
-        $prefix = config('badaso.database.prefix');
-        return  $prefix.'users';
+         
+        return 'caleventos';
     }
 
     public function getModel($model)
@@ -42,11 +42,11 @@ class TabelaWidget implements WidgetInterface
     }
 
     public function getNome():string{
-        return 'usuarios';
+        return 'caleventos';
     }
 
     public function getNomeDisplay():string{
-        return 'Usuários';
+        return 'Eventos Calendario';
     }
 
     public function getLimit(){return 0;}
