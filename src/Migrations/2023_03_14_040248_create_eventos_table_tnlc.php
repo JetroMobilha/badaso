@@ -29,7 +29,7 @@ class CreateEventosTableTnlc extends Migration
         });
 
         Schema::table('caleventos', function (Blueprint $table) {
-            $table->foreign('categoria_id')->references('id')->on(config('badaso.database.prefix').'calcategorias')->onDelete('no action')->onUpdate('no action');
+            $table->foreign('categoria_id')->references('id')->on('calcategorias')->onDelete('no action')->onUpdate('no action');
         });
 
         } catch (PDOException $ex) {

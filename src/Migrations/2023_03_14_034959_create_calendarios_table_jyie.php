@@ -15,7 +15,7 @@ class CreateCalendariosTableJyie extends Migration
     {
         try {
 
-                Schema::create(config('badaso.database.prefix').'calendarios', function (Blueprint $table) {
+                Schema::create('calendarios', function (Blueprint $table) {
             $table->bigInteger('id')->unsigned()->autoIncrement();
 			$table->string('nome', 255);
 			$table->date('data_inicio');

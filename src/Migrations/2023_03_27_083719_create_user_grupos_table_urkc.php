@@ -15,10 +15,10 @@ class CreateUsergruposTableUrkc extends Migration
     {
         try {
 
-                Schema::create(config('badaso.database.prefix').'user_calgrupos', function (Blueprint $table) {
+                Schema::create('user_calgrupos', function (Blueprint $table) {
             $table->bigInteger('id')->unsigned()->autoIncrement();
 			$table->bigInteger(config('badaso.database.prefix').'users_id');
-			$table->bigInteger(config('badaso.database.prefix').'calgrupos_id');
+			$table->bigInteger('calgrupos_id');
 			$table->timestamps();
         });
 
@@ -35,6 +35,6 @@ class CreateUsergruposTableUrkc extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('badaso.database.prefix').'user_calgrupos');
+        Schema::dropIfExists('user_calgrupos');
     }
 }

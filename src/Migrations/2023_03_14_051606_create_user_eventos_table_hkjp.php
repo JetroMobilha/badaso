@@ -15,7 +15,7 @@ class CreateUsereventosTableHkjp extends Migration
     {
         try {
 
-            Schema::create(config('badaso.database.prefix').'user_caleventos', function (Blueprint $table) {
+            Schema::create('user_caleventos', function (Blueprint $table) {
             $table->bigInteger('id')->unsigned()->autoIncrement();
 			$table->bigInteger(config('badaso.database.prefix').'users_id');
 			$table->bigInteger('caleventos_id');
@@ -35,6 +35,6 @@ class CreateUsereventosTableHkjp extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('badaso.database.prefix').'user_caleventos');
+        Schema::dropIfExists('user_caleventos');
     }
 }
