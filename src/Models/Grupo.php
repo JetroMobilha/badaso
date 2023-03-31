@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Grupo extends Model
 {
-    protected $table = nu'calgrupos'll;
+    protected $table ='calgrupos';
 
     /**
      * Constructor for setting the table name dynamically.

@@ -43,11 +43,11 @@ class CalendarioWidget implements WidgetInterface
     }
 
     public function getNome():string{
-        return WidgetInterface::NOME;
+        return  'calendario';
     }
 
     public function getNomeDisplay():string{
-        return WidgetInterface::NOME;;
+        return 'Calendário';
     }
 
     public function getLimit(){return 0;}
