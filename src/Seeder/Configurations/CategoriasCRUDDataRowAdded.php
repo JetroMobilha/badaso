@@ -135,9 +135,7 @@ class CategoriasCRUDDataRowAdded extends Seeder
                 'id' => 1,
                 'nome' => 'Tarefas',
                 'descricao' => '<p>Categorias para os eventos de calendario do tipo tarefa a ser executada por um ou varios indevidous.</p>',
-                'icon' => 'task',
-                'created_at' => '2023-03-14T17:35:32.000000Z',
-                'updated_at' => '2023-03-14T18:01:20.000000Z',
+                'icon' => 'task', 
             ));
 
             $lembrete = Badaso::model('Categoria')->where('nome', 'Lembretes')->first();
@@ -150,9 +148,7 @@ class CategoriasCRUDDataRowAdded extends Seeder
                 'id' => 2,
                 'nome' => 'Tarefas',
                 'descricao' => '<p>Categoria para lembretes o casional que n&atilde;o precis&atilde;o de uma data de terminio que so pressi&atilde;o de uma tada e oura para ser natificado na aria de trabalho</p>',
-                'icon' => 'circle_notifications',
-                'created_at' => '2023-03-14T17:35:32.000000Z',
-                'updated_at' => '2023-03-14T18:01:20.000000Z',
+                'icon' => 'circle_notifications', 
             ));
 
             $eventos = Badaso::model('Categoria')->where('nome', 'Eventos')->first();
@@ -165,9 +161,7 @@ class CategoriasCRUDDataRowAdded extends Seeder
                 'id' => 3,
                 'nome' => 'Eventos',
                 'descricao' => '<p>Categoria para datas de calendario como forma&ccedil;&atilde;o ou reuni&otilde;es e etc...</p>',
-                'icon' => 'date_range',
-                'created_at' => '2023-03-14T17:35:32.000000Z',
-                'updated_at' => '2023-03-14T18:01:20.000000Z',
+                'icon' => 'date_range', 
             ));
 
             \DB::commit();
