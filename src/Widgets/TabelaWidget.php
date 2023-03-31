@@ -42,11 +42,11 @@ class TabelaWidget implements WidgetInterface
     }
 
     public function getNome():string{
-        return WidgetInterface::NOME;
+        return 'usuarios';
     }
 
     public function getNomeDisplay():string{
-        return WidgetInterface::NOME;;
+        return 'Usuários';
     }
 
     public function getLimit(){return 0;}
