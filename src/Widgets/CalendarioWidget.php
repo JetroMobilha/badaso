@@ -263,7 +263,7 @@ class CalendarioWidget implements WidgetInterface
         // end
 
         $data->whereIn('id',function($query) use($id){
-            $query->select('eventos_id')->from('user_eventos')->where('badaso_users_id',$id);
+            $query->select('caleventos_id')->from('user_caleventos')->where(config('badaso.database.prefix').'users_id',$id);
         })->orwhere('autor',$id);
     
         $data = $data->get();
