@@ -146,7 +146,7 @@ class CategoriasCRUDDataRowAdded extends Seeder
 
             \DB::table('calcategorias')->insert(array (
                 'id' => 2,
-                'nome' => 'Tarefas',
+                'nome' => 'Lembretes',
                 'descricao' => '<p>Categoria para lembretes o casional que n&atilde;o precis&atilde;o de uma data de terminio que so pressi&atilde;o de uma tada e oura para ser natificado na aria de trabalho</p>',
                 'icon' => 'circle_notifications', 
             ));
