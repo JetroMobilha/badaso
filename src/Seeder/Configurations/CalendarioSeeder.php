@@ -2,8 +2,6 @@
 
 namespace Database\Seeders\Badaso;
 
-use Database\Seeders\Badaso\CRUD\Badaso_usersCRUDDataRowAdded;
-use Database\Seeders\Badaso\CRUD\Badaso_usersCRUDDataTypeAdded;
 use Illuminate\Database\Seeder;
 use Uasoft\Badaso\Models\Configuration;
 
