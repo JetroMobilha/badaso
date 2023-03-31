@@ -21,6 +21,7 @@ class GruposCRUDDataRowAdded extends Seeder
         try {
 
             $data_type = Badaso::model('DataType')::where('name', 'calgrupos')->first();
+            $userId = config('badaso.database.prefix').'users_id';
 
             \DB::table(config('badaso.database.prefix').'data_rows')->insert(array (
                 0 => 
@@ -60,7 +61,7 @@ class GruposCRUDDataRowAdded extends Seeder
                 2 => 
                 array (
                     'data_type_id' => $data_type->id,
-                    'field' => 'responsavel',
+                    'field' => $userId,
                     'type' => 'relation',
                     'display_name' => 'Responsavel',
                     'required' => 1,
