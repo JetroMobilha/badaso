@@ -45,6 +45,6 @@ class CreateEventosTableTnlc extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('badaso.database.prefix').'caleventos');
+        Schema::dropIfExists('caleventos');
     }
 }

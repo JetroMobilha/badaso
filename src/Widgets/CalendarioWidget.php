@@ -87,7 +87,6 @@ class CalendarioWidget implements WidgetInterface
 
         $data_rows = collect($data_type->dataRows);
         $fields = collect($data_type->dataRows)->pluck('field')->all();
-        $ids = collect($data_type->dataRows)->where('field', 'id')->pluck('field')->all();
         $field_manytomany = [];
 
         foreach ($data_rows as $key => $data_row) {
@@ -96,7 +95,7 @@ class CalendarioWidget implements WidgetInterface
             }
         }
 
-        $fields = array_diff(array_merge($fields, $ids), $field_manytomany);
+        $fields = array_diff($fields, $field_manytomany);
 
         $ClassNome = $data_type->model_name;
         $model = new  $ClassNome();
@@ -231,16 +230,15 @@ class CalendarioWidget implements WidgetInterface
 
         $data_rows = collect($data_type->dataRows);
         $fields = collect($data_type->dataRows)->pluck('field')->all();
-        $ids = collect($data_type->dataRows)->where('field', 'id')->pluck('field')->all();
         $field_manytomany = [];
 
-        foreach ($data_rows as $key => $data_row) {
+        foreach ($data_rows as $data_row) {
             if (isset($data_row['relation']) && $data_row['relation']['relation_type'] == 'belongs_to_many') {
                 $field_manytomany[] = $data_row['field'];
             }
         }
 
-        $fields = array_diff(array_merge($fields, $ids), $field_manytomany);
+        $fields = array_diff($fields, $field_manytomany);
 
         $ClassNome = $data_type->model_name;
         $model = new  $ClassNome();
