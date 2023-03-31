@@ -54,7 +54,7 @@ class GruposCRUDDataTypeAdded extends Seeder
 
             $menu_item = Badaso::model('MenuItem')
                 ->where('menu_id', $menu->id)
-                ->where('url', '/general/grupos')
+                ->where('url', '/general/calgrupos')
                 ->first();
 
             $order = Badaso::model('MenuItem')->highestOrderMenuItem($menu->id);
