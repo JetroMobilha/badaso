@@ -30,7 +30,7 @@ class Grupo extends Model
 
     public function users()
     {
-        return $this->belongsToMany('Uasoft\Badaso\Models\User',config('badaso.database.prefix').'user_calgrupos',
+        return $this->belongsToMany('Uasoft\Badaso\Models\User','user_calgrupos',
         'calgrupos_id',
         config('badaso.database.prefix').'users_id');
     }

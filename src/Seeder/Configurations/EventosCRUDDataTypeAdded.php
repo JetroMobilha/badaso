@@ -61,7 +61,7 @@ class EventosCRUDDataTypeAdded extends Seeder
 
             if (!is_null($menu_item)) {
                 $menu_item->fill([
-                    'title' => 'Eventos',
+                    'title' => 'Calendário',
                     'target' => '_self',
                     'icon_class' => '',
                     'color' => null,
