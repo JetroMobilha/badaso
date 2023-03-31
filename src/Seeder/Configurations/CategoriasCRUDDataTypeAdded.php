@@ -46,8 +46,6 @@ class CategoriasCRUDDataTypeAdded extends Seeder
                 'details' => NULL,
                 'notification' => '[]',
                 'is_soft_delete' => false,
-                'created_at' => '2023-03-14T17:35:32.000000Z',
-                'updated_at' => '2023-03-14T18:01:20.000000Z',
             ));
 
             Badaso::model('Permission')->generateFor('calcategorias');

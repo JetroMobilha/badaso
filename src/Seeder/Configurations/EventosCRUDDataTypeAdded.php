@@ -46,8 +46,6 @@ class EventosCRUDDataTypeAdded extends Seeder
                 'details' => NULL,
                 'notification' => '[]',
                 'is_soft_delete' => false,
-                'created_at' => '2023-03-21T03:26:21.000000Z',
-                'updated_at' => '2023-03-29T19:26:46.000000Z',
             ));
 
             Badaso::model('Permission')->generateFor('caleventos');
