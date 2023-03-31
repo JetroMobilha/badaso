@@ -78,7 +78,7 @@ class User extends Authenticatable
 
     protected static $logName = 'User';
 
-    public function getDescriptionForEvent(string $eventName): string
+    public function getDescriptionForEvent(string $eventName =''): string
     {
         return "This model has been {$eventName}";
     }
