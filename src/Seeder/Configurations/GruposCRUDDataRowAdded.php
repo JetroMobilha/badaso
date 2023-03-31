@@ -73,7 +73,7 @@ class GruposCRUDDataRowAdded extends Seeder
                     'details' => '{
                         "size":"4"
                     }',
-                    'relation' => '{"relation_type":"belongs_to","destination_table":'.config('badaso.database.prefix').'"users","destination_table_column":"id","destination_table_display_column":"name"}',
+                    'relation' => '{"relation_type":"belongs_to","destination_table":"'.config('badaso.database.prefix').'users","destination_table_column":"id","destination_table_display_column":"name"}',
                     'order' => 3,
                 ),
                 3 => 
@@ -89,7 +89,7 @@ class GruposCRUDDataRowAdded extends Seeder
                     'add' => 1,
                     'delete' => 1,
                     'details' => '{}',
-                    'relation' => '{"relation_type":"belongs_to_many","destination_table":'.config('badaso.database.prefix').'"users","destination_table_column":"id","destination_table_display_column":"name"}',
+                    'relation' => '{"relation_type":"belongs_to_many","destination_table":"'.config('badaso.database.prefix').'users","destination_table_column":"id","destination_table_display_column":"name"}',
                     'order' => 4,
                 ),
                 4 => 
