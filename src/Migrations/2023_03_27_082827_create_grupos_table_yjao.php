@@ -18,12 +18,12 @@ class CreateGruposTableYjao extends Migration
             Schema::create('calgrupos', function (Blueprint $table) {
             $table->bigInteger('id')->unsigned()->autoIncrement();
 			$table->string('nome', 255);
-			$table->bigInteger(config('badaso.database.prefix').'users_id')->unsigned();
+			$table->bigInteger('responsavel')->unsigned();
 			$table->timestamps();
         });
 
             Schema::table('calgrupos', function (Blueprint $table) {
-            $table->foreign(config('badaso.database.prefix').'users_id')->references('id')->on(config('badaso.database.prefix').'users')->onDelete('no action')->onUpdate('no action');
+            $table->foreign('responsavel')->references('id')->on(config('badaso.database.prefix').'users')->onDelete('no action')->onUpdate('no action');
         });
 
         } catch (PDOException $ex) {

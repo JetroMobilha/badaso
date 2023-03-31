@@ -320,7 +320,7 @@ class CalendarioWidget implements WidgetInterface
     public function getUsers() 
     {
         $users = [];
-        $grupos = Grupo::where(config('badaso.database.prefix').'users_id',auth()->id())->get();
+        $grupos = Grupo::where('responsavel',auth()->id())->get();
 
        foreach ($grupos as $grupo) {
         foreach ($grupo->users as $user) {
