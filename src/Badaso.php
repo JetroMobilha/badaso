@@ -49,6 +49,7 @@ class Badaso
         'datetime',
         'select',
         'select_multiple',
+        'select_status',
         'radio',
         'switch',
         'slider',

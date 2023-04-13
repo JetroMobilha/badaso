@@ -174,7 +174,7 @@ class CalendarioWidget implements WidgetInterface
             $contClass = 0;
             $prop['id'] =1; 
             $prop['class'] = $this->getClassUser($contClass);
-            $prop['label'] =auth()->user()->username;
+            $prop['label'] ='você';
             
             $contClass=$contClass+1;
              
