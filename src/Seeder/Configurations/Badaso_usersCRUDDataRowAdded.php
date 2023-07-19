@@ -231,6 +231,22 @@ class Badaso_usersCRUDDataRowAdded extends Seeder
                     'relation' => NULL,
                     'order' => 13,
                 ),
+                13 => 
+                array (
+                    'data_type_id' => $data_type->id,
+                    'field' => 'empresa',
+                    'type' => 'relation',
+                    'display_name' => 'Empresa',
+                    'required' => 0,
+                    'browse' => 1,
+                    'read' => 1,
+                    'edit' => 1,
+                    'add' => 1,
+                    'delete' => 1,
+                    'details' => '{}',
+                    'relation' => '{"relation_type":"belongs_to","destination_table":"empresas","destination_table_column":"id","destination_table_display_column":"nome","destination_table_display_more_column":["detalhes"]}',
+                    'order' => 14,
+                ),
             ));
 
             \DB::commit();

@@ -64,6 +64,7 @@ class Badaso
         'code',
         'relation',
         'data_identifier',
+        'empresa',
     ];
 
     protected $supported_filter_operator = [

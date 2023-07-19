@@ -61,6 +61,23 @@
                 :placeholder="$t('user.add.field.additionalInfo.placeholder')"
                 :alert="errors.additionalInfo"
               ></badaso-code-editor>
+              <badaso-select
+            
+                :label="$t('user.add.field.empresa.title')"
+                :placeholder="$t('user.add.field.empresa.placeholder')"
+                v-model="user.empresa"
+                size="12"
+                :items="
+                  relationData[
+                    $caseConvert.stringSnakeToCamel(
+                      'empresa'
+                    )
+                  ]
+                "
+                :alert="
+                  errors[$caseConvert.stringSnakeToCamel('empresa')]
+                "
+              ></badaso-select>
             </vs-col>
           </vs-row>
         </vs-card>

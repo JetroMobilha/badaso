@@ -413,6 +413,7 @@ export default {
     dataLength: 0,
     pathname: location.pathname,
     userId: "",
+    empresaId: "",
   }),
   mounted() {
     this.getDataType();
@@ -437,6 +438,9 @@ export default {
         }
         if (row.type == 'data_identifier'){
           dataRows[row.field] = this.userId;
+        }
+        if (row.type == 'empresa'){
+          dataRows[row.field] = this.empresaId;
         }
       }
 
@@ -564,6 +568,7 @@ export default {
         .then((response) => {
           this.$closeLoader();
           this.userId = response.data.user.id;
+          this.empresaId = response.data.user.empresa;
         })
         .catch((error) => {
           this.errors = error.errors;
@@ -574,7 +579,7 @@ export default {
             color: "danger",
           });
         });
-    }
+    },
   },
   computed: {
     isOnline: {
