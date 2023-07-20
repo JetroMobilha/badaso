@@ -112,9 +112,9 @@ class EmpresasCRUDDataRowAdded extends Seeder
                 5 => 
                 array (
                     'data_type_id' => $data_type->id,
-                    'field' => 'detalhes',
+                    'field' => 'descricao',
                     'type' => 'editor',
-                    'display_name' => 'Detalhes',
+                    'display_name' => 'Descrição',
                     'required' => 0,
                     'browse' => 1,
                     'read' => 1,
