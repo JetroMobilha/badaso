@@ -54,7 +54,7 @@ class EmpresasCRUDDataTypeAdded extends Seeder
 
             $menu_item = Badaso::model('MenuItem')
                 ->where('menu_id', $menu->id)
-                ->where('url', '/general/empresas')
+                ->where('url', '/core/empresas')
                 ->first();
 
             $order = Badaso::model('MenuItem')->highestOrderMenuItem($menu->id);
@@ -72,7 +72,7 @@ class EmpresasCRUDDataTypeAdded extends Seeder
             } else {
                 $menu_item = new MenuItem();
                 $menu_item->menu_id = $menu->id;
-                $menu_item->url = '/general/empresas';
+                $menu_item->url = '/core/empresas';
                 $menu_item->title = 'Empresas';
                 $menu_item->target = '_self';
                 $menu_item->icon_class = '';
