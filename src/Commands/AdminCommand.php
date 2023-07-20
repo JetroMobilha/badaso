@@ -112,7 +112,7 @@ class AdminCommand extends Command
             $empresa->continente = 'África';
             $empresa->pais = 'Angola';
             $empresa->provincia = 'Luanda';
-            $empresa->detalhes = 'Empresa provedora do pacote alterado do badaso para funcionar com assistencia tecni e manuntenção e equipamento bem como o control de processo';
+            $empresa->descricao = 'Empresa provedora do pacote alterado do badaso para funcionar com assistencia tecni e manuntenção e equipamento bem como o control de processo';
             $empresa->save();
         }
 
