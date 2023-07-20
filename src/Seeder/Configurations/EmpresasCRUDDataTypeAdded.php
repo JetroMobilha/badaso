@@ -50,11 +50,11 @@ class EmpresasCRUDDataTypeAdded extends Seeder
 
             Badaso::model('Permission')->generateFor('empresas');
 
-            $menu = Badaso::model('Menu')->where('key','core')->firstOrFail();
+            $menu = Badaso::model('Menu')->where('key', config('badaso.default_menu'))->firstOrFail();
 
             $menu_item = Badaso::model('MenuItem')
                 ->where('menu_id', $menu->id)
-                ->where('url', '/core/empresas')
+                ->where('url', '/general/empresas')
                 ->first();
 
             $order = Badaso::model('MenuItem')->highestOrderMenuItem($menu->id);
@@ -63,7 +63,7 @@ class EmpresasCRUDDataTypeAdded extends Seeder
                 $menu_item->fill([
                     'title' => 'Empresas',
                     'target' => '_self',
-                    'icon_class' => 'apartment',
+                    'icon_class' => '',
                     'color' => null,
                     'parent_id' => null,
                     'permissions' => 'browse_empresas',
@@ -72,7 +72,7 @@ class EmpresasCRUDDataTypeAdded extends Seeder
             } else {
                 $menu_item = new MenuItem();
                 $menu_item->menu_id = $menu->id;
-                $menu_item->url = '/core/empresas';
+                $menu_item->url = '/general/empresas';
                 $menu_item->title = 'Empresas';
                 $menu_item->target = '_self';
                 $menu_item->icon_class = '';
