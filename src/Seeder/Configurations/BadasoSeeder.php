@@ -20,6 +20,7 @@ class BadasoSeeder extends Seeder
         $this->call(FixedMenuItemSeeder::class);
         $this->call(ConfigurationsSeeder::class);
         $this->call(CalendarioSeeder::class);
-        $this->call(EmpresaSeeder::class);
+        $this->call( EmpresasCRUDDataTypeAdded::class);
+        $this->call( EmpresasCRUDDataRowAdded::class);
     }
 }
