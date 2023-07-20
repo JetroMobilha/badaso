@@ -234,7 +234,7 @@ class Badaso_usersCRUDDataRowAdded extends Seeder
                 13 => 
                 array (
                     'data_type_id' => $data_type->id,
-                    'field' => 'empresa',
+                    'field' => 'empresa_id',
                     'type' => 'relation',
                     'display_name' => 'Empresa',
                     'required' => 0,
@@ -244,7 +244,7 @@ class Badaso_usersCRUDDataRowAdded extends Seeder
                     'add' => 1,
                     'delete' => 1,
                     'details' => '{}',
-                    'relation' => '{"relation_type":"belongs_to","destination_table":"empresas","destination_table_column":"id","destination_table_display_column":"nome","destination_table_display_more_column":["detalhes"]}',
+                    'relation' => '{"relation_type":"belongs_to","destination_table":"empresas","destination_table_column":"id","destination_table_display_column":"nome","destination_table_display_more_column":["descricao"]}',
                     'order' => 14,
                 ),
             ));

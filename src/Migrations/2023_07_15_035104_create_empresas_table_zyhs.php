@@ -18,7 +18,7 @@ class CreateEmpresasTableZyhs extends Migration
             Schema::create('empresas', function (Blueprint $table) {
             $table->bigInteger('id')->unsigned()->autoIncrement();
 			$table->string('nome', 255)->nullable(true);
-			$table->text('detalhes')->nullable(true);
+			$table->text('descricao')->nullable(true);
 			$table->string('pais', 255)->nullable(true);
 			$table->string('provincia', 255)->nullable(true);
 			$table->string('continente', 255)->nullable(true);

@@ -15,7 +15,7 @@ class AlterBadasousersTableRmef extends Migration
     {
         try {
             Schema::table(config('badaso.database.prefix').'users', function (Blueprint $table) {
-            $table->string('empresa', 255)->nullable(true);
+            $table->string('empresa_id', 255)->nullable(true);
         });
 
 
@@ -34,7 +34,7 @@ class AlterBadasousersTableRmef extends Migration
     public function down()
     {
         Schema::table(config('badaso.database.prefix').'users', function (Blueprint $table) {
-            $table->dropColumn('empresa');
+            $table->dropColumn('empresa_id');
         });
     }
 }

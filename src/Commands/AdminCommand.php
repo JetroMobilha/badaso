@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Uasoft\Badaso\Models\Role;
 use Uasoft\Badaso\Models\User;
 use Uasoft\Badaso\Models\UserRole;
+use Uasoft\Badaso\Models\Empresa; 
 
 class AdminCommand extends Command
 {
@@ -97,6 +98,28 @@ class AdminCommand extends Command
     }
 
     /**
+     *  Traz a empresa padrão do administrados do sistema.
+     *
+     * @return mixed
+     */
+    protected function getEmpresaAdmin()
+    {
+        $empresa = Empresa::where('nome', 'Bamfura')->first();
+
+        if (is_null($empresa)) {
+            $empresa = new Empresa();
+            $empresa->nome = 'Bamfura';
+            $empresa->continente = 'África';
+            $empresa->pais = 'Angola';
+            $empresa->provincia = 'Luanda';
+            $empresa->detalhes = 'Empresa provedora do pacote alterado do badaso para funcionar com assistencia tecni e manuntenção e equipamento bem como o control de processo';
+            $empresa->save();
+        }
+
+        return $empresa;
+    }
+
+    /**
      * Get or create user.
      *
      * @param  bool  $create
@@ -146,6 +169,7 @@ class AdminCommand extends Command
             $user->name = $name;
             $user->username = $username;
             $user->email = $email;
+            $user->empresa_id = $this->getEmpresaAdmin()->id;
             $user->email_verified_at = date('Y-m-d H:i:s');
             $user->password = Hash::make($password);
            
