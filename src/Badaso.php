@@ -276,6 +276,11 @@ class Badaso
         return $this->supported_component;
     }
 
+    public function setComponents($nomeComponente)
+    {
+        return $this->supported_component[$nomeComponente];
+    }
+
     public function getFilterOperator()
     {
         return $this->supported_filter_operator;
