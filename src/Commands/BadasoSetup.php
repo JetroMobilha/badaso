@@ -90,6 +90,7 @@ class BadasoSetup extends Command
         $decoded_json['dependencies']['popper.js'] = '^1.12';
         $decoded_json['dependencies']['cross-env'] = '^5.1';
         $decoded_json['dependencies']['vue'] = '^2.5.7';
+        $decoded_json['dependencies']['vue-multiselect'] = '^2.1.7';
         $decoded_json['dependencies']['vue-loader'] = '^15.9.5';
         $decoded_json['dependencies']['vue-template-compiler'] = '^2.6.14';
         $decoded_json['dependencies']['sass'] = '^1.32.11';
@@ -101,9 +102,12 @@ class BadasoSetup extends Command
         $decoded_json['dependencies']['@tinymce/tinymce-vue'] = '^3';
         $decoded_json['dependencies']['body-scroll-lock'] = '^4.0.0-beta.0';
         $decoded_json['dependencies']['chart.js'] = '^2.8.0';
+        $decoded_json['dependencies']['dayjs'] = '^1.10.7';
         $decoded_json['dependencies']['firebase'] = '^8.4.2';
         $decoded_json['dependencies']['jspdf'] = '^2.3.1';
+        $decoded_json['dependencies']['handlebars'] = '^4.7.7';
         $decoded_json['dependencies']['jspdf-autotable'] = '^3.5.14';
+        $decoded_json['dependencies']['@johmun/vue-tags-input'] = '^2.1.0';
         $decoded_json['dependencies']['luxon'] = '^1.25.0';
         $decoded_json['dependencies']['material-icons'] = '^0.3.1';
         $decoded_json['dependencies']['moment'] = '^2.29.1';

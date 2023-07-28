@@ -14,6 +14,7 @@ import store from "./store/store";
 import lang from "./lang/";
 import excludedRouter from "./router/excludeRouter";
 import VueDayjs from 'vue-dayjs-plugin'
+import Multiselect from 'vue-multiselect'
 
 import App from "./apps/App.vue";
 
@@ -36,6 +37,7 @@ Vue.component("datetime", Datetime);
 Vue.use(Vuelidate);
 
 Vue.component("VueCal", VueCal);
+Vue.component('multiselect', Multiselect)
 
 // IDENTIFIED VARIABLE BROADCAST CHANNEL
 const broadcastChannelName = "sw-badaso-messages";
