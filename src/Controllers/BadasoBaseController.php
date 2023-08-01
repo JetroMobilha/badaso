@@ -455,17 +455,18 @@ class BadasoBaseController extends Controller
             $page = $request->input('page');
             $on_page = 50;
             $search = $request->input('search', false);
+            $coluna = $request->input('coluna', false);
              
              
             $model = app($data_type->model_name);
             $skip = $on_page * ($page - 1);
     
             // If search query, use LIKE to filter results depending on field label
-            if ($search) {
+            if (isset($search)) {
                 
-                $total_count = $model->{$request->tipo}()->where('nome', 'LIKE', '%' . $search . '%')->count();
+                $total_count = $model->{$request->tipo}()->where($coluna, 'LIKE', '%' . $search . '%')->count();
                 $relationshipOptions = $model->{$request->tipo}()->take($on_page)->skip($skip)
-                    ->where('nome', 'LIKE', '%' . $search . '%')
+                    ->where($coluna, 'LIKE', '%' . $search . '%')
                     ->get();
                 
             } else {
@@ -480,12 +481,7 @@ class BadasoBaseController extends Controller
             foreach ($relationshipOptions as $relationshipOption) {
                 $results[] = [
                     'id' => $relationshipOption->id,
-                    'text' => $relationshipOption->nome,
-                    'nome' => $relationshipOption->nome,
-                    'descricao' => $relationshipOption->descricao,
-                    'parametros' =>$relationshipOption->parametros,
-                    'plano_manuntencao' =>$relationshipOption->plana_manuntencao,
-                    'tarefas' =>$relationshipOption->plana_manuntencao,
+                    'text' => $relationshipOption->{$coluna},
                 ];
             }
     
