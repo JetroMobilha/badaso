@@ -445,4 +445,65 @@ class BadasoBaseController extends Controller
             return ApiResponse::failed($e);
         }
     }
+
+    public function relation(Request $request) {
+       
+
+        try {
+            $slug = $this->getSlug($request);
+            $data_type = $this->getDataType($slug);
+            $page = $request->input('page');
+            $on_page = 50;
+            $search = $request->input('search', false);
+             
+             
+            $model = app($data_type->model_name);
+            $skip = $on_page * ($page - 1);
+    
+            // If search query, use LIKE to filter results depending on field label
+            if ($search) {
+                
+                $total_count = $model->{$request->tipo}()->where('nome', 'LIKE', '%' . $search . '%')->count();
+                $relationshipOptions = $model->{$request->tipo}()->take($on_page)->skip($skip)
+                    ->where('nome', 'LIKE', '%' . $search . '%')
+                    ->get();
+                
+            } else {
+                $total_count = $model->{$request->tipo}()->count();
+                $relationshipOptions = $model->{$request->tipo}()->take($on_page)->skip($skip)->get();
+            }
+    
+            $results = [];
+    
+    
+    
+            foreach ($relationshipOptions as $relationshipOption) {
+                $results[] = [
+                    'id' => $relationshipOption->id,
+                    'text' => $relationshipOption->nome,
+                    'nome' => $relationshipOption->nome,
+                    'descricao' => $relationshipOption->descricao,
+                    'parametros' =>$relationshipOption->parametros,
+                    'plano_manuntencao' =>$relationshipOption->plana_manuntencao,
+                    'tarefas' =>$relationshipOption->plana_manuntencao,
+                ];
+            }
+    
+            return response()->json([
+                        'data' => $results,
+                        'pagination' => [
+                            'more' => ($total_count > ($skip + $on_page)),
+                        ],
+            ]);
+
+             $dados['dados']= $results;
+             $dados['pagination']= [
+                'more' => ($total_count > ($skip + $on_page)),
+            ];
+
+            return ApiResponse::onlyEntity($dados);
+        } catch (Exception $e) {
+            return ApiResponse::failed($e);
+        }
+    }
 }

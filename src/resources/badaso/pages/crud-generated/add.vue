@@ -568,7 +568,7 @@ export default {
         .then((response) => {
           this.$closeLoader();
           this.userId = response.data.user.id;
-          this.empresaId = response.data.user.empresa;
+          this.empresaId = response.data.user.empresaId;
         })
         .catch((error) => {
           this.errors = error.errors;

@@ -86,4 +86,11 @@ export default {
   maintenance(data = {}) {
     return resource.post(entityPrefix + "/" + data.slug + "/maintenance", data);
   },
+
+  relation(data = {}) {
+    const ep = entityPrefix + "/" + data.slug;
+    const qs = QueryString(data);
+    const url = ep + qs;
+    return resource.get(url);
+  },
 };

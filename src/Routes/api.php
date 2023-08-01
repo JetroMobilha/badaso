@@ -204,6 +204,10 @@ Route::group(['prefix' => $api_route_prefix, 'namespace' => 'Uasoft\Badaso\Contr
                     Route::post($data_type->slug.'/maintenance', $crud_data_controller.'@setMaintenanceState')
                         ->name($data_type->slug.'.maintenance')
                         ->middleware(config('badaso.middleware.check_crud_permission').':'.$data_type->slug.',maintenance');
+
+                    Route::get($data_type->slug.'/relation', $crud_data_controller.'@relation')
+                        ->name($data_type->slug.'.relation')
+                        ->middleware(config('badaso.middleware.check_crud_permission').':'.$data_type->slug.',read');
                 }
             } catch (\InvalidArgumentException $e) {
                 throw new \InvalidArgumentException("Custom routes hasn't been configured because: ".$e->getMessage(), 1);
