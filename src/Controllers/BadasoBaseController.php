@@ -482,6 +482,7 @@ class BadasoBaseController extends Controller
                 $results[] = [
                     'id' => $relationshipOption->id,
                     'text' => $relationshipOption->{$coluna},
+                    'dados' => $relationshipOption,
                 ];
             }
     
