@@ -106,18 +106,22 @@ class GetData
         $data = $query->paginate($limit ? $limit : 10);
         $collection = $data->getCollection();
         foreach ($collection as $row) {
-            $class = new ReflectionClass(get_class($row));
-            $class_methods = $class->getMethods();
-            $record = $row;
-            foreach ($class_methods as $class_method) {
-                if ($class_method->class == $class->name) {
-                    try {
-                       // $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}));
-                    } catch (Exception $e) {
-                        // $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}()));
+
+            try{
+                $class = new ReflectionClass(get_class($row));
+                $class_methods = $class->getMethods();
+                $record = $row;
+                foreach ($class_methods as $class_method) {
+                    if ($class_method->class == $class->name) {
+                        try {
+                            $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}));
+                        } catch (Exception $e) {
+                            // $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}()));
+                        }
                     }
                 }
-            }
+            }catch(Exception $e){}
+           
             $records[] = self::getRelationData($data_type, $record);
         }
         $data->setCollection(collect($records));
@@ -210,19 +214,24 @@ class GetData
         $data = $data->get();
 
         foreach ($data as $row) {
-            $class = new ReflectionClass(get_class($row));
-            $class_methods = $class->getMethods();
+            try{
 
-            $record = $row;
-            foreach ($class_methods as $class_method) {
-                if ($class_method->class == $class->name) {
-                    try {
-                      //  $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}));
-                    } catch (Exception $e) {
-                        // $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}()));
+                $class = new ReflectionClass(get_class($row));
+                $class_methods = $class->getMethods();
+    
+                $record = $row;
+                foreach ($class_methods as $class_method) {
+                    if ($class_method->class == $class->name) {
+                        try {
+                            $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}));
+                        } catch (Exception $e) {
+                            // $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}()));
+                        }
                     }
                 }
-            }
+
+            }catch(Exception $e){}
+           
             $records[] = self::getRelationData($data_type, $record);
         }
 
