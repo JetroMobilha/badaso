@@ -294,7 +294,7 @@ const firebaseConfig = {
   measurementId: process.env.MIX_FIREBASE_MEASUREMENT_ID,
 };
 
-let statusActiveFeatureFirebase = true;
+let statusActiveFeatureFirebase = false;
 for (const key in firebaseConfig)
   statusActiveFeatureFirebase =
     statusActiveFeatureFirebase &&
