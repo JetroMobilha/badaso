@@ -49,8 +49,8 @@ try {
 }
 // END IDENTIFIED VARIABLE BROADCAST CHANNEL
 
-const pluginsEnv = process.env.MIX_BADASO_PLUGINS
-  ? process.env.MIX_BADASO_PLUGINS
+const pluginsEnv = import.meta.env.VITE_BADASO_PLUGINS
+  ? import.meta.env.VITE_BADASO_PLUGINS
   : null;
 
 // EXCLUDED ROUTES
@@ -60,7 +60,7 @@ excluded = excludedRouter;
 // DYNAMIC IMPORT PLUGINS FOR COMPONENTS
 try {
   if (pluginsEnv) {
-    const plugins = process.env.MIX_BADASO_PLUGINS.split(",");
+    const plugins = import.meta.env.VITE_BADASO_PLUGINS.split(",");
     if (plugins && plugins.length > 0) {
       plugins.forEach((plugin) => {
         const router = require("../../../../" +
@@ -76,15 +76,12 @@ try {
 
 // DYNAMIC IMPORT BADASO COMPONENT
 try {
-  const requireComponent = require.context(
-    "./components",
-    false,
-    /[\w-]+\.vue$/
-  );
-  requireComponent.keys().forEach((fileName) => {
-    const componentConfig = requireComponent(fileName);
+  const requireComponent = import.meta.glob("./components/*.vue");
+  Object.keys(requireComponent).forEach((fileName) => {
+    const componentConfig = requireComponent[fileName];
     const componentName = fileName
       .replace(/^\.\/_/, "")
+      .replace(/^\.\/components\//, "")
       .replace(/\.\w+$/, "")
       .split("-")
       .map((kebab) => kebab.charAt(0).toUpperCase() + kebab.slice(1))
@@ -104,17 +101,16 @@ try {
 
 // DYNAMIC IMPORT CUSTOM COMPONENT
 try {
-  const requireCustomComponent = require.context(
-    "../../../../../../resources/js/badaso/components",
-    false,
-    /[\w-]+\.vue$/
+  const requireCustomComponent = import.meta.globEager(
+    "../../../../../../resources/js/badaso/components/*.vue"
   );
-  requireCustomComponent.keys().forEach((fileName) => {
-    const componentConfig = requireCustomComponent(fileName);
+  Object.keys(requireCustomComponent).forEach((fileName) => {
+    const componentConfig = requireCustomComponent[fileName];
     const componentName = fileName
-      .replace(/^\.\/_/, "")
       .replace(/\.\w+$/, "")
-      .split("-")
+      .replace(/^(\.\.\/)+/, "./")
+      .split("/")
+      .slice(-2)
       .map((kebab) => kebab.charAt(0).toUpperCase() + kebab.slice(1))
       .join("");
 
@@ -132,9 +128,10 @@ try {
 
 // DYNAMIC IMPORT BADASO UTILS
 try {
-  const requireUtils = require.context("./utils", false, /\.js$/);
-  requireUtils.keys().forEach((fileName) => {
+  const requireUtils = import.meta.globEager("./utils/*.js");
+  Object.keys(requireUtils).forEach((fileName) => {
     const utilName = fileName
+      .replace(/^\.\/utils\//, "")
       .replace("./", "")
       .replace(".js", "")
       .replace(/([a-z])([A-Z])/g, "$1-$2") // get all lowercase letters that are near to uppercase ones
@@ -150,7 +147,8 @@ try {
         }
       })
       .join("");
-    Vue.prototype["$" + utilName] = requireUtils(fileName).default;
+
+    Vue.prototype["$" + utilName] = requireUtils[fileName].default;
   });
 } catch (error) {
   console.info("Failed to load badaso utils", error);
@@ -158,14 +156,13 @@ try {
 
 // DYNAMIC IMPORT CUSTOM UTILS
 try {
-  const requireCustomUtils = require.context(
-    "../../../../../../resources/js/badaso/utils",
-    false,
-    /\.js$/
+  const requireCustomUtils = import.meta.globEager(
+    "../../../../../../resources/js/badaso/utils/*.js"
   );
-  requireCustomUtils.keys().forEach((fileName) => {
+
+  Object.keys(requireCustomUtils).forEach((fileName) => {
     const utilName = fileName
-      .replace("./", "")
+      .replace(/^.*[\\/]/, "")
       .replace(".js", "")
       .replace(/([a-z])([A-Z])/g, "$1-$2") // get all lowercase letters that are near to uppercase ones
       .replace(/[\s_]+/g, "-") // replace all spaces and low dash
@@ -180,7 +177,8 @@ try {
         }
       })
       .join("");
-    Vue.prototype["$" + utilName] = requireCustomUtils(fileName).default;
+
+    Vue.prototype["$" + utilName] = requireCustomUtils[fileName].default;
   });
 } catch (error) {
   console.info("Failed to load custom utils", error);
@@ -188,17 +186,16 @@ try {
 
 // DYNAMIC IMPORT CUSTOM PAGES
 try {
-  const requireCustomPages = require.context(
-    "../../../../../../resources/js/badaso/pages",
-    true,
-    /[\w-]+\.vue$/
+  const requireCustomPages = import.meta.globEager(
+    "../../../../../../resources/js/badaso/pages/**/*.vue"
   );
-  requireCustomPages.keys().forEach((fileName) => {
-    const componentConfig = requireCustomPages(fileName);
+  Object.keys(requireCustomPages).forEach((fileName) => {
+    const componentConfig = requireCustomPages[fileName];
     const componentName = fileName
-      .replace(/^\.\/_/, "")
       .replace(/\.\w+$/, "")
-      .split("-")
+      .replace(/^(\.\.\/)+/, "./")
+      .split("/")
+      .slice(-2)
       .map((kebab) => kebab.charAt(0).toUpperCase() + kebab.slice(1))
       .join("");
 
@@ -208,7 +205,6 @@ try {
       .toLowerCase() // convert to lower case
       .replace("./", "")
       .replace("/", "-");
-
     Vue.component(str, componentConfig.default || componentConfig);
   });
 } catch (error) {
@@ -218,7 +214,7 @@ try {
 // DYNAMIC IMPORT PLUGINS FOR COMPONENTS
 try {
   if (pluginsEnv) {
-    const plugins = process.env.MIX_BADASO_PLUGINS.split(",");
+    const plugins = import.meta.env.VITE_BADASO_PLUGINS.split(",");
     if (plugins && plugins.length > 0) {
       plugins.forEach((plugin) => {
         const fileName = require("../../../../" +
@@ -254,8 +250,8 @@ Vue.prototype.$loadingConfig = {
   color: "#06bbd3",
 };
 
-const baseUrl = process.env.MIX_ADMIN_PANEL_ROUTE_PREFIX
-  ? process.env.MIX_ADMIN_PANEL_ROUTE_PREFIX
+const baseUrl = import.meta.env.VITE_ADMIN_PANEL_ROUTE_PREFIX
+  ? import.meta.env.VITE_ADMIN_PANEL_ROUTE_PREFIX
   : "badaso-dashboard";
 Vue.prototype.$baseUrl = "/" + baseUrl;
 
@@ -285,13 +281,13 @@ Vue.prototype.$syncLoader = function (statusSyncLoader) {
 
 // ADD FIREBASE MESSAGE
 const firebaseConfig = {
-  apiKey: process.env.MIX_FIREBASE_API_KEY,
-  authDomain: process.env.MIX_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.MIX_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.MIX_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.MIX_FIREBASE_MESSAGE_SEENDER,
-  appId: process.env.MIX_FIREBASE_APP_ID,
-  measurementId: process.env.MIX_FIREBASE_MEASUREMENT_ID,
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGE_SEENDER,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 let statusActiveFeatureFirebase = false;
@@ -325,9 +321,9 @@ if (statusActiveFeatureFirebase) {
   }
 
   Vue.prototype.$messaging = firebase.messaging();
-  Vue.prototype.$messagingToken = firebase
-    .messaging()
-    .getToken({ vapidKey: process.env.MIX_FIREBASE_WEB_PUSH_CERTIFICATES });
+  Vue.prototype.$messagingToken = firebase.messaging().getToken({
+    vapidKey: import.meta.env.VITE_FIREBASE_WEB_PUSH_CERTIFICATES,
+  });
 }
 // END ADD FIREBASE
 
@@ -342,8 +338,8 @@ Vue.use(
   {
     pageTrackerExcludedRoutes: excluded,
     config: {
-      id: process.env.MIX_ANALYTICS_TRACKING_ID
-        ? process.env.MIX_ANALYTICS_TRACKING_ID
+      id: import.meta.env.VITE_ANALYTICS_TRACKING_ID
+        ? import.meta.env.VITE_ANALYTICS_TRACKING_ID
         : null,
       params: {
         send_page_view: true,
