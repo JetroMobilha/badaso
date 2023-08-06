@@ -187,8 +187,8 @@ class BadasoSetup extends Command
 
             $resolveCode = "
         // Badaso Input
-        ,'vendor/badaso/core/src/resources/badaso/app.js',
-        'vendor/badaso/core/src/resources/badaso/assets/scss/style.scss',";
+        ,'vendor/bamfura/core/src/resources/badaso/app.js',
+        'vendor/bamfura/core/src/resources/badaso/assets/scss/style.scss',";
 
             $configArray = substr($config, $pluginsIndex + 10);
             $configArrayCloseIndex = strpos($configArray, ']');
@@ -217,7 +217,7 @@ class BadasoSetup extends Command
           viteStaticCopy({
             targets: [
                 {
-                    src: 'vendor/badaso/core/src/resources/badaso/app.js',
+                    src: 'vendor/bamfura/core/src/resources/badaso/app.js',
                     dest: 'js',
                 },
             ],
