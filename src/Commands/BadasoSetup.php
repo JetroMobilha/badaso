@@ -165,11 +165,11 @@ class BadasoSetup extends Command
         if ($this->checkExist($vite_path, $search_package_laravel)) {
             $data =
                 <<<'EOT'
-        //Badaso
-        import { viteStaticCopy } from "vite-plugin-static-copy";
-        import vue from "@vitejs/plugin-vue2";
-        import EnvironmentPlugin from "vite-plugin-environment";
-        EOT;
+                //Badaso
+                import { viteStaticCopy } from "vite-plugin-static-copy";
+                import vue from "@vitejs/plugin-vue2";
+                import EnvironmentPlugin from "vite-plugin-environment";
+                EOT;
             $this->file->append($vite_path, $data);
         }
 
@@ -186,9 +186,9 @@ class BadasoSetup extends Command
             $pluginsIndex = strpos($config, 'plugins: [');
 
             $resolveCode = "
-        // Badaso Input
-        ,'vendor/bamfura/core/src/resources/badaso/app.js',
-        'vendor/bamfura/core/src/resources/badaso/assets/scss/style.scss',";
+                // Badaso Input
+                ,'vendor/bamfura/core/src/resources/badaso/app.js',
+                'vendor/bamfura/core/src/resources/badaso/assets/scss/style.scss',";
 
             $configArray = substr($config, $pluginsIndex + 10);
             $configArrayCloseIndex = strpos($configArray, ']');
@@ -240,17 +240,17 @@ class BadasoSetup extends Command
         if ($this->checkExist($vite_path, $search_badaso_resolve)) {
             $pluginsIndex = strpos($config, 'defineConfig({');
             $resolveCode = "
-        // resolve BadasoCss
-        resolve: {
-        alias: [
-            {
-                find: /^~.+/,
-                replacement: (val) => {
-                    return val.replace(/^~/, '');
-                },
-            },
-        ],
-    },\n";
+                // resolve BadasoCss
+                resolve: {
+                alias: [
+                    {
+                        find: /^~.+/,
+                        replacement: (val) => {
+                            return val.replace(/^~/, '');
+                        },
+                    },
+                ],
+            },\n";
 
             $modifiedConfig = substr($config, 0, $pluginsIndex + 15).$resolveCode.substr($config, $pluginsIndex + 15);
 
