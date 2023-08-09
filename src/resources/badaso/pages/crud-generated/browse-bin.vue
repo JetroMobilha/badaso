@@ -705,7 +705,7 @@
           <div
             class="flex flex-direction-column justify-content-center align-items-center"
           >
-            <img src="/badaso-images/maintenance.png" alt="Maintenance Icon" />
+            <img :src="`${maintenanceImg}`" alt="Maintenance Icon" />
 
             <h1 class="mt-4 text-center">We are under <br />maintenance</h1>
           </div>
