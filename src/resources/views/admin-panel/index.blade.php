@@ -24,7 +24,7 @@
         <link rel="shortcut icon" href="{{ asset('storage' . '/' . $favicon) }}" type="image/png">
     @endif
 
-    @vite('vendor/bamfura/core/src/resources/badaso/assets/scss/style.scss')
+    @vite('style.scss')
 </head>
 <body>
     <div id="app"></div>
@@ -33,6 +33,6 @@
         window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
         window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
     </script>
-     @vite('vendor/bamfura/core/src/resources/badaso/app.js')
+     @vite('app.js')
 </body>
 </html>
