@@ -13,6 +13,7 @@ class AlterEmpresasTableClsq extends Migration
      */
     public function up()
     {
+        /*
         try {
 
             Schema::table('empresas', function (Blueprint $table) {
@@ -24,7 +25,7 @@ class AlterEmpresasTableClsq extends Migration
         } catch (PDOException $ex) {
             $this->down();
             throw $ex;
-        }
+        }*/
     }
 
     /**
@@ -34,10 +35,10 @@ class AlterEmpresasTableClsq extends Migration
      */
     public function down()
     {
-        Schema::table('empresas', function (Blueprint $table) {
+      /*  Schema::table('empresas', function (Blueprint $table) {
             $table->string('nome', 255)->nullable(true)->charset('')->collation('')->change();
 			$table->string('pais', 255)->nullable(true)->charset('')->collation('')->change();
 			$table->string('continente', 255)->nullable(true)->charset('')->collation('')->change();
-        });
+        });*/
     }
 }
