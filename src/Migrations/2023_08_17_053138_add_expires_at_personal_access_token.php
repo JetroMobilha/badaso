@@ -12,7 +12,7 @@ class AddExpiresAtPersonalAccessToken extends Migration
     public function up(): void
     {
         Schema::table('personal_access_tokens', function (Blueprint $table) {
-            $table->timestamp('expires_at')->nullable();
+            $table->timestamp('expires_at')->nullable()->after('abilities');
         });
     }
 
