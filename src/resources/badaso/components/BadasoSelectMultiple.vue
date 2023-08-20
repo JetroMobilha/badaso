@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     satinize(item) {
-      return DOMPurify.sanitize(item)
+      return item;
     },
     handleInput(val) {
       this.$emit("input", val);
