@@ -8,6 +8,7 @@ use ReflectionClass;
 use Uasoft\Badaso\Models\DataType;
 use Uasoft\Badaso\Models\Permission;
 use Uasoft\Badaso\Models\UserRole;
+use ArgumentCountError;
 
 class GetData
 {
@@ -113,8 +114,8 @@ class GetData
             foreach ($class_methods as $class_method) {
                 if ($class_method->class == $class->name) {
                     try {
-                        $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}));
-                    } catch (Exception $e) {
+                        //$record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}));
+                    } catch (Exception|ArgumentCountError $e) {
                         // $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}()));
                     }
                 }
@@ -220,8 +221,8 @@ class GetData
             foreach ($class_methods as $class_method) {
                 if ($class_method->class == $class->name) {
                     try {
-                        $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}));
-                    } catch (Exception $e) {
+                        //$record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}));
+                    } catch (Exception|ArgumentCountError $e) {
                         // $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}()));
                     }
                 }

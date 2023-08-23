@@ -481,7 +481,7 @@ class BadasoBaseController extends Controller
             foreach ($relationshipOptions as $relationshipOption) {
                 $results[] = [
                     'id' => $relationshipOption->id,
-                    'text' => $relationshipOption->{$coluna},
+                    $coluna => $relationshipOption->{$coluna},
                     'dados' => $relationshipOption,
                 ];
             }
