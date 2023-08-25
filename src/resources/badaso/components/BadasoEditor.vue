@@ -89,7 +89,7 @@ export default {
   data() {
     return {
       init: {
-        height: heigh,
+        height: 500,
         plugins: [
           "lists advlist",
           "image imagetools",
@@ -146,10 +146,6 @@ export default {
     size: {
       type: String,
       default: "12",
-    },
-    heigh: {
-      type: Number,
-      default: 500,
     },
     label: {
       type: String,
