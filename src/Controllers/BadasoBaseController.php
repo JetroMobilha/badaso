@@ -454,7 +454,7 @@ class BadasoBaseController extends Controller
             $data_type = $this->getDataType($slug);
             $page = $request->input('page');
             $on_page = 50;
-            $search = $request->input('search', false);
+            $search = $request->input('query', false);
             $coluna = $request->input('coluna', false);
              
              
@@ -503,7 +503,7 @@ class BadasoBaseController extends Controller
         try {
             $slug = $this->getSlug($request);
             $data_type = $this->getDataType($slug);
-            $search = $request->input('search', false);
+            $search = $request->input('query', false);
             $coluna = $request->input('coluna', false);
              
              
@@ -521,8 +521,7 @@ class BadasoBaseController extends Controller
             
      
             return response()->json([
-                'data' => $resposta,   
-                'cont' => $total_count,     
+                'data' => $resposta,      
             ]);
   
         } catch (Exception $e) {
