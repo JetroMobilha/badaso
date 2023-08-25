@@ -493,12 +493,31 @@ class BadasoBaseController extends Controller
                         ],
             ]);
 
-             $dados['dados']= $results;
-             $dados['pagination']= [
-                'more' => ($total_count > ($skip + $on_page)),
-            ];
+        } catch (Exception $e) {
+            return ApiResponse::failed($e);
+        }
+    }
 
-            return ApiResponse::onlyEntity($dados);
+    public function isexiste(Request $request) {
+        
+        try {
+            $slug = $this->getSlug($request);
+            $data_type = $this->getDataType($slug);
+            $search = $request->input('search', false);
+            $coluna = $request->input('coluna', false);
+             
+             
+            $model = app($data_type->model_name);
+             
+            // If search query, use LIKE to filter results depending on field label
+            if (isset($search)) {
+                $total_count = $model->{$request->tipo}()->where($coluna, $search )->count();
+            }  
+     
+            return response()->json([
+                'data' => $total_count>0?true:false,     
+            ]);
+  
         } catch (Exception $e) {
             return ApiResponse::failed($e);
         }
