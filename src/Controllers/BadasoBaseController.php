@@ -512,10 +512,17 @@ class BadasoBaseController extends Controller
             // If search query, use LIKE to filter results depending on field label
             if (isset($search)) {
                 $total_count = $model->{$request->tipo}()->where($coluna, $search )->count();
+            } 
+
+            $resposta = false;
+            if ($total_count > 0) {
+                $resposta = true;
             }  
+            
      
             return response()->json([
-                'data' => $total_count>0?true:false,     
+                'data' => $resposta,   
+                'cont' => $total_count,     
             ]);
   
         } catch (Exception $e) {
