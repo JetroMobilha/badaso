@@ -512,7 +512,7 @@ export default {
                   ].replace(" ", "T")
                 : null;
               data.value = new Date(dateValue);
-            } else if (data.value == undefined && data.type == "hidden") {
+            } else if (data.details.value) {
               data.value = data.details.value ? data.details.value : "";
             } else if (
               data.type == "text" ||

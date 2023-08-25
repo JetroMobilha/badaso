@@ -505,7 +505,7 @@ class BadasoBaseController extends Controller
             $data_type = $this->getDataType($slug);
             $search = $request->input('query', false);
             $coluna = $request->input('coluna', false);
-             
+            $total_count =0;
              
             $model = app($data_type->model_name);
              
