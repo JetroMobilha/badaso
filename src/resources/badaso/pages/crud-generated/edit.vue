@@ -420,14 +420,32 @@ export default {
   methods: {
     submitForm() {
       // init data row
+      this.errors = {};
       const dataRows = {};
       for (const row of this.dataType.dataRows) {
+        if(row.required && 
+          (row.value==null||row.value=='') &&
+          !(row.type == "hidden") &&
+          row.edit &&
+          !(row.type == "empresa")
+        ) {
+          this.errors[row.field]= this.$t("vuelidate.rowsRequired")
+        }
         dataRows[row.field] = row.value;
       }
 
       // validate values in data rows must not equals 0
       if (Object.values(dataRows).length == 0) {
         this.isValid = false;
+        return;
+      }
+
+      if (Object.values(this.errors).length > 0) {
+        this.$vs.notify({
+            title: this.$t("alert.danger"),
+            text: this.$t("vuelidate.rowsRequired"),
+            color: "danger",
+          });
         return;
       }
 

@@ -431,13 +431,16 @@ export default {
       // init data rows
       const dataRows = {};
       for (const row of this.dataType.dataRows) {
-        if (
-          (row && row.value) ||
-          row.type == "switch" ||
-          row.type == "slider"
+        if(row.required && 
+          (row.value==null||row.value=='') &&
+          !(row.type == "hidden") &&
+          row.add &&
+          !(row.type == "empresa")
         ) {
-          dataRows[row.field] = row.value;
+          this.errors[row.field]= this.$t("vuelidate.rowsRequired")
         }
+         
+        dataRows[row.field] = row.value;
         if (row.type == "data_identifier") {
           dataRows[row.field] = this.userId;
         }
@@ -449,6 +452,15 @@ export default {
       // validate values in data rows must not equals 0
       if (Object.values(dataRows).length == 0) {
         this.isValid = false;
+        return;
+      }
+
+      if (Object.values(this.errors).length > 0) {
+        this.$vs.notify({
+            title: this.$t("alert.danger"),
+            text: this.$t("vuelidate.rowsRequired"),
+            color: "danger",
+          });
         return;
       }
 
