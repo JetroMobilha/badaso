@@ -505,18 +505,20 @@ class BadasoBaseController extends Controller
             $data_type = $this->getDataType($slug);
             $search = $request->input('query', false);
             $coluna = $request->input('coluna', false);
-            $total_count =0;
+            $id = $request->input('id', false);
+            $total_count =null;
              
             $model = app($data_type->model_name);
              
             // If search query, use LIKE to filter results depending on field label
             if (isset($search)) {
-                $total_count = $model->{$request->tipo}()->where($coluna, $search )->count();
+                $total_count = $model->{$request->tipo}()->where($coluna, $search )->get();
             } 
 
             $resposta = false;
-            if ($total_count > 0) {
+            if (isset($total_count)) {
                 $resposta = true;
+                if($id && $resposta) $resposta = ($id==$total_count->id)? false:true;
             }  
             
      
