@@ -100,4 +100,11 @@ export default {
     const url = ep + qs;
     return resource.get(url);
   },
+
+  isremove(data) {
+    const ep = entityPrefix + "/" + data.slug + "/isremove";
+    const qs = QueryString(data);
+    const url = ep + qs;
+    return resource.get(url);
+  },
 };

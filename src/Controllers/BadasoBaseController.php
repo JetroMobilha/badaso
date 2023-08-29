@@ -530,4 +530,17 @@ class BadasoBaseController extends Controller
             return ApiResponse::failed($e);
         }
     }
+
+    public function isremove(Request $request) {
+        
+        try {
+            $resposta = true;
+             
+            return response()->json([
+                'data' => $resposta,      
+            ]);
+        } catch (Exception $e) {
+            return ApiResponse::failed($e);
+        }
+    }
 }
