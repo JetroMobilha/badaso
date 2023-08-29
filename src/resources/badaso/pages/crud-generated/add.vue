@@ -594,6 +594,22 @@ export default {
           });
         });
     },
+    async isExiste(searchQuery) {
+      try {
+        
+        const response = await this.$api.badasoEntity.isexiste({
+          slug: this.$route.params.slug,
+          query:searchQuery,
+          tipo:this.pesquisaNome.tipo,
+          coluna:this.pesquisaNome.coluna
+        });
+        
+        this.pesquisaNome.isExiste = response.data;
+         
+      } catch (error) {
+        
+      }
+    },
   },
   computed: {
     isOnline: {
