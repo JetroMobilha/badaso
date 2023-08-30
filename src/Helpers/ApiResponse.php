@@ -86,23 +86,25 @@ class ApiResponse
         return self::send($response, $http_status);
     }
 
-    public static function entity($data_type, $data = null, $permissions = null)
+    public static function entity($data_type, $data = null, $permissions = null, $extra = null)
     {
         $response = [];
         $response['message'] = __('badaso::api_response.200');
         $response['data']['data_type'] = $data_type;
         $response['data']['entities'] = $data;
+        $response['data']['extra'] = $extra;
         $response['errors'] = null;
         $response = json_decode(json_encode($response));
 
         return self::send($response);
     }
 
-    public static function onlyEntity($data = null, $permissions = null)
+    public static function onlyEntity($data = null, $permissions = null, $extra = null)
     {
         $response = [];
         $response['message'] = __('badaso::api_response.200');
         $response['data'] = $data;
+        $response['extra'] = $extra;
         $response['errors'] = null;
         $response = json_decode(json_encode($response));
 
