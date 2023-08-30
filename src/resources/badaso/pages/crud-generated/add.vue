@@ -319,7 +319,7 @@
                       dataRow.type == 'relation' &&
                       dataRow.relation != undefined &&
                       dataRow.relation.relationType !== 'belongs_to' &&
-                      dataRow.relation.relationType !== 'belongs_to_many'&&
+                      dataRow.relation.relationType !== 'belongs_to_many'
                     "
                     :label="dataRow.displayName"
                     :placeholder="dataRow.displayName"
