@@ -296,6 +296,7 @@
                   <badaso-select
                     v-if="
                       dataRow.type == 'relation' &&
+                      dataRow.relation != undefined &&
                       dataRow.relation.relationType == 'belongs_to'
                     "
                     :label="dataRow.displayName"
@@ -313,9 +314,25 @@
                       errors[$caseConvert.stringSnakeToCamel(dataRow.field)]
                     "
                   ></badaso-select>
+                  <badaso-text
+                    v-if="
+                      dataRow.type == 'relation' &&
+                      dataRow.relation != undefined &&
+                      dataRow.relation.relationType !== 'belongs_to' &&
+                      dataRow.relation.relationType !== 'belongs_to_many'&&
+                    "
+                    :label="dataRow.displayName"
+                    :placeholder="dataRow.displayName"
+                    v-model="dataRow.value"
+                    size="12"
+                    :alert="
+                      errors[$caseConvert.stringSnakeToCamel(dataRow.field)]
+                    "
+                  ></badaso-text>
                   <badaso-select-multiple
                     v-if="
                       dataRow.type == 'relation' &&
+                      dataRow.relation != undefined &&
                       dataRow.relation.relationType == 'belongs_to_many'
                     "
                     :label="dataRow.displayName"
