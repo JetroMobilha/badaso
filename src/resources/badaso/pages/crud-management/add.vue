@@ -349,6 +349,21 @@
                 :alert="errors.description"
               >
               </badaso-textarea>
+
+              <badaso-textarea
+                size="12"
+                :label="$t('crud.add.field.description.title')"
+                :placeholder="$t('crud.add.field.description.placeholder')"
+                v-model="crudData.description"
+                :alert="errors.description"
+              >
+              </badaso-textarea>
+              <badaso-code-editor
+                label="details"
+                size="12"
+                v-model="crudData.details"
+              >
+              </badaso-code-editor>
             </vs-row>
           </badaso-collapse-item>
         </badaso-collapse>
@@ -462,7 +477,6 @@
                     <td>
                       <badaso-code-editor
                         v-model="field.details"
-                        v-if="field.type !== 'relation'"
                       >
                       </badaso-code-editor>
                       <vs-button

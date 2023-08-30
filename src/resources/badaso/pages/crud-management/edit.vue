@@ -354,6 +354,12 @@
                 :alert="errors.description"
               >
               </badaso-textarea>
+              <badaso-code-editor
+                label="details"
+                size="12"
+                v-model="crudData.details"
+              >
+              </badaso-code-editor>
             </vs-row>
           </badaso-collapse-item>
         </badaso-collapse>

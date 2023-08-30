@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <vs-col
+  <vs-col
       v-if="size !== ''"
       :vs-lg="size"
       vs-xs="12"
@@ -58,7 +57,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
