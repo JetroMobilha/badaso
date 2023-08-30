@@ -124,7 +124,7 @@
               >
                 <template slot="thead">
                   <vs-th
-                    v-for="(dataRow, index) in dataType.dataRows"
+                  v-for="(dataRow, index) in getRowBrowse(dataType.dataRows)"
                     :key="index"
                     :sort-key="$caseConvert.stringSnakeToCamel(dataRow.field)"
                   >
@@ -1251,6 +1251,13 @@ export default {
     },
     async onSwitchChangeDataShow() {
       await this.getEntity();
+    },
+    getRowBrowse(dataRows) {
+      if(dataRows!=undefined){
+        return dataRows.filter(data => data.browse == 1);
+      }else{
+        return [];
+      }
     },
   },
   computed: {
