@@ -73,11 +73,14 @@ class GetData
         $fields = array_diff(array_merge($fields, $ids, $fields_data_identifier), $field_other_relation);
 
         $records = [];
-        $query = $model::query()->select($fields);
+         
+        $query = self::setCopeDataType($data_type,$model);
+        $query = $query->select($fields);
 
         if (! $is_roles) {
             if ($is_field) {
-                $query = $model::query()->select($fields)->where($field_identify_related_user, auth()->user()->id);
+                $query = self::setCopeDataType($data_type,$model);
+                $query = $query->select($fields)->where($field_identify_related_user, auth()->user()->id);
             }
         }
 
@@ -184,19 +187,22 @@ class GetData
         $order_direction = $builder_params['order_direction'];
 
         $records = [];
-
+ 
+        $query = self::setCopeDataType($data_type,$model);
         if ($order_field) {
-            $data = $model::query()->select($fields)->orderBy($order_field, $order_direction);
+            $query = $query->select($fields)->orderBy($order_field, $order_direction);
             if (! $is_roles) {
                 if ($is_field) {
-                    $data = $model::query()->select($fields)->orderBy($order_field, $order_direction)->where($field_identify_related_user, auth()->user()->id);
+                    $query = self::setCopeDataType($data_type,$model);
+                    $query = $query->select($fields)->orderBy($order_field, $order_direction)->where($field_identify_related_user, auth()->user()->id);
                 }
             }
         } else {
-            $data = $model::query()->select($fields);
+            $query = $query->select($fields);
             if (! $is_roles) {
                 if ($is_field) {
-                    $data = $model::query()->select($fields)->where($field_identify_related_user, auth()->user()->id);
+                    $query = self::setCopeDataType($data_type,$model);
+                    $query = $query->select($fields)->where($field_identify_related_user, auth()->user()->id);
                 }
             }
         }
@@ -204,13 +210,13 @@ class GetData
         $is_soft_delete = $data_type->is_soft_delete;
         if ($is_soft_delete) {
             if ($only_data_soft_delete) {
-                $data = $data->whereNotNull('deleted_at');
+                $query = $query->whereNotNull('deleted_at');
             } else {
-                $data = $data->whereNull('deleted_at');
+                $query = $query->whereNull('deleted_at');
             }
         }
         // end
-        $data = $data->get();
+        $data = $query->get();
 
         foreach ($data as $row) {
 
@@ -625,5 +631,21 @@ class GetData
         }
 
         return $row;
+    }
+
+    protected static function setCopeDataType($dataType,$model)
+    {
+        $query = $model->query();
+        if (isset($dataType->details)) {
+            $details = is_string($dataType->details) ? json_decode($dataType->details) : $dataType->details;
+        }
+
+        if (isset($details) &&
+        isset($details->scope) &&
+         $details->scope != '' &&
+          method_exists($model, 'scope'.ucfirst($details->scope))) {
+            $query = $query->{$details->scope}();
+        }
+        return $query;
     }
 }

@@ -29,8 +29,8 @@
           <span class="badaso-code-editor__editor--error" v-html="alert"></span>
         </div>
       </div>
-    </vs-col>
-    <div v-else>
+  </vs-col>
+  <div v-else>
       <label v-if="label != ''" for="" class="badaso-code-editor__label">{{
         label
       }}</label>
@@ -56,7 +56,7 @@
           <span class="badaso-code-editor__editor--error" v-html="alert"></span>
         </div>
       </div>
-    </div>
+  </div>
 </template>
 
 <script>
