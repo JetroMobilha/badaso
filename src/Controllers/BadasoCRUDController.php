@@ -238,6 +238,9 @@ class BadasoCRUDController extends Controller
                     if (isset($data_row['relation_type'])) {
                         $relation['relation_type'] = $data_row['relation_type'];
                     }
+                    if (isset($data_row['model'])) {
+                        $relation['model'] = $data_row['model'];
+                    }
                     if (isset($data_row['destination_table'])) {
                         $relation['destination_table'] = $data_row['destination_table'];
                     }
@@ -378,6 +381,9 @@ class BadasoCRUDController extends Controller
                 $relation = [];
                 if (isset($data_row['relation_type'])) {
                     $relation['relation_type'] = $data_row['relation_type'];
+                }
+                if (isset($data_row['model'])) {
+                    $relation['model'] = $data_row['model'];
                 }
                 if (isset($data_row['destination_table'])) {
                     $relation['destination_table'] = $data_row['destination_table'];

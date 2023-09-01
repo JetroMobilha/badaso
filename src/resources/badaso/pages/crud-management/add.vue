@@ -520,6 +520,12 @@
                               />
                             </vs-select>
                           </vs-col>
+                          <badaso-text
+                            v-model="relation.model"
+                            size="12"
+                            label="Model Eloquent"
+                            placeholder="Model Eloquent ex. App\Models\User"
+                          ></badaso-text>
                           <badaso-select
                             size="12"
                             v-model="relation.destinationTableColumn"
@@ -621,6 +627,12 @@
                             />
                           </vs-select>
                         </vs-col>
+                        <badaso-text
+                            v-model="otherRelation.model"
+                            size="12"
+                            label="Model Eloquent"
+                            placeholder="Model Eloquent ex. App\Models\User"
+                          ></badaso-text>
                         <badaso-select
                           size="12"
                           v-model="otherRelation.destinationTableColumn"
@@ -865,6 +877,12 @@
                                   />
                                 </vs-select>
                               </vs-col>
+                              <badaso-text
+                                v-model="relation.model"
+                                size="12"
+                                label="Model Eloquent"
+                                placeholder="Model Eloquent ex. App\Models\User"
+                              ></badaso-text>
                               <badaso-select
                                 size="12"
                                 v-model="relation.destinationTableColumn"
@@ -967,6 +985,12 @@
                         />
                       </vs-select>
                     </vs-col>
+                    <badaso-text
+                      v-model="otherRelation.model"
+                      size="12"
+                      label="Model Eloquent"
+                      placeholder="Model Eloquent ex. App\Models\User"
+                    ></badaso-text>
                     <badaso-select
                       size="12"
                       v-model="otherRelation.destinationTableColumn"
@@ -1107,6 +1131,7 @@ export default {
     destinationTableColumns: [],
     setOtherRelation: false,
     otherRelation: {
+      model: "",
       relationType: "",
       destinationTable: "",
       destinationTableColumn: "",
@@ -1118,6 +1143,7 @@ export default {
     },
     itemKey: "",
     relation: {
+      model: "",
       relationType: "",
       destinationTable: "",
       destinationTableColumn: "",
@@ -1175,6 +1201,7 @@ export default {
       this.relation = {
         relationType: field.relationType ? field.relationType : "",
         destinationTable: field.destinationTable ? field.destinationTable : "",
+        model: field.model ? field.model : "",
         destinationTableColumn: field.destinationTableColumn
           ? field.destinationTableColumn
           : "",
@@ -1190,6 +1217,7 @@ export default {
       if (table) {
         this.relation.destinationTableColumn = "";
         this.relation.destinationTableDisplayColumn = "";
+        this.relation.model = "";
         this.getDestinationTableColumns(table);
       }
     },
@@ -1197,6 +1225,7 @@ export default {
       field.relationType = this.relation.relationType;
       field.destinationTable = this.relation.destinationTable;
       field.destinationTableColumn = this.relation.destinationTableColumn;
+      field.model = this.relation.model;
       field.destinationTableDisplayColumn =
         this.relation.destinationTableDisplayColumn;
       field.destinationTableDisplayMoreColumn =
@@ -1224,6 +1253,7 @@ export default {
           .destinationTableDisplayColumn
           ? this.otherRelation.destinationTableDisplayColumn
           : "",
+        model: this.otherRelation.model ? this.otherRelation.model:"",
       };
     },
     changeTableManytomany(table) {
@@ -1279,6 +1309,9 @@ export default {
             .destinationTableDisplayColumn
             ? this.otherRelation.destinationTableDisplayColumn
             : "",
+            model: this.otherRelation.model
+            ? this.otherRelation.model
+            : "",
           setRelation: false,
         });
       }
@@ -1292,6 +1325,7 @@ export default {
       this.otherRelation.destinationTable = "";
       this.otherRelation.destinationTableColumn = "";
       this.otherRelation.destinationTableDisplayColumn = "";
+      this.otherRelation.model = "";
       this.relationManytomanyAdvance.destinationTableManytomany = "";
     },
     dataNotificationEventHandle() {

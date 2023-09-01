@@ -515,6 +515,12 @@
                                 v-for="(item, index) in destinationTables"
                               />
                             </vs-select>
+                            <badaso-text
+                              v-model="relation.model"
+                              size="12"
+                              label="Model Eloquent"
+                              placeholder="Model Eloquent ex. App\Models\User"
+                            ></badaso-text>
                           </vs-col>
                           <badaso-select
                             size="12"
@@ -609,6 +615,12 @@
                             />
                           </vs-select>
                         </vs-col>
+                        <badaso-text
+                          v-model="otherRelation.model"
+                          size="12"
+                          label="Model Eloquent"
+                          placeholder="Model Eloquent ex. App\Models\User"
+                        ></badaso-text>
                         <badaso-select
                           size="12"
                           v-model="otherRelation.destinationTableColumn"
@@ -824,6 +836,12 @@
                                   />
                                 </vs-select>
                               </vs-col>
+                              <badaso-text
+                                v-model="relation.model"
+                                size="12"
+                                label="Model Eloquent"
+                                placeholder="Model Eloquent ex. App\Models\User"
+                              ></badaso-text>
                               <badaso-select
                                 size="12"
                                 v-model="relation.destinationTableColumn"
@@ -916,6 +934,12 @@
                         />
                       </vs-select>
                     </vs-col>
+                    <badaso-text
+                      v-model="otherRelation.model"
+                      size="12"
+                      label="Model Eloquent"
+                      placeholder="Model Eloquent ex. App\Models\User"
+                    ></badaso-text>
                     <badaso-select
                       size="12"
                       v-model="otherRelation.destinationTableColumn"
@@ -1058,6 +1082,7 @@ export default {
     destinationTableColumns: [],
     relation: {},
     otherRelation: {
+      model: "",
       relationType: "",
       destinationTable: "",
       destinationTableColumn: "",
@@ -1126,6 +1151,7 @@ export default {
           field.destinationTableDisplayMoreColumn
             ? field.destinationTableDisplayMoreColumn
             : "",
+        model: field.model ? field.model:"",
       };
       if (field.destinationTable !== "") {
         this.getDestinationTableColumns(field.destinationTable);
@@ -1135,10 +1161,12 @@ export default {
       if (table) {
         this.relation.destinationTableColumn = "";
         this.relation.destinationTableDisplayColumn = "";
+        this.relation.model = "";
         this.getDestinationTableColumns(table);
       }
     },
     saveRelation(field) {
+      field.model = this.relation.model;
       field.relationType = this.relation.relationType;
       field.destinationTable = this.relation.destinationTable;
       field.destinationTableColumn = this.relation.destinationTableColumn;
@@ -1163,6 +1191,8 @@ export default {
           .destinationTableDisplayColumn
           ? this.otherRelation.destinationTableDisplayColumn
           : "",
+        model: this.otherRelation.model? this.otherRelation.model
+          : "",
       };
       if (this.otherRelation.destinationTable !== "") {
         this.getDestinationTableColumns(this.otherRelation.destinationTable);
@@ -1173,6 +1203,7 @@ export default {
         this.otherRelation.destinationTableColumn = "";
         this.otherRelation.destinationTableDisplayColumn = "";
         this.otherRelation.destinationTableDisplayMoreColumn = "";
+        this.otherRelation.model = "";
         this.getDestinationTableColumns(table);
       }
     },
@@ -1237,6 +1268,9 @@ export default {
             .destinationTableDisplayColumn
             ? this.otherRelation.destinationTableDisplayColumn
             : "",
+          model: this.otherRelation.model
+            ? this.otherRelation.model
+            : "",
           setRelation: false,
         });
       }
@@ -1246,6 +1280,7 @@ export default {
     },
     cancelRelationManytomany() {
       this.setOtherRelation = false;
+      this.otherRelation.model = "";
       this.otherRelation.relationType = "";
       this.otherRelation.destinationTable = "";
       this.otherRelation.destinationTableColumn = "";
@@ -1350,6 +1385,9 @@ export default {
                 : "",
               destinationTableDisplayColumn: field.relation
                 ? field.relation.destinationTableDisplayColumn
+                : "",
+                model: field.relation
+                ? field.relation.model
                 : "",
               order: field.order,
               setRelation: false,

@@ -212,8 +212,8 @@ class BadasoBaseController extends Controller
             $user_auth = Auth::guard($guard)->user();
 
             activity($data_type->display_name_singular)
-                ->causedBy($user_auth ?? null)
-                ->withProperties($data)
+                ->catusedBy($user_auth ?? null)
+                ->wihProperties($data)
                 ->log($data_type->display_name_singular.' has been deleted');
 
             DB::commit();
