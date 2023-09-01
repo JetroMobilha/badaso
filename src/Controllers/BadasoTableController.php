@@ -175,25 +175,62 @@ class BadasoTableController extends Controller
                 $destination_table = array_key_exists('destination_table', $relation_detail) ? $relation_detail['destination_table'] : null;
                 $destination_table_column = array_key_exists('destination_table_column', $relation_detail) ? $relation_detail['destination_table_column'] : null;
                 $destination_table_display_column = array_key_exists('destination_table_display_column', $relation_detail) ? $relation_detail['destination_table_display_column'] : null;
-
+                $modelRelation = array_key_exists('model', $relation_detail) ? $relation_detail['model'] : null;
+                
                 if (
                     $relation_type
                     && $destination_table
                     && $destination_table_column
                     && $destination_table_display_column
                 ) {
-                    $relation_data = DB::table($destination_table)->select([
-                        $destination_table_column,
-                        $destination_table_display_column,
-                    ])->get();
-                    $result = collect($relation_data);
-                    $data[$destination_table] = $result->map(function ($res) use ($destination_table_column, $destination_table_display_column) {
-                        $item = $res;
-                        $item->value = $res->{$destination_table_column};
-                        $item->label = $res->{$destination_table_display_column};
+                    if (isset($modelRelation)) {
+                       try {
+                        $model = app($modelRelation);
+                        $query = $model->query();
+                        $details =null;
+                        if (isset($field->details)) {
+                            $details = is_string($field->details) ? json_decode($field->details) : $field->details;
+                        }
 
-                        return $item;
-                    })->toArray();
+                        if (isset($details) && isset($details->scope) && $details->scope != '' &&
+                            method_exists($model, 'scope'.ucfirst($details->scope))) {
+                            
+                            $relation_data = $query->{$details->scope}()->get();
+                            $result = collect($relation_data);
+                            $data[$destination_table] = $result->map(function ($res) use ($destination_table_column, $destination_table_display_column) {
+                            $item = $res;
+                            $item->value = $res->{$destination_table_column};
+                            $item->label = $res->{$destination_table_display_column};
+    
+                            return $item;
+                        })->toArray();
+                        }else{
+                            $result = collect($query->get());
+                            $data[$destination_table] = $result->map(function ($res) use ($destination_table_column, $destination_table_display_column) {
+                            $item = $res;
+                            $item->value = $res->{$destination_table_column};
+                            $item->label = $res->{$destination_table_display_column};
+    
+                            return $item;
+                        })->toArray();
+                        }
+                       } catch (\Throwable $th) {
+                         
+                       }
+                    } else {
+                        $relation_data = DB::table($destination_table)->select([
+                            $destination_table_column,
+                            $destination_table_display_column,
+                        ])->get();
+                        $result = collect($relation_data);
+                        $data[$destination_table] = $result->map(function ($res) use ($destination_table_column, $destination_table_display_column) {
+                            $item = $res;
+                            $item->value = $res->{$destination_table_column};
+                            $item->label = $res->{$destination_table_display_column};
+    
+                            return $item;
+                        })->toArray();
+                    }
                 }
             }
 
