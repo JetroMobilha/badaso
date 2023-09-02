@@ -647,6 +647,16 @@
                             $t('crud.add.body.destinationTableDisplayColumn')
                           "
                         ></badaso-select>
+                        <badaso-select-multiple
+                            v-model="otherRelation.destinationTableDisplayMoreColumn"
+                            size="12"
+                            :label="
+                              $t(
+                                'crud.add.body.destinationTableDisplayMoreColumn'
+                              )
+                            "
+                            :items="destinationTableColumns"
+                          ></badaso-select-multiple>
                         <vs-col vs-lg="14">
                           <badaso-collapse>
                             <badaso-collapse-item>
@@ -1003,6 +1013,16 @@
                       :items="destinationTableColumns"
                       :label="$t('crud.add.body.destinationTableDisplayColumn')"
                     ></badaso-select>
+                    <badaso-select-multiple
+                      v-model="otherRelation.destinationTableDisplayMoreColumn"
+                      size="12"
+                      :label="
+                        $t(
+                          'crud.add.body.destinationTableDisplayMoreColumn'
+                        )
+                      "
+                      :items="destinationTableColumns"
+                    ></badaso-select-multiple>
                     <badaso-collapse>
                       <badaso-collapse-item>
                         <h3 slot="header">
@@ -1149,6 +1169,7 @@ export default {
       destinationTableColumn: "",
       destinationTableManytomany: "",
       destinationTableDisplayColumn: "",
+      destinationTableDisplayMoreColumn: "",
     },
     onCreate: false,
     onCreateTitle: "",
@@ -1208,6 +1229,9 @@ export default {
         destinationTableDisplayColumn: field.destinationTableDisplayColumn
           ? field.destinationTableDisplayColumn
           : "",
+          destinationTableDisplayMoreColumn: field.destinationTableDisplayMoreColumn
+          ? field.destinationTableDisplayMoreColumn
+          : "",
       };
       if (field.destinationTable !== "") {
         this.getDestinationTableColumns(field.destinationTable);
@@ -1218,6 +1242,7 @@ export default {
         this.relation.destinationTableColumn = "";
         this.relation.destinationTableDisplayColumn = "";
         this.relation.model = "";
+        this.relation.destinationTableDisplayMoreColumn = "";   
         this.getDestinationTableColumns(table);
       }
     },
@@ -1253,6 +1278,10 @@ export default {
           .destinationTableDisplayColumn
           ? this.otherRelation.destinationTableDisplayColumn
           : "",
+          destinationTableDisplayMoreColumn: this.otherRelation
+          .destinationTableDisplayMoreColumn
+          ? this.otherRelation.destinationTableDisplayMoreColumn
+          : "",
         model: this.otherRelation.model ? this.otherRelation.model:"",
       };
     },
@@ -1261,6 +1290,7 @@ export default {
         this.otherRelation.destinationTableColumn = "";
         this.otherRelation.destinationTableDisplayColumn = "";
         this.otherRelation.destinationTableDisplayMoreColumn = "";
+        this.otherRelation.model = "";
         this.getDestinationTableColumns(table);
       }
     },
@@ -1309,6 +1339,10 @@ export default {
             .destinationTableDisplayColumn
             ? this.otherRelation.destinationTableDisplayColumn
             : "",
+            destinationTableDisplayMoreColumn: this.otherRelation
+            .destinationTableDisplayMoreColumn
+            ? this.otherRelation.destinationTableDisplayMoreColumn
+            : "",
             model: this.otherRelation.model
             ? this.otherRelation.model
             : "",
@@ -1327,6 +1361,7 @@ export default {
       this.otherRelation.destinationTableDisplayColumn = "";
       this.otherRelation.model = "";
       this.relationManytomanyAdvance.destinationTableManytomany = "";
+      this.otherRelation.destinationTableDisplayMoreColumn = "";
     },
     dataNotificationEventHandle() {
       this.crudData.notification = this.crudData.notification.map(

@@ -514,14 +514,14 @@
                                 :text="item.label ? item.label : item"
                                 v-for="(item, index) in destinationTables"
                               />
-                            </vs-select>
-                            <badaso-text
+                            </vs-select> 
+                          </vs-col>
+                          <badaso-text
                               v-model="relation.model"
                               size="12"
                               label="Model Eloquent"
                               placeholder="Model Eloquent ex. App\Models\User"
                             ></badaso-text>
-                          </vs-col>
                           <badaso-select
                             size="12"
                             v-model="relation.destinationTableColumn"
@@ -536,6 +536,16 @@
                               $t('crud.edit.body.destinationTableDisplayColumn')
                             "
                           ></badaso-select>
+                          <badaso-select-multiple
+                            v-model="relation.destinationTableDisplayMoreColumn"
+                            size="12"
+                            :label="
+                              $t(
+                                'crud.add.body.destinationTableDisplayMoreColumn'
+                              )
+                            "
+                            :items="destinationTableColumns"
+                          ></badaso-select-multiple>
                         </vs-row>
                         <vs-row vs-type="flex" vs-justify="space-between">
                           <vs-col vs-lg="2" vs-type="flex" vs-align="flex-end">
@@ -635,7 +645,17 @@
                             $t('crud.edit.body.destinationTableDisplayColumn')
                           "
                         ></badaso-select>
-                        <vs-col vs-lg="14">
+                        <badaso-select-multiple
+                          v-model="otherRelation.destinationTableDisplayMoreColumn"
+                          size="12"
+                          :label="
+                            $t(
+                              'crud.add.body.destinationTableDisplayMoreColumn'
+                            )
+                          "
+                          :items="destinationTableColumns"
+                        ></badaso-select-multiple>
+                        <vs-col vs-lg="12">
                           <badaso-collapse>
                             <badaso-collapse-item>
                               <h3 slot="header">
@@ -860,6 +880,16 @@
                                   )
                                 "
                               ></badaso-select>
+                              <badaso-select-multiple
+                                v-model="relation.destinationTableDisplayMoreColumn"
+                                size="12"
+                                :label="
+                                  $t(
+                                    'crud.add.body.destinationTableDisplayMoreColumn'
+                                  )
+                                "
+                                :items="destinationTableColumns"
+                              ></badaso-select-multiple>
                             </vs-row>
                             <vs-row vs-type="flex" vs-justify="space-between">
                               <vs-col
@@ -952,7 +982,17 @@
                       :items="destinationTableColumns"
                       :label="$t('crud.add.body.destinationTableDisplayColumn')"
                     ></badaso-select>
-                    <vs-col vs-lg="14">
+                    <badaso-select-multiple
+                      v-model="otherRelation.destinationTableDisplayMoreColumn"
+                      size="12"
+                      :label="
+                        $t(
+                         'crud.add.body.destinationTableDisplayMoreColumn'
+                        )
+                      "
+                      :items="destinationTableColumns"
+                    ></badaso-select-multiple>
+                    <vs-col vs-lg="12">
                       <badaso-collapse>
                         <badaso-collapse-item>
                           <h3 slot="header">
@@ -1087,6 +1127,7 @@ export default {
       destinationTable: "",
       destinationTableColumn: "",
       destinationTableDisplayColumn: "",
+      destinationTableDisplayMoreColumn: "",
     },
     relationManytomanyAdvance: {
       destinationTableManytomany: "",
@@ -1162,6 +1203,7 @@ export default {
         this.relation.destinationTableColumn = "";
         this.relation.destinationTableDisplayColumn = "";
         this.relation.model = "";
+        this.relation.destinationTableDisplayMoreColumn = "";
         this.getDestinationTableColumns(table);
       }
     },
@@ -1172,6 +1214,8 @@ export default {
       field.destinationTableColumn = this.relation.destinationTableColumn;
       field.destinationTableDisplayColumn =
         this.relation.destinationTableDisplayColumn;
+      field.destinationTableDisplayMoreColumn =
+        this.relation.destinationTableDisplayMoreColumn  
       this.relation = {};
       field.setRelation = false;
     },
@@ -1190,6 +1234,10 @@ export default {
         destinationTableDisplayColumn: this.otherRelation
           .destinationTableDisplayColumn
           ? this.otherRelation.destinationTableDisplayColumn
+          : "",
+          destinationTableDisplayMoreColumn: this.otherRelation
+          .destinationTableDisplayMoreColumn
+          ? this.otherRelation.destinationTableDisplayMoreColumn
           : "",
         model: this.otherRelation.model? this.otherRelation.model
           : "",
@@ -1268,6 +1316,10 @@ export default {
             .destinationTableDisplayColumn
             ? this.otherRelation.destinationTableDisplayColumn
             : "",
+            destinationTableDisplayMoreColumn: this.otherRelation
+            .destinationTableDisplayMoreColumn
+            ? this.otherRelation.destinationTableDisplayMoreColumn
+            : "",
           model: this.otherRelation.model
             ? this.otherRelation.model
             : "",
@@ -1285,6 +1337,7 @@ export default {
       this.otherRelation.destinationTable = "";
       this.otherRelation.destinationTableColumn = "";
       this.otherRelation.destinationTableDisplayColumn = "";
+      this.otherRelation.destinationTableDisplayMoreColumn = "";
       this.relationManytomanyAdvance.destinationTableManytomany = "";
     },
     dataNotificationEventHandle() {

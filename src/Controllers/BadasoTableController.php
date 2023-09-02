@@ -175,8 +175,15 @@ class BadasoTableController extends Controller
                 $destination_table = array_key_exists('destination_table', $relation_detail) ? $relation_detail['destination_table'] : null;
                 $destination_table_column = array_key_exists('destination_table_column', $relation_detail) ? $relation_detail['destination_table_column'] : null;
                 $destination_table_display_column = array_key_exists('destination_table_display_column', $relation_detail) ? $relation_detail['destination_table_display_column'] : null;
+                $destination_table_display_more_column = array_key_exists('destination_table_display_more_column', $relation_detail) ? $relation_detail['destination_table_display_more_column'] : null;
                 $modelRelation = array_key_exists('model', $relation_detail) ? $relation_detail['model'] : null;
                 
+                if (isset($destination_table_display_more_column)) {
+                    $destination_table_display_more_column =
+                     is_string($destination_table_display_more_column) ? 
+                     json_decode($destination_table_display_more_column) : $destination_table_display_more_column;
+                }
+
                 if (
                     $relation_type
                     && $destination_table
@@ -201,7 +208,13 @@ class BadasoTableController extends Controller
                             $item = $res;
                             $item->value = $res->{$destination_table_column};
                             $item->label = $res->{$destination_table_display_column};
-    
+
+                            if (isset($destination_table_display_more_column)) {
+                                foreach ($destination_table_display_more_column as $key => $value) {
+                                    $item->{$value} = $res->{$value};
+                                }
+                            }
+
                             return $item;
                         })->toArray();
                         }else{
@@ -210,7 +223,13 @@ class BadasoTableController extends Controller
                             $item = $res;
                             $item->value = $res->{$destination_table_column};
                             $item->label = $res->{$destination_table_display_column};
-    
+
+                            if (isset($destination_table_display_more_column)) {
+                                foreach ($destination_table_display_more_column as $key => $value) {
+                                    $item->{$value} = $res->{$value};
+                                }
+                            }
+                            
                             return $item;
                         })->toArray();
                         }
@@ -227,6 +246,12 @@ class BadasoTableController extends Controller
                             $item = $res;
                             $item->value = $res->{$destination_table_column};
                             $item->label = $res->{$destination_table_display_column};
+
+                            if (isset($destination_table_display_more_column)) {
+                                foreach ($destination_table_display_more_column as $key => $value) {
+                                    $item->{$value} = $res->{$value};
+                                }
+                            }
     
                             return $item;
                         })->toArray();
