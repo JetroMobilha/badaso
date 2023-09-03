@@ -516,7 +516,7 @@ class BadasoBaseController extends Controller
             } 
 
             $resposta = false;
-            if (isset($total_count)) {
+            if (isset($total_count) && $total_count->count()) {
                 $resposta = true;
                 if($id && $resposta) $resposta = ($id==$total_count->id)? false:true;
             }  

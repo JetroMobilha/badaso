@@ -205,18 +205,19 @@ class BadasoTableController extends Controller
                             $relation_data = $query->{$details->scope}()->get();
                             $result = collect($relation_data);
                             $data[$destination_table] = $result->map(function ($res) use ($destination_table_column, $destination_table_display_column) {
-                            $item = $res;
-                            $item->value = $res->{$destination_table_column};
-                            $item->label = $res->{$destination_table_display_column};
+                                    $item = $res;
+                                    $item->value = $res->{$destination_table_column};
+                                    $item->label = $res->{$destination_table_display_column};
 
-                            if (isset($destination_table_display_more_column)) {
-                                foreach ($destination_table_display_more_column as $key => $value) {
-                                    $item->{$value} = $res->{$value};
+                                    if (isset($destination_table_display_more_column)) {
+                                        foreach ($destination_table_display_more_column as $key => $value) {
+                                            $item->{$value} = $res->{$value};
+                                        }
+                                    }
+
+                                    return $item;
                                 }
-                            }
-
-                            return $item;
-                        })->toArray();
+                            )->toArray();
                         }else{
                             $result = collect($query->get());
                             $data[$destination_table] = $result->map(function ($res) use ($destination_table_column, $destination_table_display_column) {
