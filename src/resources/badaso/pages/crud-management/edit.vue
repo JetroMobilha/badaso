@@ -1127,7 +1127,7 @@ export default {
       destinationTable: "",
       destinationTableColumn: "",
       destinationTableDisplayColumn: "",
-      destinationTableDisplayMoreColumn: "",
+      destinationTableDisplayMoreColumn: [],
     },
     relationManytomanyAdvance: {
       destinationTableManytomany: "",
@@ -1191,7 +1191,7 @@ export default {
         destinationTableDisplayMoreColumn:
           field.destinationTableDisplayMoreColumn
             ? field.destinationTableDisplayMoreColumn
-            : "",
+            : [],
         model: field.model ? field.model:"",
       };
       if (field.destinationTable !== "") {
@@ -1203,7 +1203,7 @@ export default {
         this.relation.destinationTableColumn = "";
         this.relation.destinationTableDisplayColumn = "";
         this.relation.model = "";
-        this.relation.destinationTableDisplayMoreColumn = "";
+        this.relation.destinationTableDisplayMoreColumn = [];
         this.getDestinationTableColumns(table);
       }
     },
@@ -1238,7 +1238,7 @@ export default {
           destinationTableDisplayMoreColumn: this.otherRelation
           .destinationTableDisplayMoreColumn
           ? this.otherRelation.destinationTableDisplayMoreColumn
-          : "",
+          : [],
         model: this.otherRelation.model? this.otherRelation.model
           : "",
       };
@@ -1250,7 +1250,7 @@ export default {
       if (table) {
         this.otherRelation.destinationTableColumn = "";
         this.otherRelation.destinationTableDisplayColumn = "";
-        this.otherRelation.destinationTableDisplayMoreColumn = "";
+        this.otherRelation.destinationTableDisplayMoreColumn = [];
         this.otherRelation.model = "";
         this.getDestinationTableColumns(table);
       }
@@ -1319,7 +1319,7 @@ export default {
             destinationTableDisplayMoreColumn: this.otherRelation
             .destinationTableDisplayMoreColumn
             ? this.otherRelation.destinationTableDisplayMoreColumn
-            : "",
+            : [],
           model: this.otherRelation.model
             ? this.otherRelation.model
             : "",
@@ -1337,7 +1337,7 @@ export default {
       this.otherRelation.destinationTable = "";
       this.otherRelation.destinationTableColumn = "";
       this.otherRelation.destinationTableDisplayColumn = "";
-      this.otherRelation.destinationTableDisplayMoreColumn = "";
+      this.otherRelation.destinationTableDisplayMoreColumn = [];
       this.relationManytomanyAdvance.destinationTableManytomany = "";
     },
     dataNotificationEventHandle() {
@@ -1439,6 +1439,9 @@ export default {
               destinationTableDisplayColumn: field.relation
                 ? field.relation.destinationTableDisplayColumn
                 : "",
+                destinationTableDisplayMoreColumn: field.relation
+                ? field.relation.destinationTableDisplayMoreColumn
+                : [],
                 model: field.relation
                 ? field.relation.model
                 : "",
