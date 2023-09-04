@@ -103,12 +103,13 @@ class BadasoSetup extends Command
          
         $decoded_json['dependencies']['vue-cal'] = '^3.11.0';
         $decoded_json['dependencies']['dompurify'] = '^3.0.5';
-
+        
         $decoded_json['dependencies']['@johmun/vue-tags-input'] = '^2.1.0';
         $decoded_json['dependencies']['@tinymce/tinymce-vue'] = '^3';
         $decoded_json['dependencies']['body-scroll-lock'] = '^4.0.0-beta.0';
         $decoded_json['dependencies']['chart.js'] = '^2.8.0';
-        $decoded_json['dependencies']['dayjs'] = '^1.10.7';
+        $decoded_json['dependencies']['chart.js'] = '^2.8.0';
+        $decoded_json['dependencies']['echarts'] = '^5.4.3';
         $decoded_json['dependencies']['firebase'] = '^8.4.2';
         $decoded_json['dependencies']['jspdf'] = '^2.3.1';
         $decoded_json['dependencies']['handlebars'] = '^4.7.7';

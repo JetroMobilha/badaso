@@ -25,7 +25,6 @@ class GetData
         $order_field = $builder_params['order_field'];
         $order_direction = $builder_params['order_direction'];
         $filter_key = $builder_params['filter_key'];
-        $filter_operator = $builder_params['filter_operator'];
         $filter_value = $builder_params['filter_value'];
         $field_other_relation = [];
 
@@ -75,12 +74,12 @@ class GetData
         $records = [];
          
         $query = self::setCopeDataType($data_type,$model);
-        $query = $query->select($fields);
+        $query->select($fields);
 
         if (! $is_roles) {
             if ($is_field) {
                 $query = self::setCopeDataType($data_type,$model);
-                $query = $query->select($fields)->where($field_identify_related_user, auth()->user()->id);
+                $query->select($fields)->where($field_identify_related_user, auth()->user()->id);
             }
         }
 
@@ -95,15 +94,18 @@ class GetData
         }
         // end
 
-        if ($filter_value) {
+        if ($filter_value && $filter_key) {
+            $query->where($filter_key,$filter_value);
+        }else if ($filter_value) {
             foreach ($fields as $index => $field) {
                 if ($index == 0) {
-                    $query->where($field, 'LIKE', "%{$filter_value}%");
+                     $query->where($field, 'LIKE', "%{$filter_value}%");
                 } else {
-                    $query->orWhere($field, 'LIKE', "%{$filter_value}%");
+                     $query->orWhere($field, 'LIKE', "%{$filter_value}%");
                 }
             }
         }
+
         if ($order_field) {
             $query->orderBy($order_field, $order_direction);
         }
@@ -185,24 +187,26 @@ class GetData
         $model = app($data_type->model_name);
         $order_field = $builder_params['order_field'];
         $order_direction = $builder_params['order_direction'];
+        $filter_key = $builder_params['filter_key'];
+        $filter_value = $builder_params['filter_value'];
 
         $records = [];
  
         $query = self::setCopeDataType($data_type,$model);
         if ($order_field) {
-            $query = $query->select($fields)->orderBy($order_field, $order_direction);
+            $query->select($fields)->orderBy($order_field, $order_direction);
             if (! $is_roles) {
                 if ($is_field) {
                     $query = self::setCopeDataType($data_type,$model);
-                    $query = $query->select($fields)->orderBy($order_field, $order_direction)->where($field_identify_related_user, auth()->user()->id);
+                    $query->select($fields)->orderBy($order_field, $order_direction)->where($field_identify_related_user, auth()->user()->id);
                 }
             }
         } else {
-            $query = $query->select($fields);
+            $query->select($fields);
             if (! $is_roles) {
                 if ($is_field) {
                     $query = self::setCopeDataType($data_type,$model);
-                    $query = $query->select($fields)->where($field_identify_related_user, auth()->user()->id);
+                    $query->select($fields)->where($field_identify_related_user, auth()->user()->id);
                 }
             }
         }
@@ -210,9 +214,21 @@ class GetData
         $is_soft_delete = $data_type->is_soft_delete;
         if ($is_soft_delete) {
             if ($only_data_soft_delete) {
-                $query = $query->whereNotNull('deleted_at');
+                $query->whereNotNull('deleted_at');
             } else {
-                $query = $query->whereNull('deleted_at');
+                $query->whereNull('deleted_at');
+            }
+        }
+
+        if ($filter_value && $filter_key) {
+            $query->where($filter_key,$filter_value);
+        }else if ($filter_value) {
+            foreach ($fields as $index => $field) {
+                if ($index == 0) {
+                     $query->where($field, 'LIKE', "%{$filter_value}%");
+                } else {
+                     $query->orWhere($field, 'LIKE', "%{$filter_value}%");
+                }
             }
         }
         // end
@@ -276,7 +292,6 @@ class GetData
         $order_field = $builder_params['order_field'];
         $order_direction = $builder_params['order_direction'];
         $filter_key = $builder_params['filter_key'];
-        $filter_operator = $builder_params['filter_operator'];
         $filter_value = $builder_params['filter_value'];
 
         $is_roles = false;
@@ -339,7 +354,9 @@ class GetData
         }
         // end
 
-        if ($filter_value) {
+        if ($filter_value && $filter_key) {
+            $query->where($filter_key,$filter_value);
+        }else if ($filter_value) {
             foreach ($fields as $index => $field) {
                 if ($index == 0) {
                     $query->where($field, 'LIKE', "%{$filter_value}%");
@@ -432,6 +449,8 @@ class GetData
         $fields = array_diff(array_merge($fields, $ids, $fields_data_identifier), $field_other_relation);
         $order_field = $builder_params['order_field'];
         $order_direction = $builder_params['order_direction'];
+        $filter_key = $builder_params['filter_key'];
+        $filter_value = $builder_params['filter_value'];
 
         if ($order_field) {
             $records = DB::table($data_type->name)->select($fields)->orderBy($order_field, $order_direction);
@@ -449,6 +468,18 @@ class GetData
             }
         }
         // end
+
+        if ($filter_value && $filter_key) {
+            $records->where($filter_key,$filter_value);
+        }else if ($filter_value) {
+            foreach ($fields as $index => $field) {
+                if ($index == 0) {
+                     $records->where($field, 'LIKE', "%{$filter_value}%");
+                } else {
+                     $records->orWhere($field, 'LIKE', "%{$filter_value}%");
+                }
+            }
+        }
 
         $records = $records->get()->map(function ($record) use ($data_rows) {
             foreach ($data_rows as $index => $data_row) {
