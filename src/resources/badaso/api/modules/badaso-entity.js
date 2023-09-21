@@ -107,4 +107,13 @@ export default {
     const url = ep + qs;
     return resource.get(url);
   },
+
+   
+  
+  info(data={}) {
+    const ep = entityPrefix + "/" + data.slug + "/info";
+    const qs = QueryString(data);
+    const url = ep + qs;
+    return resource.get(url);
+  },
 };

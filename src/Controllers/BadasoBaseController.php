@@ -543,4 +543,14 @@ class BadasoBaseController extends Controller
             return ApiResponse::failed($e);
         }
     }
+
+    public function info(Request $request)
+    {
+        try {
+            $data = "Emplemetra estecmetodo mano ";
+            return ApiResponse::onlyEntity($data);
+        } catch (Exception $e) {
+            return ApiResponse::failed($e);
+        }
+    }
 }
