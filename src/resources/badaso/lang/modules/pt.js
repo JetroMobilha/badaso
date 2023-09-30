@@ -41,14 +41,20 @@ export default {
       name: "Nome",
       username: "Nome de usuário",
       phone: "Telefone",
+      address: "Endereço",
       email: "E;mail",
       password: "Senha",
       passwordConfirmation: "ConfirmaÇão Da Senha",
+      gender: "Género",
     },
     button: "Registro",
     existingAccount: {
       text: "Você tem uma conta?",
       link: "Conecte-se",
+    },
+    gender: {
+      man: "Homen",
+      woman: "Mulher",
     },
   },
 
@@ -125,6 +131,9 @@ export default {
     newPasswordConfirmation: "Confirmação da nova Senha",
     name: "Npme",
     avatar: "Avatar",
+    phone: "Numero Telefone",
+    address: "Endereço",
+    gender: "Género",
     additionalInfo: "Informações adicionais (opcional)",
     token: "Código de verificação",
     buttons: {
@@ -652,6 +661,14 @@ export default {
           title: "NomeUtulizador",
           placeholder: "NomeUtulizador",
         },
+        phone: {
+          title: "Numero de Telefone",
+          placeholder: "Numero de Telefone",
+        },
+        address: {
+          title: "Endereço",
+          placeholder: "Endereço",
+        },
         email: {
           title: "E-mail",
           placeholder: "E-mail",
@@ -667,6 +684,10 @@ export default {
         avatar: {
           title: "Avatar",
           placeholder: "Avatar",
+        },
+        gender: {
+          title: "Gênero",
+          placeholder: "Gênero",
         },
         additionalInfo: {
           title: "Informações Adicionais (JSON)",
@@ -686,6 +707,18 @@ export default {
         username: {
           title: "NomeUtilizador",
           placeholder: "NomeUtilizador",
+        },
+        phone: {
+          title: "Numero de Telefone",
+          placeholder: "Numero de Telefone",
+        },
+        address: {
+          title: "Endereço",
+          placeholder: "Endereço",
+        },
+        gender: {
+          title: "Gênero",
+          placeholder: "Gênero",
         },
         email: {
           title: "E-mail",
@@ -716,6 +749,9 @@ export default {
       avatar: "Avatar",
       name: "Nome",
       username: "NomeUtilizador",
+      phone: "Numero de Telefone",
+      address: "Endereço",
+      gender: "Gênero",
       email: "E-mail",
       additionalInfo: "Informação adicional",
       emailVerified: "O e-mail esta verificado",
@@ -732,6 +768,10 @@ export default {
         title: "Sucesso",
         text: "As funções foram definidas",
       },
+    },
+    gender: {
+      man: "Homen",
+      woman: "Mulher",
     },
   },
 
