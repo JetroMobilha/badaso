@@ -154,7 +154,7 @@
                       "
                     >
                       <vs-td
-                        v-for="(dataRow, indexColumn) in dataType.dataRows"
+                        v-for="(dataRow, indexColumn) in getRowBrowse(dataType.dataRows)"
                         :key="indexColumn"
                         :data="
                           data[index][
