@@ -42,10 +42,10 @@ export default {
       username: "Nome de usuário",
       phone: "Telefone",
       address: "Endereço",
-      email: "E;mail",
+      email: "E-mail",
       password: "Senha",
       passwordConfirmation: "ConfirmaÇão Da Senha",
-      gender: "Género",
+      gender: "Gênero",
     },
     button: "Registro",
     existingAccount: {
@@ -133,7 +133,7 @@ export default {
     avatar: "Avatar",
     phone: "Numero Telefone",
     address: "Endereço",
-    gender: "Género",
+    gender: "Gênero",
     additionalInfo: "Informações adicionais (opcional)",
     token: "Código de verificação",
     buttons: {
