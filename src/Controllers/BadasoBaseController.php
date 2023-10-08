@@ -6,6 +6,9 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Uasoft\Badaso\Events\EntityAdded;
+use Uasoft\Badaso\Events\EntityDeleted;
+use Uasoft\Badaso\Events\EntityUpdated;
 use Uasoft\Badaso\Helpers\ApiResponse;
 use Uasoft\Badaso\Helpers\Firebase\FCMNotification;
 use Uasoft\Badaso\Helpers\GetData;
@@ -125,6 +128,8 @@ class BadasoBaseController extends Controller
             $table_name = $data_type->name;
             FCMNotification::notification(FCMNotification::$ACTIVE_EVENT_ON_UPDATE, $table_name);
 
+            event(new EntityUpdated($data_type, $updated['updated_data'], 'Updated'));
+
             return ApiResponse::onlyEntity($updated['updated_data']);
         } catch (Exception $e) {
             DB::rollBack();
@@ -167,6 +172,8 @@ class BadasoBaseController extends Controller
             // add event notification handle
             $table_name = $data_type->name;
             FCMNotification::notification(FCMNotification::$ACTIVE_EVENT_ON_CREATE, $table_name);
+
+            event(new EntityAdded($data_type, $stored_data, 'Added'));
 
             return ApiResponse::onlyEntity($stored_data);
         } catch (Exception $e) {
@@ -221,6 +228,8 @@ class BadasoBaseController extends Controller
             // add event notification handle
             $table_name = $data_type->name;
             FCMNotification::notification(FCMNotification::$ACTIVE_EVENT_ON_DELETE, $table_name);
+
+            event(new EntityDeleted($data_type, $data, 'Deleted'));
 
             return ApiResponse::onlyEntity($data);
         } catch (Exception $e) {
