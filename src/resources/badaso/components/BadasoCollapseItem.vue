@@ -8,10 +8,9 @@
     @mouseover="mouseover"
     @mouseout="mouseout"
   >
-    <header class="badaso-collapse-item__header" >
+    <header class="badaso-collapse-item__header" @click="toggleContent">
       <slot name="header"></slot>
-      <slot name="control"></slot>
-      <span v-if="!notArrow" class="badaso-collapse-item__header-icon" @click="toggleContent">
+      <span v-if="!notArrow" class="badaso-collapse-item__header-icon">
         <vs-icon :icon-pack="iconPack" :icon="iconArrow" />
       </span>
     </header>
