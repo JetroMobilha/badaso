@@ -358,7 +358,13 @@
         <vs-col vs-lg="12">
           <vs-card class="action-card">
             <vs-row>
-              <vs-col vs-lg="12">
+              <vs-col vs-type="flex"  vs-align="center" vs-lg="2" vs-xs="12">
+                <vs-switch color="dark" v-model="isPermanecer">
+                  <span slot="on">Continuar</span>
+                  <span slot="off">Não Continuar</span>
+                </vs-switch>
+              </vs-col>
+              <vs-col vs-lg="10">
                 <vs-button color="primary" type="relief" @click="submitForm">
                   <vs-icon icon="save"></vs-icon>
                   {{ $t("crudGenerated.add.button") }}
@@ -432,6 +438,7 @@ export default {
     dataLength: 0,
     pathname: location.pathname,
     userId: "",
+    isPermanecer:false,
     empresaId: "",
   }),
   mounted() {
@@ -490,12 +497,18 @@ export default {
         })
         .then((response) => {
           this.$closeLoader();
-          this.$router.push({
-            name: "CrudGeneratedBrowse",
-            params: {
-              slug: this.$route.params.slug,
-            },
-          });
+          
+          if (this.isPermanecer) {
+            this.limparForm();
+            this.isPermanecer= false;
+          } else {
+            this.$router.push({
+              name: "CrudGeneratedBrowse",
+              params: {
+                slug: this.$route.params.slug,
+              },
+            });
+          }
         })
         .catch((error) => {
           this.requestObjectStoreData();
@@ -625,6 +638,11 @@ export default {
          
       } catch (error) {
         
+      }
+    },
+    limparForm() {
+      for (const row of this.dataType.dataRows) {
+        row.value="";
       }
     },
   },
