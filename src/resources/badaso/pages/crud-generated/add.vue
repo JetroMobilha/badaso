@@ -497,10 +497,15 @@ export default {
         })
         .then((response) => {
           this.$closeLoader();
-          
+
           if (this.isPermanecer) {
             this.limparForm();
             this.isPermanecer= false;
+            this.$vs.notify({
+              title: this.$t("alert.success"),
+              text: error.message,
+              color: "success",
+            });
           } else {
             this.$router.push({
               name: "CrudGeneratedBrowse",
