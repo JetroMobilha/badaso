@@ -503,7 +503,7 @@ export default {
             this.isPermanecer= false;
             this.$vs.notify({
               title: this.$t("alert.success"),
-              text: error.message,
+              text: this.$route.params.slug + " Criado",
               color: "success",
             });
           } else {
