@@ -14,7 +14,7 @@ function createResource() {
     (config) => {
       const token = localStorage.getItem("token");
       if (token) config.headers.Authorization = "Bearer " + token;
-      beforeRequest(config);
+     // beforeRequest(config); empedir de guadar dados offiline no navegador
 
       return config;
     },
