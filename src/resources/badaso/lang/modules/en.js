@@ -694,6 +694,11 @@ export default {
           placeholder: "Additional Info (JSON)",
           invalid: "Additional Info is invalid",
         },
+        empresa: {
+          title: "Empresa",
+          placeholder: "Empresa",
+          invalid: "Empresa Invalido",
+        },
       },
       button: "Save",
     },
@@ -740,6 +745,11 @@ export default {
           title: "Additional Info (JSON)",
           placeholder: "Additional Info (JSON)",
           invalid: "Additional Info is invalid",
+        },
+        empresa: {
+          title: "Empresa",
+          placeholder: "Empresa",
+          invalid: "Empresa Invalido",
         },
       },
       button: "Save",

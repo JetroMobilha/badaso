@@ -694,6 +694,11 @@ export default {
           placeholder: "Informações Adicionais (JSON)",
           invalid: "As informações adicionais são inválidas",
         },
+        empresa: {
+          title: "Empresa",
+          placeholder: "Empresa",
+          invalid: "Empresa Invalido",
+        },
       },
       button: "Salvar",
     },
@@ -740,6 +745,11 @@ export default {
           title: "Informações Adicionais (JSON)",
           placeholder: "Informações Adicionais (JSON)",
           invalid: "As informações adicionais são inválidas",
+        },
+        empresa: {
+          title: "Empresa",
+          placeholder: "Empresa",
+          invalid: "Empresa Invalido",
         },
       },
       button: "Salvar",

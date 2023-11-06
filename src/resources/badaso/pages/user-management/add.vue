@@ -83,24 +83,24 @@
                 :placeholder="$t('user.add.field.additionalInfo.placeholder')"
                 :alert="errors.additionalInfo"
               ></badaso-code-editor>
-              <badaso-select
-            
-                :label="$t('user.add.field.empresa.title')"
-                :placeholder="$t('user.add.field.empresa.placeholder')"
-                v-model="user.empresa"
-                size="12"
-                :items="
-                  relationData[
-                    $caseConvert.stringSnakeToCamel(
-                      'empresa'
-                    )
-                  ]
-                "
-                :alert="
-                  errors[$caseConvert.stringSnakeToCamel('empresa')]
-                "
-              ></badaso-select>
+             
             </vs-col>
+            <badaso-select
+              :label="$t('user.add.field.empresa.title')"
+              :placeholder="$t('user.add.field.empresa.placeholder')"
+              v-model="user.empresa_id"
+              size="12"
+              :items="
+                relationData[
+                  $caseConvert.stringSnakeToCamel(
+                    'empresas'
+                  )
+                ]
+              "
+              :alert="
+                errors[$caseConvert.stringSnakeToCamel('empresa_id')]
+              "
+            ></badaso-select>
           </vs-row>
         </vs-card>
       </vs-col>
@@ -125,26 +125,30 @@ export default {
   components: {},
   data() {
     return {
-    errors: {},
-    user: {
-      email: "",
-      name: "",
-      username: "",
-      phone: "",
-      address: "",
-      avatar: "",
-      password: "",
-      emailVerified: false,
-      additionalInfo: "",
-      gender:"",
-    },
-    gender: [
+      errors: {},
+      relationData: {},
+      user: {
+        email: "",
+        name: "",
+        username: "",
+        phone: "",
+        address: "",
+        avatar: "",
+        password: "",
+        emailVerified: false,
+        additionalInfo: "",
+        gender:"",
+        empresa_id:"",
+      },
+      gender: [
         { label: this.$t("user.gender.man"), value: "man" },
         { label: this.$t("user.gender.woman"), value: "woman" },
-    ],
+      ],
     };
   },
-  mounted() {},
+  mounted() {
+    this.getRelationDataBySlug();
+  },
   methods: {
     submitForm() {
       this.errors = {};
@@ -186,6 +190,26 @@ export default {
           color: "danger",
         });
       }
+    },
+    getRelationDataBySlug() {
+      this.$openLoader();
+
+      this.$api.badasoTable
+        .relationDataBySlug({
+          slug: 'badaso_users',
+      })
+      .then((response) => {
+        this.$closeLoader();
+        this.relationData = response.data;
+      })
+      .catch((error) => {
+        this.$closeLoader();
+        this.$vs.notify({
+          title: this.$t("alert.danger"),
+          text: error.message,
+          color: "danger",
+        });
+      });
     },
   },
 };
