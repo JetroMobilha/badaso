@@ -13,7 +13,7 @@ import router from "./router/router";
 import store from "./store/store";
 import lang from "./lang/";
 import excludedRouter from "./router/excludeRouter";
-import VueDayjs from 'vue-dayjs-plugin'
+//import VueDayjs from 'vue-dayjs-plugin'
 import Multiselect from 'vue-multiselect'
 
 import App from "./apps/App.vue";
@@ -31,7 +31,7 @@ Vue.config.devtools = true;
 Vue.use(Vuesax);
 Vue.use(VueI18n);
 Vue.use(Datetime);
-Vue.use(VueDayjs)
+//Vue.use(VueDayjs)
 // eslint-disable-next-line vue/multi-word-component-names
 Vue.component("datetime", Datetime);
 Vue.use(Vuelidate);
