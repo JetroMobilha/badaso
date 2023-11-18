@@ -19,7 +19,6 @@
     <!---Page Container-->
     <div class="main-container-fluid">
       <router-view class="content" :key="$route.path"></router-view>
-      <Footer></Footer>
     </div>
     <badaso-unauthorize />
   </div>

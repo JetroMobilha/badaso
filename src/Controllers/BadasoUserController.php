@@ -71,6 +71,7 @@ class BadasoUserController extends Controller
             $user->email = $request->email;
             $user->avatar = $request->avatar;
             $user->gender = $request->gender;
+            $user->empresa_id = $request->empresa_id;
             $user->additional_info = $request->additional_info;
             if ($request->password && $request->password != '') {
                 $user->password = Hash::make($request->password);
@@ -124,6 +125,7 @@ class BadasoUserController extends Controller
             $user->email = $request->email;
             $user->avatar = $request->avatar;
             $user->gender = $request->gender;
+            $user->empresa_id = $request->empresa_id;
             $user->additional_info = $request->additional_info;
             $user->password = Hash::make($request->password);
             if ($request->email_verified) {
@@ -160,7 +162,8 @@ class BadasoUserController extends Controller
             ]);
 
             $user = User::find($request->id);
-            $this->handleDeleteFile($user->avatar);
+            if(isset($user->avatar))
+                $this->handleDeleteFile($user->avatar);
             $user->delete();
 
             DB::commit();
@@ -195,7 +198,8 @@ class BadasoUserController extends Controller
             foreach ($id_list as $key => $id) {
                 $user = User::find($id);
                 $user_name[] = $user->name;
-                $this->handleDeleteFile($user->avatar);
+                if(isset($user->avatar))
+                    $this->handleDeleteFile($user->avatar);
                 $user->delete();
             }
             $user_name = join(',', $user_name);

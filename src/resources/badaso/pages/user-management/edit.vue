@@ -87,7 +87,7 @@
             <badaso-select
               :label="$t('user.edit.field.empresa.title')"
               :placeholder="$t('user.edit.field.empresa.placeholder')"
-              v-model="user.empresa_id"
+              v-model="user.empresaId"
               size="12"
               :items="
                 relationData[
@@ -137,11 +137,11 @@ export default {
         emailVerified: false,
         additionalInfo: "",
         gender:"",
-        empresa_id:"",
+        empresaId:"",
       },
       gender: [
-        { label: this.$t("user.gender.man"), value: "man" },
-        { label: this.$t("user.gender.woman"), value: "woman" },
+        { label: this.$t("user.gender.man"), value: "Homen" },
+        { label: this.$t("user.gender.woman"), value: "Mulher" },
       ],
     };
   },
@@ -197,6 +197,7 @@ export default {
           emailVerified: this.user.emailVerified,
           additionalInfo: JSON.stringify(this.user.additionalInfo),
           gender: this.user.gender,
+          empresaId:this.user.empresaId,
         })
         .then((response) => {
           if (this.loggedInUser.id == this.user.id) {
