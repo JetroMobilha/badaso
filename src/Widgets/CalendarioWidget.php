@@ -212,6 +212,10 @@ class CalendarioWidget implements WidgetInterface
         return $entities;
     }
 
+    public function isDados(){
+        return null;
+    }
+
     public function getEventosUser($id) 
     {
         // get data type by slug

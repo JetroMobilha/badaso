@@ -35,6 +35,10 @@ class UserWidget implements WidgetInterface
         return null;
     }
 
+    public function isDados(){
+        return null;
+    }
+
     public function run($params = null)
     {
         return [

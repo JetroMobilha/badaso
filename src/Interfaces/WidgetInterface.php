@@ -23,6 +23,8 @@ interface WidgetInterface
 
     public function getDados();
 
+    public function isDados();
+
     public function getNomeDisplay():string;
 
     public function run($params = null);

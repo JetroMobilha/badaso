@@ -21,12 +21,23 @@ class BadasoDashboardController extends Controller
                     $permissions = $widget_class->getPermissions();
                     if (is_null($permissions)) {
                         $widget_data = $widget_class->run();
-                        $data[] = $widget_data;
+                        
+                        if ($widget_class->getType()==WidgetInterface::TABELA && $widget_class->isDados() ) {
+                            $data[] = $widget_data;
+                        }else{
+                            $data[] = $widget_data;
+                        }
+                        
                     } else {
                         $allowed = AuthenticatedUser::isAllowedTo($permissions);
                         if ($allowed) {
                             $widget_data = $widget_class->run();
-                            $data[] = $widget_data;
+                            
+                            if ($widget_class->getType()==WidgetInterface::TABELA && $widget_class->isDados() ) {
+                                $data[] = $widget_data;
+                            }else{
+                                $data[] = $widget_data;
+                            }
                         }
                     }
                 }
