@@ -22,7 +22,7 @@ class TabelaWidget implements WidgetInterface
      */
     public function getPermissions()
     {
-        return 'browse_users';
+        return 'browse_'.$this->getTabela();
     }
 
     public function getType(): string
