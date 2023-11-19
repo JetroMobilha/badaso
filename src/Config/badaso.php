@@ -48,6 +48,8 @@ return [
     'widgets' => [
         'Uasoft\\Badaso\\Widgets\\CalendarioWidget',
         'Uasoft\\Badaso\\Widgets\\TabelaWidget',
+        'Uasoft\\Badaso\\Widgets\\TarefaPendenteWidget',
+        'Uasoft\\Badaso\\Widgets\\TarefaActivoWidget',
     ],
     'whitelist' => [
         'web' => [],
