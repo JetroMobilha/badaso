@@ -403,6 +403,7 @@
 <script>
 // eslint-disable-next-line no-unused-vars
 import * as _ from "lodash";
+import moment from "moment";
 
 export default {
   name: "CrudGeneratedEdit",
@@ -634,7 +635,7 @@ export default {
           case 'descricao':ret = false;
             break;
           case 'data_fim':ret = false;
-          dataFim.value = this.$date(dataInicio.value,'YYYY-MM-DD HH:mm:ss').add(30,'m').format('YYYY-MM-DD HH:mm:ss');
+          dataFim.value = moment(dataInicio.value,'YYYY-MM-DD HH:mm:ss').add(30,'m').format('YYYY-MM-DD HH:mm:ss');
           dataFim.details.size = 0;
             break;
           default:ret = true;

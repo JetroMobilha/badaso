@@ -39,7 +39,9 @@ class CalendarioWidget implements WidgetInterface
 
     public function getModel($model)
     {
-        return $model;
+        return  $model->whereIn('id',function($query){
+            $query->select('caleventos_id')->from('user_caleventos')->where('badaso_users_id',auth()->id());
+        })->orWhere('autor',auth()->id());   
     }
 
     public function getNome():string{
