@@ -22,8 +22,8 @@ class BadasoDashboardController extends Controller
                     if (is_null($permissions)) {
                         $widget_data = $widget_class->run();
                         
-                        if ($widget_class->getType()==WidgetInterface::TABELA && $widget_class->isDados() ) {
-                            $data[] = $widget_data;
+                        if ($widget_class->getType()==WidgetInterface::TABELA) {
+                           if($widget_class->isDados() ) $data[] = $widget_data;
                         }else{
                             $data[] = $widget_data;
                         }
@@ -33,8 +33,8 @@ class BadasoDashboardController extends Controller
                         if ($allowed) {
                             $widget_data = $widget_class->run();
                             
-                            if ($widget_class->getType()==WidgetInterface::TABELA && $widget_class->isDados() ) {
-                                $data[] = $widget_data;
+                            if ($widget_class->getType()==WidgetInterface::TABELA ) {
+                                if($widget_class->isDados() ) $data[] = $widget_data;
                             }else{
                                 $data[] = $widget_data;
                             }

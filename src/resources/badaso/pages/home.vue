@@ -95,12 +95,10 @@ export default {
         .then((response) => {
           this.$closeLoader();
           this.dashboardData = response.data;
-          if (this.dashboardData.length >= 4) {
-            this.col = 6;
-          } else if (this.dashboardData.length == 3) {
+          if (this.dashboardData.length >= 2) {
             this.col = 6;
           } else {
-            this.col = 6;
+            this.col = 12;
           }
         })
         .catch((error) => {
