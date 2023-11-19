@@ -104,21 +104,22 @@ class TabelaWidget implements WidgetInterface
 
         $records = [];
 
+        $query = $this->setCopeDataType($data_type,$model);
         if ($order_field) {
-            $data = $model::query()->select($fields)->orderBy($order_field, $order_direction);
+            $query->select($fields)->orderBy($order_field, $order_direction);
         } else {
-            $data = $model::query()->select($fields);
+            $query->select($fields);
         }
         // soft delete implement
         $is_soft_delete = $data_type->is_soft_delete;
 
         if ($is_soft_delete) {
-            $data = $data->whereNotNull('deleted_at');
+            $query->whereNotNull('deleted_at');
         }
         // end
 
-        $data = $this->getModel($data);
-        $data = $data->get();
+        $query = $this->getModel($query);
+        $data = $query->get();
 
         foreach ($data as $row) {
             $class = new ReflectionClass(get_class($row));
@@ -160,5 +161,21 @@ class TabelaWidget implements WidgetInterface
         $entities['total'] = count($data);
 
         return $entities;
+    }
+
+    protected function setCopeDataType($dataType,$model)
+    {
+        $query = $model->query();
+        if (isset($dataType->details)) {
+            $details = is_string($dataType->details) ? json_decode($dataType->details) : $dataType->details;
+        }
+
+        if (isset($details) &&
+        isset($details->scope) &&
+         $details->scope != '' &&
+          method_exists($model, 'scope'.ucfirst($details->scope))) {
+            $query = $query->{$details->scope}();
+        }
+        return $query;
     }
 }
