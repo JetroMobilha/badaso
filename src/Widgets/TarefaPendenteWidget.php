@@ -45,7 +45,7 @@ class TarefaPendenteWidget implements WidgetInterface
     }
 
     public function getNome():string{
-        return 'caleventos';
+        return 'caleventosPendentes';
     }
 
     public function getNomeDisplay():string{

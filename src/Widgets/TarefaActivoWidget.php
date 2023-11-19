@@ -45,7 +45,7 @@ class TarefaActivoWidget implements WidgetInterface
     }
 
     public function getNome():string{
-        return 'caleventos';
+        return 'caleventosActivos';
     }
 
     public function getNomeDisplay():string{
