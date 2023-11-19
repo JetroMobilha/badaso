@@ -32,4 +32,11 @@ class Evento extends Model
         'status',
         'autor',
     ];
+
+    public function scopeUser($query)
+    {
+        return $query->whereIn('id',function($query){
+            $query->select('caleventos_id')->from('user_caleventos')->where('badaso_users_id',auth()->id());
+        })->orWhere('autor',auth()->id());   
+    }
 }
