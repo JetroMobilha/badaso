@@ -294,7 +294,7 @@ export default {
         const {
           data: { dataType },
         } = await this.$api.badasoTable.getDataType({
-          slug: this.nome,
+          slug: this.table,
         });
         this.$closeLoader();
         this.data = response.data;
