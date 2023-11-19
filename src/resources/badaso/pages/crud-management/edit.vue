@@ -1428,7 +1428,7 @@ export default {
               edit: field.edit == 1,
               add: field.add == 1,
               delete: field.delete == 1,
-              details: field.details,
+              details: field.details ? field.details : "",
               relationType: field.relation ? field.relation.relationType : "",
               destinationTable: field.relation
                 ? field.relation.destinationTable
