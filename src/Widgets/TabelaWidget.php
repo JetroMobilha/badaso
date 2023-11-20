@@ -106,8 +106,7 @@ class TabelaWidget implements WidgetInterface
         $order_direction = $builder_params['order_direction'];
 
         $records = [];
-
-        $query = $this->setCopeDataType($data_type,$model);
+ 
         if ($order_field) {
             $query->select($fields)->orderBy($order_field, $order_direction);
         } else {
@@ -163,7 +162,7 @@ class TabelaWidget implements WidgetInterface
 
         $records = [];
 
-        $query = $this->setCopeDataType($data_type,$model);
+       
         if ($order_field) {
             $query->select($fields)->orderBy($order_field, $order_direction);
         } else {
