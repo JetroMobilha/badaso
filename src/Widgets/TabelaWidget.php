@@ -106,7 +106,7 @@ class TabelaWidget implements WidgetInterface
         $order_direction = $builder_params['order_direction'];
 
         $records = [];
- 
+         $query = $model->query();
         if ($order_field) {
             $query->select($fields)->orderBy($order_field, $order_direction);
         } else {
