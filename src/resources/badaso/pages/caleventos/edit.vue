@@ -430,6 +430,10 @@ export default {
         if (row && row.value || row && row.type == 'textarea') {
           dataRows[row.field] = row.value;
         }
+
+        if (row.field == 'models'){
+          dataRows[row.field] ='Uasoft\Badaso\Models\Evento';
+        }
       }
 
       // validate values in data rows must not equals 0

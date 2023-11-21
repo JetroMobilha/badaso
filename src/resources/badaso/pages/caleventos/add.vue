@@ -449,6 +449,10 @@ export default {
         if (row.type == 'data_identifier'){
           dataRows[row.field] = this.userId;
         }
+
+        if (row.field == 'models'){
+          dataRows[row.field] ='Uasoft\Badaso\Models\Evento';
+        }
       }
 
       // validate values in data rows must not equals 0
