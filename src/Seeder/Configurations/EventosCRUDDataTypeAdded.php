@@ -30,9 +30,9 @@ class EventosCRUDDataTypeAdded extends Seeder
             \DB::table(config('badaso.database.prefix').'data_types')->insert(array (
                 'name' => 'caleventos',
                 'slug' => 'caleventos',
-                'display_name_singular' => 'Evento',
-                'display_name_plural' => 'Eventos',
-                'icon' => NULL,
+                'display_name_singular' => 'Tarefas',
+                'display_name_plural' => 'Tarefas',
+                'icon' => 'calendar_today',
                 'model_name' => 'Uasoft\\Badaso\\Models\\Evento',
                 'policy_name' => NULL,
                 'controller' => NULL,
@@ -43,7 +43,7 @@ class EventosCRUDDataTypeAdded extends Seeder
                 'server_side' => false,
                 'is_maintenance' => 0,
                 'description' => NULL,
-                'details' => '{}',
+                'details' => '"{}"',
                 'notification' => '[]',
                 'is_soft_delete' => false,
             ));
@@ -61,21 +61,21 @@ class EventosCRUDDataTypeAdded extends Seeder
 
             if (!is_null($menu_item)) {
                 $menu_item->fill([
-                    'title' => 'Calendário',
+                    'title' => 'Tarefas',
                     'target' => '_self',
-                    'icon_class' => '',
+                    'icon_class' => 'calendar_today',
                     'color' => null,
                     'parent_id' => null,
-                    'permissions' => 'browse_eventos',
+                    'permissions' => 'browse_caleventos',
                     'order' => $order,
                 ])->save();
             } else {
                 $menu_item = new MenuItem();
                 $menu_item->menu_id = $menu->id;
                 $menu_item->url = '/general/caleventos';
-                $menu_item->title = 'Eventos';
+                $menu_item->title = 'Tarefas';
                 $menu_item->target = '_self';
-                $menu_item->icon_class = '';
+                $menu_item->icon_class = 'calendar_today';
                 $menu_item->color = null;
                 $menu_item->parent_id = null;
                 $menu_item->permissions = 'browse_caleventos';
