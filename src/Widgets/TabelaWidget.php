@@ -162,7 +162,7 @@ class TabelaWidget implements WidgetInterface
 
         $records = [];
 
-       
+        $query = $model->query();
         if ($order_field) {
             $query->select($fields)->orderBy($order_field, $order_direction);
         } else {
@@ -219,21 +219,5 @@ class TabelaWidget implements WidgetInterface
         $entities['total'] = count($data);
 
         return $entities;
-    }
-
-    protected function setCopeDataType($dataType,$model)
-    {
-        $query = $model->query();
-        if (isset($dataType->details)) {
-            $details = is_string($dataType->details) ? json_decode($dataType->details) : $dataType->details;
-        }
-
-        if (isset($details) &&
-        isset($details->scope) &&
-         $details->scope != '' &&
-          method_exists($model, 'scope'.ucfirst($details->scope))) {
-            $query = $query->{$details->scope}();
-        }
-        return $query;
-    }
+    } 
 }
