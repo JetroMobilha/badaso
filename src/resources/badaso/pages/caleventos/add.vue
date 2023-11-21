@@ -451,7 +451,7 @@ export default {
         }
 
         if (row.field == 'models'){
-          dataRows[row.field] ='Uasoft\Badaso\Models\Evento';
+          dataRows[row.field] ='Uasoft\\Badaso\\Models\\Evento';
         }
       }
 

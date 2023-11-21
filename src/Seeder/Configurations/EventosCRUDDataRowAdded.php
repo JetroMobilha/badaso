@@ -257,6 +257,22 @@ class EventosCRUDDataRowAdded extends Seeder
                     'relation' => NULL,
                     'order' => 13,
                 ),
+                13 => 
+                array (
+                    'data_type_id' => $data_type->id,
+                    'field' => 'empresa_id',
+                    'type' => 'empresa',
+                    'display_name' => 'Empresa',
+                    'required' => 0,
+                    'browse' => 0,
+                    'read' => 1,
+                    'edit' => 1,
+                    'add' => 1,
+                    'delete' => 0,
+                    'details' => '{}',
+                    'relation' => NULL,
+                    'order' => 14,
+                ),
             ));
 
             \DB::commit();

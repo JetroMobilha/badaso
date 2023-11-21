@@ -123,6 +123,22 @@ class GruposCRUDDataRowAdded extends Seeder
                     'relation' => NULL,
                     'order' => 6,
                 ),
+                6 => 
+                array (
+                    'data_type_id' => $data_type->id,
+                    'field' => 'empresa_id',
+                    'type' => 'empresa',
+                    'display_name' => 'Empresa',
+                    'required' => 0,
+                    'browse' => 1,
+                    'read' => 1,
+                    'edit' => 1,
+                    'add' => 1,
+                    'delete' => 1,
+                    'details' => '{}',
+                    'relation' => NULL,
+                    'order' => 7,
+                ),
             ));
 
             \DB::commit();

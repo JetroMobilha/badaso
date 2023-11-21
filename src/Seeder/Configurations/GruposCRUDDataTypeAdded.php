@@ -32,7 +32,7 @@ class GruposCRUDDataTypeAdded extends Seeder
                 'slug' => 'calgrupos',
                 'display_name_singular' => 'Grupos',
                 'display_name_plural' => 'Grupos',
-                'icon' => NULL,
+                'icon' => 'work',
                 'model_name' =>  'Uasoft\\Badaso\\Models\\Grupo',
                 'policy_name' => NULL,
                 'controller' => NULL,
@@ -63,7 +63,7 @@ class GruposCRUDDataTypeAdded extends Seeder
                 $menu_item->fill([
                     'title' => 'Grupos',
                     'target' => '_self',
-                    'icon_class' => '',
+                    'icon_class' => 'work',
                     'color' => null,
                     'parent_id' => null,
                     'permissions' => 'browse_calgrupos',
@@ -75,7 +75,7 @@ class GruposCRUDDataTypeAdded extends Seeder
                 $menu_item->url = '/general/calgrupos';
                 $menu_item->title = 'Grupos';
                 $menu_item->target = '_self';
-                $menu_item->icon_class = '';
+                $menu_item->icon_class = 'work';
                 $menu_item->color = null;
                 $menu_item->parent_id = null;
                 $menu_item->permissions = 'browse_calgrupos';

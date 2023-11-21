@@ -20,12 +20,15 @@ class CalendarioSeeder extends Seeder
         $this->call( Badaso_usersCRUDDataTypeAdded::class);
         $this->call( Badaso_usersCRUDDataRowAdded::class);
 
+        $this->call( CategoriasCRUDDataDeleted::class);
         $this->call( CategoriasCRUDDataTypeAdded::class);
         $this->call( CategoriasCRUDDataRowAdded::class);
 
+        $this->call( EventosCRUDDataDeleted::class);
         $this->call( EventosCRUDDataTypeAdded::class);
         $this->call( EventosCRUDDataRowAdded::class);
 
+        $this->call( GruposCRUDDataDeleted::class);
         $this->call( GruposCRUDDataTypeAdded::class);
         $this->call( GruposCRUDDataRowAdded::class);
     }
