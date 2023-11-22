@@ -32,4 +32,10 @@ class Evento extends Model
         'status',
         'autor',
     ]; 
+
+    public function users() {
+        $userModel = User::class;
+        return$this->belongsToMany($userModel,'user_caleventos',
+        config('badaso.database.prefix').'users_id','caleventos_id');
+    }
 }
