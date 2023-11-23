@@ -187,7 +187,7 @@ class TabelaWidget implements WidgetInterface
             foreach ($class_methods as $class_method) {
                 if ($class_method->class == $class->name) {
                     try {
-                        $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}));
+                        //$record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}));
                     } catch (Exception $e) {
                         // $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}()));
                     }
