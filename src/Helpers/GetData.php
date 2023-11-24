@@ -666,17 +666,21 @@ class GetData
 
     protected static function setCopeDataType($dataType,$model)
     {
+        $details = null;
         $query = $model->query();
-        if (isset($dataType->details)) {
-            $details = is_string($dataType->details) ? json_decode($dataType->details) : $dataType->details;
-        }
+      
+        try {
+            if (isset($dataType->details)) {
+                $details = is_string($dataType->details) ? json_decode($dataType->details) : $dataType->details;
+            }
 
-        if (isset($details) &&
-        isset($details->scope) &&
-         $details->scope != '' &&
-          method_exists($model, 'scope'.ucfirst($details->scope))) {
-            $query = $query->{$details->scope}();
-        }
+            if (isset($details) &&
+            isset($details->scope) &&
+            $details->scope != '') {
+                $query = $query->{$details->scope}();
+            }
+       } catch (\Throwable $th) {}
+        
         return $query;
     }
 }
