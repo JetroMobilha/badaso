@@ -464,10 +464,6 @@ export default {
           this.errors[row.field]= this.$t("vuelidate.rowsRequired")
         }
 
-        if(!row.required && row.value=='' && row.add) {
-          row.value=null;
-        }
-         
         dataRows[row.field] = row.value;
         if (row.type == "data_identifier") {
           dataRows[row.field] = this.userId;
