@@ -43,7 +43,7 @@ class GruposCRUDDataTypeAdded extends Seeder
                 'server_side' => false,
                 'is_maintenance' => 0,
                 'description' => NULL,
-                'details' => NULL,
+                'details' => '"{\\"scope\\":\\"empresa\\"}"',
                 'notification' => '[]',
                 'is_soft_delete' => false,
             ));

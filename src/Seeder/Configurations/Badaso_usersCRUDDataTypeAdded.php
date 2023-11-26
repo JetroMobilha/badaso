@@ -42,7 +42,7 @@ class Badaso_usersCRUDDataTypeAdded extends Seeder
                 'server_side' => false,
                 'description' => NULL,
                 'details' => NULL,
-                'notification' => '[]',
+                'details' => '"{\\"scope\\":\\"empresa\\"}"',
                 'is_soft_delete' => false,
             ));
 

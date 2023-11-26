@@ -94,4 +94,9 @@ class User extends Authenticatable
     {
         return LogOptions::defaults()->dontSubmitEmptyLogs();
     }
+
+    public function scopeEmpresa($query)
+    {
+        return $query->where('empresa_id', auth()->user()->empresa_id);
+    }
 }

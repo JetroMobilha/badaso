@@ -113,7 +113,7 @@ class CategoriasCRUDDataRowAdded extends Seeder
                     'field' => 'updated_at',
                     'type' => 'datetime',
                     'display_name' => 'Updated At',
-                    'required' => 0,
+                    'required' => 1,
                     'browse' => 0,
                     'read' => 0,
                     'edit' => 0,
@@ -130,11 +130,11 @@ class CategoriasCRUDDataRowAdded extends Seeder
                     'type' => 'empresa',
                     'display_name' => 'Empresa',
                     'required' => 1,
-                    'browse' => 1,
-                    'read' => 1,
-                    'edit' => 1,
+                    'browse' => 0,
+                    'read' => 0,
+                    'edit' => 0,
                     'add' => 1,
-                    'delete' => 1,
+                    'delete' => 0,
                     'details' => '{}',
                     'relation' => NULL,
                     'order' => 7,
@@ -151,7 +151,8 @@ class CategoriasCRUDDataRowAdded extends Seeder
                 'id' => 1,
                 'nome' => 'Tarefas',
                 'descricao' => '<p>Categorias para os eventos de calendario do tipo tarefa a ser executada por um ou varios indevidous.</p>',
-                'icon' => 'task', 
+                'icon' => 'task',
+                'empresa_id' => '1', 
             ));
 
             $lembrete = Badaso::model('Categoria')->where('nome', 'Lembretes')->first();
@@ -165,6 +166,7 @@ class CategoriasCRUDDataRowAdded extends Seeder
                 'nome' => 'Lembretes',
                 'descricao' => '<p>Categoria para lembretes o casional que n&atilde;o precis&atilde;o de uma data de terminio que so pressi&atilde;o de uma tada e oura para ser natificado na aria de trabalho</p>',
                 'icon' => 'circle_notifications', 
+                'empresa_id' => '1', 
             ));
 
             $eventos = Badaso::model('Categoria')->where('nome', 'Eventos')->first();
@@ -178,6 +180,7 @@ class CategoriasCRUDDataRowAdded extends Seeder
                 'nome' => 'Eventos',
                 'descricao' => '<p>Categoria para datas de calendario como forma&ccedil;&atilde;o ou reuni&otilde;es e etc...</p>',
                 'icon' => 'date_range', 
+                'empresa_id' => '1', 
             ));
 
             \DB::commit();

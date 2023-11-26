@@ -32,7 +32,7 @@ class CategoriasCRUDDataTypeAdded extends Seeder
                 'slug' => 'calcategorias',
                 'display_name_singular' => 'Categoria',
                 'display_name_plural' => 'Categorias',
-                'icon' => 'category',
+                'icon' => 'settings',
                 'model_name' => 'Uasoft\\Badaso\\Models\\Categoria',
                 'policy_name' => NULL,
                 'controller' => NULL,
@@ -43,7 +43,7 @@ class CategoriasCRUDDataTypeAdded extends Seeder
                 'server_side' => false,
                 'is_maintenance' => 0,
                 'description' => NULL,
-                'details' => NULL,
+                'details' => '{}',
                 'notification' => '[]',
                 'is_soft_delete' => false,
             ));

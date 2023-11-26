@@ -70,9 +70,10 @@ class GruposCRUDDataRowAdded extends Seeder
                     'add' => 1,
                     'delete' => 1,
                     'details' => '{
-                        "size":"4"
+                        "size":"4",
+                        "scope":"empresa"
                     }',
-                    'relation' => '{"relation_type":"belongs_to","destination_table":"'.config('badaso.database.prefix').'users","destination_table_column":"id","destination_table_display_column":"name"}',
+                    'relation' => '{"relation_type":"belongs_to","model":"Uasoft\\\\Badaso\\\\Models\\\\User","destination_table":"'.config('badaso.database.prefix').'users","destination_table_column":"id","destination_table_display_column":"name"}',
                     'order' => 3,
                 ),
                 3 => 
@@ -87,8 +88,8 @@ class GruposCRUDDataRowAdded extends Seeder
                     'edit' => 1,
                     'add' => 1,
                     'delete' => 1,
-                    'details' => '{}',
-                    'relation' => '{"relation_type":"belongs_to_many","destination_table":"'.config('badaso.database.prefix').'users","destination_table_column":"id","destination_table_display_column":"name"}',
+                    'details' => '{"scope":"empresa"}',
+                    'relation' => '{"relation_type":"belongs_to_many","model":"Uasoft\\\\Badaso\\\\Models\\\\User","destination_table":"badaso_users","destination_table_column":"id","destination_table_display_column":"name","destination_table_display_more_column":[]}',
                     'order' => 4,
                 ),
                 4 => 

@@ -22,7 +22,7 @@ class EventosCRUDDataRowAdded extends Seeder
 
             $data_type = Badaso::model('DataType')::where('name', 'caleventos')->first();
 
-            $relacao = '{"relation_type":"belongs_to_many","destination_table":"'.config('badaso.database.prefix').'users","destination_table_column":"id","destination_table_display_column":"name"}';
+            $relacao = '{"relation_type":"belongs_to_many","model":"Uasoft\\\\Badaso\\\\Models\\\\User","destination_table":"'.config('badaso.database.prefix').'users","destination_table_column":"id","destination_table_display_column":"name"}';
 
             \DB::table(config('badaso.database.prefix').'data_rows')->insert(array (
                 0 => 
@@ -54,7 +54,8 @@ class EventosCRUDDataRowAdded extends Seeder
                     'add' => 1,
                     'delete' => 1,
                     'details' => '{
-                        "size":"6"
+                        "size":"6",
+                        "scope":"empresa"
                     }',
                     'relation' => '{"relation_type":"belongs_to","destination_table":"calcategorias","destination_table_column":"id","destination_table_display_column":"nome"}',
                     'order' => 2,
@@ -189,7 +190,7 @@ class EventosCRUDDataRowAdded extends Seeder
                     'edit' => 1,
                     'add' => 1,
                     'delete' => 1,
-                    'details' => '{}',
+                    'details' => '{"scope":"empresa"}',
                     'relation' => $relacao,
                     'order' => 9,
                 ),
