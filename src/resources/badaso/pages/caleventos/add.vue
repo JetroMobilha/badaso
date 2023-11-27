@@ -451,7 +451,7 @@ export default {
         }
 
         if (row.field == 'models'){
-          dataRows[row.field] ='Uasoft\\Badaso\\Models\\Evento';
+          dataRows[row.field] =null;
         }
       }
 
@@ -635,7 +635,7 @@ export default {
           case 'descricao':ret = false;
             break;
           case 'data_fim':ret = false;
-          dataFim.value = moment(dataInicio.value,'YYYY-MM-DD HH:mm:ss').add(30,'m').format('YYYY-MM-DD HH:mm:ss');
+          dataFim.value = moment(dataInicio.value,'YYYY-MM-DD HH:mm:ss').add(60,'m').format('YYYY-MM-DD HH:mm:ss');
           dataFim.details.size = 0;
             break;
           default:ret = true;

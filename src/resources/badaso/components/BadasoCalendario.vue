@@ -125,17 +125,28 @@ export default {
       }
     }, 
     onEventClick (event,e) {
-    this.$router.push({
-            name: "CrudGeneratedRead",
-            params: {
-              id: event.id,
-              slug: this.table,
-            },
-          });
+     
+      let mTable,mId ;
+       
+      if(event.model!=null||event.model!=''|| event.model!=undefined){
+        mId= event.model.split("/")[1];
+        mTable= event.model.split("/")[0];
+      }else{
+        mId= event.id;
+        mTable= this.table;
+      }
 
-    // Prevent navigating to narrower view (default vue-cal behavior).
-    e.stopPropagation()
-  },
+      this.$router.push({
+        name: "CrudGeneratedRead",
+        params: {
+          id: mId,
+          slug: mTable,
+        },
+      });
+
+      // Prevent navigating to narrower view (default vue-cal behavior).
+      e.stopPropagation()
+    },
   },
 };
 </script>

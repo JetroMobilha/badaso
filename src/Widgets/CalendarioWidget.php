@@ -167,6 +167,7 @@ class CalendarioWidget implements WidgetInterface
             $reto['start'] =$row->data_inicio; 
             $reto['end'] =$row->data_fim;
             $reto['title'] =$row->nome;
+            $reto['model'] =$row->model;
             $reto['class'] =$this->getClass($row->status); 
             $data[] = $reto;
         }
@@ -280,7 +281,7 @@ class CalendarioWidget implements WidgetInterface
             foreach ($class_methods as $class_method) {
                 if ($class_method->class == $class->name) {
                     try {
-                        $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}));
+                       // $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}));
                     } catch (Exception $e) {
                         // $record->{$class_method->name} = json_decode(json_encode($row->{$class_method->name}()));
                     }
@@ -316,6 +317,7 @@ class CalendarioWidget implements WidgetInterface
             $reto['start'] =$row->data_inicio; 
             $reto['end'] =$row->data_fim;
             $reto['title'] =$row->nome;
+            $reto['model'] =$row->model;
             $reto['class'] =$this->getClass($row->status);
             $data[] = $reto;
         }

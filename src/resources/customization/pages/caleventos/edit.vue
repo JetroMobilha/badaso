@@ -406,6 +406,7 @@
 <script>
 // eslint-disable-next-line no-unused-vars
 import * as _ from "lodash";
+import moment from "moment";
 
 export default {
   name: "CrudGeneratedEdit",
@@ -431,6 +432,10 @@ export default {
       for (const row of this.dataType.dataRows) {
         if (row && row.value || row && row.type == 'textarea') {
           dataRows[row.field] = row.value;
+        }
+
+        if (row.field == 'models'){
+          dataRows[row.field] =null;
         }
       }
 
@@ -637,7 +642,7 @@ export default {
           case 'descricao':ret = false;
             break;
           case 'data_fim':ret = false;
-          dataFim.value = this.$date(dataInicio.value,'YYYY-MM-DD HH:mm:ss').add(30,'m').format('YYYY-MM-DD HH:mm:ss');
+          dataFim.value = moment(dataInicio.value,'YYYY-MM-DD HH:mm:ss').add(60,'m').format('YYYY-MM-DD HH:mm:ss');
           dataFim.details.size = 0;
             break;
           default:ret = true;

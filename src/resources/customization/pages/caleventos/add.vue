@@ -415,6 +415,7 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
   name: "CrudGeneratedAdd",
   components: {},
@@ -447,6 +448,10 @@ export default {
         }
         if (row.type == 'data_identifier'){
           dataRows[row.field] = this.userId;
+        }
+
+        if (row.field == 'models'){
+          dataRows[row.field] =null;
         }
       }
 
@@ -630,7 +635,7 @@ export default {
           case 'descricao':ret = false;
             break;
           case 'data_fim':ret = false;
-          dataFim.value = this.$date(dataInicio.value,'YYYY-MM-DD HH:mm:ss').add(30,'m').format('YYYY-MM-DD HH:mm:ss');
+          dataFim.value = moment(dataInicio.value,'YYYY-MM-DD HH:mm:ss').add(60,'m').format('YYYY-MM-DD HH:mm:ss');
           dataFim.details.size = 0;
             break;
           default:ret = true;
