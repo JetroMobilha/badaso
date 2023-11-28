@@ -443,9 +443,21 @@ export default {
       // init data rows
       const dataRows = {};
       for (const row of this.dataType.dataRows) {
-        if (row && row.value || row.type == 'switch' ||  row.type == 'slider') {
-          dataRows[row.field] = row.value;
+        if(row.required && 
+          (row.value==null||row.value=='') &&
+          !(row.type == "hidden") &&
+          !(row.field == "data_fim") &&
+          !(row.field == "localizacao") &&
+          !(row.field == "descricao") &&
+          !(row.type == "data_identifier") &&
+          !(row.field == "models") &&
+          row.add &&
+          !(row.type == "empresa")
+        ) {
+          this.errors[row.field]= this.$t("vuelidate.rowsRequired")
         }
+
+        dataRows[row.field] = row.value;
         if (row.type == 'data_identifier'){
           dataRows[row.field] = this.userId;
         }
