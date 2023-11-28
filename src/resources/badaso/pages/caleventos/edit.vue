@@ -453,6 +453,15 @@ export default {
         return;
       }
 
+      if (Object.values(this.errors).length > 0) {
+        this.$vs.notify({
+            title: this.$t("alert.danger"),
+            text: this.$t("vuelidate.rowsRequired"),
+            color: "danger",
+          });
+        return;
+      }
+
       this.$openLoader();
       this.$api.badasoEntity
         .edit({

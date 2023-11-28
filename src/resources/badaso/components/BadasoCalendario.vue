@@ -125,23 +125,11 @@ export default {
       }
     }, 
     onEventClick (event,e) {
-     
-      var mId ;
-      var mTable;
-       
-      if(event.model!=null && event.model!='null' && event.model!='' &&  event.model!=undefined){
-        mId= event.model.split("/")[1];
-        mTable= event.model.split("/")[0];
-      }else{
-        mId= event.id;
-        mTable= this.table;
-      }
-
       this.$router.push({
         name: "CrudGeneratedRead",
         params: {
-          id: mId,
-          slug: mTable,
+          id: event.id,
+          slug: this.table,
         },
       });
 

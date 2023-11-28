@@ -472,6 +472,15 @@ export default {
         this.isValid = false;
         return;
       }
+
+      if (Object.values(this.errors).length > 0) {
+        this.$vs.notify({
+            title: this.$t("alert.danger"),
+            text: this.$t("vuelidate.rowsRequired"),
+            color: "danger",
+          });
+        return;
+      }
       
       // start request
       this.$openLoader();

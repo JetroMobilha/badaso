@@ -173,7 +173,7 @@
                         <span v-else-if="dataRow.type == 'relation'">{{
                           displayRelationData(record, dataRow)
                         }}</span>
-                        <span v-else-if="dataRow.type == 'hidden'">{{
+                        <span v-else-if="dataRow.type == 'hidden'|| dataRow.field == 'models'">{{
                            
                         }}</span>
                         <span v-else>{{

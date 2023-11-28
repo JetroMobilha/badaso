@@ -167,7 +167,7 @@ class CalendarioWidget implements WidgetInterface
             $reto['start'] =$row->data_inicio; 
             $reto['end'] =$row->data_fim;
             $reto['title'] =$row->nome;
-            $reto['model'] =$row->model;
+            $reto['model'] =$row->models;
             $reto['class'] =$this->getClass($row->status); 
             $data[] = $reto;
         }
@@ -317,7 +317,7 @@ class CalendarioWidget implements WidgetInterface
             $reto['start'] =$row->data_inicio; 
             $reto['end'] =$row->data_fim;
             $reto['title'] =$row->nome;
-            $reto['model'] =$row->model;
+            $reto['model'] =$row->models;
             $reto['class'] =$this->getClass($row->status);
             $data[] = $reto;
         }
