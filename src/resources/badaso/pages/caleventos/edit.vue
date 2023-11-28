@@ -430,10 +430,21 @@ export default {
       // init data row
       const dataRows = {};
       for (const row of this.dataType.dataRows) {
-        if (row && row.value || row && row.type == 'textarea') {
-          dataRows[row.field] = row.value;
+        if(row.required && 
+          (row.value==null||row.value=='') &&
+          !(row.type == "hidden") &&
+          !(row.field == "data_fim") &&
+          !(row.field == "localizacao") &&
+          !(row.field == "descricao") &&
+          !(row.type == "data_identifier") &&
+          !(row.field == "models") &&
+          row.add &&
+          !(row.type == "empresa")
+        ) {
+          this.errors[row.field]= this.$t("vuelidate.rowsRequired")
         }
 
+        dataRows[row.field] = row.value;
         if (row.field == 'models'){
           dataRows[row.field] =null;
         }
