@@ -113,7 +113,7 @@ class CategoriasCRUDDataRowAdded extends Seeder
                     'field' => 'updated_at',
                     'type' => 'datetime',
                     'display_name' => 'Updated At',
-                    'required' => 1,
+                    'required' => 0,
                     'browse' => 0,
                     'read' => 0,
                     'edit' => 0,
