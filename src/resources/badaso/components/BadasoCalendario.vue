@@ -129,7 +129,7 @@ export default {
       var mId ;
       var mTable;
        
-      if(event.model!=null||event.model!=''|| event.model!=undefined){
+      if(event.model!=null && event.model!='null' && event.model!='' &&  event.model!=undefined){
         mId= event.model.split("/")[1];
         mTable= event.model.split("/")[0];
       }else{
