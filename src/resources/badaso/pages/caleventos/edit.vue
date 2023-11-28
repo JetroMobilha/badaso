@@ -445,9 +445,6 @@ export default {
         }
 
         dataRows[row.field] = row.value;
-        if (row.field == 'models'){
-          dataRows[row.field] =null;
-        }
       }
 
       // validate values in data rows must not equals 0
