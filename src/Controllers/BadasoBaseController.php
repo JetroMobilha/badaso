@@ -473,14 +473,25 @@ class BadasoBaseController extends Controller
             // If search query, use LIKE to filter results depending on field label
             if (isset($search)) {
                 
-                $total_count = $model->{$request->tipo}()->where($coluna, 'LIKE', '%' . $search . '%')->count();
-                $relationshipOptions = $model->{$request->tipo}()->take($on_page)->skip($skip)
-                    ->where($coluna, 'LIKE', '%' . $search . '%')
-                    ->get();
+                if (isset($request->tipo)) {
+                    $total_count = $model->{$request->tipo}()->where($coluna, 'LIKE', '%' . $search . '%')->count();
+                    $relationshipOptions = $model->{$request->tipo}()->take($on_page)->skip($skip)
+                    ->where($coluna, 'LIKE', '%' . $search . '%')->get();
+                } else {
+                    $total_count = $model->where($coluna, 'LIKE', '%' . $search . '%')->count();
+                    $relationshipOptions = $model->take($on_page)->skip($skip)
+                    ->where($coluna, 'LIKE', '%' . $search . '%')->get();
+                }
                 
             } else {
-                $total_count = $model->{$request->tipo}()->count();
-                $relationshipOptions = $model->{$request->tipo}()->take($on_page)->skip($skip)->get();
+
+                if (isset($request->tipo)) {
+                    $total_count = $model->{$request->tipo}()->count();
+                    $relationshipOptions = $model->{$request->tipo}()->take($on_page)->skip($skip)->get();
+                } else {
+                    $total_count = $model->count();
+                    $relationshipOptions = $model->take($on_page)->skip($skip)->get();
+                }
             }
     
             $results = [];
