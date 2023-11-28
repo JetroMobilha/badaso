@@ -126,7 +126,8 @@ export default {
     }, 
     onEventClick (event,e) {
      
-      let mTable,mId ;
+      var mId ;
+      var mTable;
        
       if(event.model!=null||event.model!=''|| event.model!=undefined){
         mId= event.model.split("/")[1];
