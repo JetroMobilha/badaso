@@ -159,6 +159,7 @@ class CalendarioWidget implements WidgetInterface
         }
 
         $data =[];
+        $dataUser =[];
         $splits =[];
 
         foreach ($retorno as $row) {
@@ -168,8 +169,9 @@ class CalendarioWidget implements WidgetInterface
             $reto['end'] =$row->data_fim;
             $reto['title'] =$row->nome;
             $reto['model'] =$row->models;
+            $reto['autor'] =$row->autor;
             $reto['class'] =$this->getClass($row->status); 
-            $data[] = $reto;
+            $dataUser[] = $reto;
         }
 
         $useres = $this->getUsers();
@@ -182,10 +184,10 @@ class CalendarioWidget implements WidgetInterface
             $contClass=$contClass+1;
              
             $splits[] = $prop;
-           $data = array_map(function($value){
+           $dataUser = array_map(function($value){
               $value['split']=1;
             return  $value;
-           },$data);
+           },$dataUser);
 
             foreach ($useres as  $key=>$user) {
 
@@ -200,20 +202,37 @@ class CalendarioWidget implements WidgetInterface
 
                 $sub['label'] =$user->username;
                 $splits[] = $sub;
-                 $eventoUser = $this->getEventosUser($user->id);
+                $eventoUser = $this->getEventosUser($user->id);
 
-                 foreach ($eventoUser as $value) {
+                foreach ($eventoUser as $value) {
                     $value['split']=($key + 2);
                     $data[] = $value;
                 }
             }
-        }
 
-        $entities['data'] = $data;
-        $entities['splits'] = $splits;
-         
-        return $entities;
+            foreach ($dataUser as $val) {
+                $isAdd= true;
+                foreach ($data as $value) {
+                    if ($val['id'] ==$value['id'] && DB::table('user_caleventos')
+                        ->select([config('badaso.database.prefix').'users_id'])
+                        ->where('caleventos_id', $val['id'])
+                        ->where(config('badaso.database.prefix').'users_id', auth()->id())
+                    ->count()== 0) $isAdd=false;
+                }
+
+                if($isAdd) $data[]=$val;
+            }
+
+            $entities['data'] = $data;
+            $entities['splits'] = $splits;
+            return $entities;
+        }else{
+            $entities['data'] = $dataUser;
+            $entities['splits'] = $splits;
+            return $entities;
+        }
     }
+
 
     public function isDados(){
         return null;
@@ -318,6 +337,7 @@ class CalendarioWidget implements WidgetInterface
             $reto['end'] =$row->data_fim;
             $reto['title'] =$row->nome;
             $reto['model'] =$row->models;
+            $reto['autor'] =$row->autor;
             $reto['class'] =$this->getClass($row->status);
             $data[] = $reto;
         }
