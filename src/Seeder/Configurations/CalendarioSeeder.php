@@ -2,7 +2,6 @@
 
 namespace Database\Seeders\Badaso;
 
-use Database\Seeders\Badaso\CRUD\EventosCRUDDataDeleted;
 use Illuminate\Database\Seeder;
 use Uasoft\Badaso\Models\Configuration;
 
