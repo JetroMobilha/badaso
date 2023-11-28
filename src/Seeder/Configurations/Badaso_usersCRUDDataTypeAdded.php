@@ -41,8 +41,7 @@ class Badaso_usersCRUDDataTypeAdded extends Seeder
                 'generate_permissions' => true,
                 'server_side' => false,
                 'description' => NULL,
-                'details' => NULL,
-                'details' => '"{\\"scope\\":\\"empresa\\"}"',
+                'details' => '{"scope":"empresa"}',
                 'is_soft_delete' => false,
             ));
 
