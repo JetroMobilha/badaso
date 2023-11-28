@@ -2,7 +2,7 @@
   <vs-col :vs-lg="size" vs-xs="12" class="badaso-select-multiple__container">
     <label class="typo__label">{{ label }}</label>
     <multiselect 
-      v-model="value" 
+      v-model="val" 
       :options="options"  
       :placeholder="placeholder" 
       :label="coluna" 
@@ -40,7 +40,10 @@
 export default {
   name: "BadasotMultipleSelect",
   components: {},
-  data: () => ({}),
+  data: () => ({
+    val:null,
+    options:[],
+  }),
   props: {
     size: {
       type: String,
@@ -53,16 +56,6 @@ export default {
     placeholder: {
       type: String,
       default: "Multiple Select",
-    },
-    value: {
-      type: Array,
-      default: () => {
-        return [];
-      },
-    },
-    items: {
-      type: Array,
-      required: true,
     },
     additionalInfo: {
       type: String,
@@ -84,11 +77,16 @@ export default {
       type: String,
       default:"",
     },
+    value: {
+      type: String,
+      default:"",
+    },
+  },
+  mounted() {
+    this.getRelation('');
   },
   methods: {
-    satinize(item) {
-      return item;
-    },
+     
     handleInput(val) {
       this.$emit("input", val);
     },

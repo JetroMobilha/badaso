@@ -473,7 +473,7 @@ class BadasoBaseController extends Controller
             // If search query, use LIKE to filter results depending on field label
             if (isset($search)) {
                 
-                if (isset($request->tipo)) {
+                if ($request->tipo!=null && $request->tipo!='null' ) {
                     $total_count = $model->{$request->tipo}()->where($coluna, 'LIKE', '%' . $search . '%')->count();
                     $relationshipOptions = $model->{$request->tipo}()->take($on_page)->skip($skip)
                     ->where($coluna, 'LIKE', '%' . $search . '%')->get();
@@ -485,7 +485,7 @@ class BadasoBaseController extends Controller
                 
             } else {
 
-                if (isset($request->tipo)) {
+                if ($request->tipo!=null && $request->tipo!='null') {
                     $total_count = $model->{$request->tipo}()->count();
                     $relationshipOptions = $model->{$request->tipo}()->take($on_page)->skip($skip)->get();
                 } else {
