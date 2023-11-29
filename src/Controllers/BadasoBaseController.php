@@ -13,6 +13,7 @@ use Uasoft\Badaso\Helpers\ApiResponse;
 use Uasoft\Badaso\Helpers\Firebase\FCMNotification;
 use Uasoft\Badaso\Helpers\GetData;
 use Uasoft\Badaso\Models\DataType;
+use Uasoft\Badaso\Helpers\CaseConvert;
 
 class BadasoBaseController extends Controller
 {
@@ -467,6 +468,7 @@ class BadasoBaseController extends Controller
             $skip = $on_page * ($page - 1);
             $search = $request->input('query', '');
             $coluna = $request->input('coluna', false);
+            $tabela = $request->input('table', '');
              
             $data_type = $this->getDataType($slug);
             $data_rows = $this->dataRowsTypeReplace($data_type->dataRows);
@@ -491,7 +493,7 @@ class BadasoBaseController extends Controller
                 $destination_table_display_more_column = array_key_exists('destination_table_display_more_column', $relation_detail) ? $relation_detail['destination_table_display_more_column'] : [];
                 $modelRelation = array_key_exists('model', $relation_detail) ? $relation_detail['model'] : null;
                 
-                if ( $destination_table_display_column==$coluna) {
+                if ( $destination_table_display_column==$coluna && $tabela==$destination_table) {
                     
                     if (isset($destination_table_display_more_column)) {
                         $destination_table_display_more_column =

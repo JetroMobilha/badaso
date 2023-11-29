@@ -76,6 +76,10 @@ export default {
       type: String,
       default:"",
     },
+    tableDestino: {
+      type: String,
+      default:"",
+    },
     value: {
       type: String,
       default:"",
@@ -86,7 +90,7 @@ export default {
     },
   },
   mounted() {
-    this.getRelation('');
+    this.getRelation();
   },
   methods: {
      
@@ -106,12 +110,13 @@ export default {
     },
     async getRelation(searchQuery) {
       try {
-        
+        if(searchQuery==undefined ||searchQuery==null)searchQuery=" "
         this.isLoading = true;
         const response = await this.$api.badasoEntity.relationSlug({
           slug: this.slug,
           query:searchQuery,
           coluna:this.coluna,
+          table:this.tableDestino,
         });
         
         this.options = response.data;
