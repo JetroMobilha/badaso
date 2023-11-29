@@ -98,11 +98,12 @@ export default {
       var retornArray=[];
       if (this.multiple) {
         this.val.forEach(element => {
-          retornArray.push(element[this.id]);
+          retornArray.push(element['value']);
         });
         this.$emit("input", retornArray);
       } else {
-        this.$emit("input", val);
+        
+        this.$emit("input", this.val.value);
       }
     },
     compoGerarSelecionado(selectedOption, id){
