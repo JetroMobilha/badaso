@@ -208,7 +208,11 @@ Route::group(['prefix' => $api_route_prefix, 'namespace' => 'Uasoft\Badaso\Contr
                     Route::get($data_type->slug.'/relation', $crud_data_controller.'@relation')
                         ->name($data_type->slug.'.relation')
                         ->middleware(config('badaso.middleware.check_crud_permission').':'.$data_type->slug.',read');
-                
+                    
+                    Route::get($data_type->slug.'/relation-slug', $crud_data_controller.'@getRelationDataBySlug')
+                        ->name($data_type->slug.'.relation-slug')
+                        ->middleware(config('badaso.middleware.check_crud_permission').':'.$data_type->slug.',read');
+                       
                     Route::get($data_type->slug.'/isexiste', $crud_data_controller.'@isexiste')
                         ->name($data_type->slug.'.isexiste')
                         ->middleware(config('badaso.middleware.check_crud_permission').':'.$data_type->slug.',read');

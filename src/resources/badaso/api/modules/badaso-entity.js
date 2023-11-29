@@ -94,6 +94,14 @@ export default {
     return resource.get(url);
   },
 
+  relationSlug(data) {
+    const ep = entityPrefix + "/" + data.slug + "/relation-slug";
+    const qs = QueryString(data);
+    const url = ep + qs;
+    return resource.get(url);
+  },
+
+
   isexiste(data) {
     const ep = entityPrefix + "/" + data.slug + "/isexiste";
     const qs = QueryString(data);

@@ -5,9 +5,11 @@
       v-model="val" 
       :options="options"  
       :placeholder="placeholder" 
-      :label="coluna" 
-      track-by="id"
+      label="label" 
+      :multiple='multiple'
+      track-by="value"
       @select="compoGerarSelecionado"
+      @remove="compoGerarSelecionado"
       @search-change="getRelation"
       :searchable="true" 
       :loading="isLoading" 
@@ -41,7 +43,7 @@ export default {
   name: "BadasotMultipleSelect",
   components: {},
   data: () => ({
-    val:null,
+    val:'',
     options:[],
   }),
   props: {
@@ -67,11 +69,8 @@ export default {
     },
     coluna: {
       type: String,
+      required: true,
       default: "nome",
-    },
-    tipo: {
-      type: String,
-      default:null,
     },
     slug: {
       type: String,
@@ -81,6 +80,10 @@ export default {
       type: String,
       default:"",
     },
+    multiple: {
+      type: Boolean,
+      default:false,
+    },
   },
   mounted() {
     this.getRelation('');
@@ -88,7 +91,15 @@ export default {
   methods: {
      
     handleInput(val) {
-      this.$emit("input", val);
+      var retornArray=[];
+      if (this.multiple) {
+        this.val.forEach(element => {
+          retornArray.push(element[this.id]);
+        });
+        this.$emit("input", retornArray);
+      } else {
+        this.$emit("input", val);
+      }
     },
     compoGerarSelecionado(selectedOption, id){
       this.handleInput(selectedOption[this.coluna]);
@@ -97,11 +108,10 @@ export default {
       try {
         
         this.isLoading = true;
-        const response = await this.$api.badasoEntity.relation({
+        const response = await this.$api.badasoEntity.relationSlug({
           slug: this.slug,
           query:searchQuery,
-          tipo:this.tipo,
-          coluna:this.coluna
+          coluna:this.coluna,
         });
         
         this.options = response.data;

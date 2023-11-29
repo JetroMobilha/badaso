@@ -455,6 +455,133 @@ class BadasoBaseController extends Controller
         }
     }
 
+    public function getRelationDataBySlug(Request $request)
+    {
+        try {
+            $request->validate([
+                'slug' => 'required|exists:Uasoft\Badaso\Models\DataType,slug',
+            ]);
+            $slug = $request->input('slug', '');
+            $page = $request->input('page',1);
+            $on_page = 50;
+            $skip = $on_page * ($page - 1);
+            $search = $request->input('query', '');
+            $coluna = $request->input('coluna', false);
+             
+            $data_type = $this->getDataType($slug);
+            $data_rows = $this->dataRowsTypeReplace($data_type->dataRows);
+            $data = [];
+            $relational_rows = collect($data_rows)->filter(function ($value, $key) {
+                return $value->relation != null;
+            })->all();
+
+            foreach ($relational_rows as $key => $field) {
+                $relation_detail = [];
+
+                try {
+                    $relation_detail = is_string($field->relation) ? json_decode($field->relation) : $field->relation;
+                    $relation_detail = CaseConvert::snake($relation_detail);
+                } catch (\Exception $e) {
+                }
+
+                $relation_type = array_key_exists('relation_type', $relation_detail) ? $relation_detail['relation_type'] : null;
+                $destination_table = array_key_exists('destination_table', $relation_detail) ? $relation_detail['destination_table'] : null;
+                $destination_table_column = array_key_exists('destination_table_column', $relation_detail) ? $relation_detail['destination_table_column'] : null;
+                $destination_table_display_column = array_key_exists('destination_table_display_column', $relation_detail) ? $relation_detail['destination_table_display_column'] : null;
+                $destination_table_display_more_column = array_key_exists('destination_table_display_more_column', $relation_detail) ? $relation_detail['destination_table_display_more_column'] : [];
+                $modelRelation = array_key_exists('model', $relation_detail) ? $relation_detail['model'] : null;
+                
+                if ( $destination_table_display_column==$coluna) {
+                    
+                    if (isset($destination_table_display_more_column)) {
+                        $destination_table_display_more_column =
+                         is_string($destination_table_display_more_column) ? 
+                         json_decode($destination_table_display_more_column) : $destination_table_display_more_column;
+                    }
+    
+                    if (
+                        $relation_type
+                        && $destination_table
+                        && $destination_table_column
+                        && $destination_table_display_column
+                    ) {
+                        if (isset($modelRelation)) {
+                           try {
+                            $model = app($modelRelation);
+                            $query = $model->query();
+                            $details =null;
+                            if (isset($field->details)) {
+                                $details = is_string($field->details) ? json_decode($field->details) : $field->details;
+                            }
+    
+                            $culunas = array_merge(
+                                [
+                                    $destination_table_column,
+                                    $destination_table_display_column,
+                                ], 
+                                $destination_table_display_more_column
+                            );
+                             
+                            if (isset($details) && isset($details->scope) && $details->scope != '' &&
+                                method_exists($model, 'scope'.ucfirst($details->scope))) {
+                                
+                                $relation_data = $query->{$details->scope}()
+                                    ->select($culunas)->take($on_page)->skip($skip)
+                                    ->where($coluna, 'LIKE', '%' . $search . '%')->get();
+                                $result = collect($relation_data);
+                                $data = $result->map(function ($res) use ($destination_table_column, $destination_table_display_column) {
+                                        $item = $res;
+                                        $item->value = $res->{$destination_table_column};
+                                        $item->label = $res->{$destination_table_display_column};
+     
+                                        return $item;
+                                    }
+                                )->toArray();
+    
+    
+                            }else{
+                                $result = collect($query ->select($culunas)->take($on_page)->skip($skip)
+                                ->where($coluna, 'LIKE', '%' . $search . '%')->get());
+                                $data = $result->map(function ($res) use ($destination_table_column, $destination_table_display_column) {
+                                    $item = $res;
+                                    $item->value = $res->{$destination_table_column};
+                                    $item->label = $res->{$destination_table_display_column};
+                    
+                                    return $item;
+                                })->toArray();
+                            }
+                           } catch (\Throwable $th) {
+                             
+                           }
+                        } else {
+                            $culunas = [
+                                $destination_table_column,
+                                $destination_table_display_column,
+                            ];
+    
+                            $relation_data = DB::table($destination_table)->select(
+                                array_merge($culunas, $destination_table_display_more_column)
+                            )->take($on_page)->skip($skip)
+                            ->where($coluna, 'LIKE', '%' . $search . '%')->get();
+                            $result = collect($relation_data);
+                            $data = $result->map(function ($res) use ($destination_table_column, $destination_table_display_column) {
+                                $item = $res;
+                                $item->value = $res->{$destination_table_column};
+                                $item->label = $res->{$destination_table_display_column};
+    
+                                return $item;
+                            })->toArray();
+                        }
+                    } 
+                }
+            }
+
+            return ApiResponse::success($data);
+        } catch (Exception $e) {
+            return APIResponse::failed($e);
+        }
+    }
+
     public function relation(Request $request) {
        
 

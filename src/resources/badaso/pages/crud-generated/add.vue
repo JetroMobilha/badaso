@@ -293,7 +293,7 @@
                       errors[$caseConvert.stringSnakeToCamel(dataRow.field)]
                     "
                   ></badaso-code-editor>
-                  <badaso-select
+                  <badaso-multiple-select
                     v-if="
                       dataRow.type == 'relation' &&
                       dataRow.relation != undefined &&
@@ -301,19 +301,15 @@
                     "
                     :label="dataRow.displayName"
                     :placeholder="dataRow.displayName"
+                    :slug="dataRow.relation.destinationTable"
+                    :coluna="dataRow.relation.destinationTableDisplayColumn"
                     v-model="dataRow.value"
+                    :multiple="false"
                     size="12"
-                    :items="
-                      relationData[
-                        $caseConvert.stringSnakeToCamel(
-                          dataRow.relation.destinationTable
-                        )
-                      ]
-                    "
                     :alert="
                       errors[$caseConvert.stringSnakeToCamel(dataRow.field)]
                     "
-                  ></badaso-select>
+                  ></badaso-multiple-select>
                   <badaso-text
                     v-if="
                       dataRow.type == 'relation' &&
@@ -329,7 +325,7 @@
                       errors[$caseConvert.stringSnakeToCamel(dataRow.field)]
                     "
                   ></badaso-text>
-                  <badaso-select-multiple
+                  <badaso-multiple-select
                     v-if="
                       dataRow.type == 'relation' &&
                       dataRow.relation != undefined &&
@@ -337,19 +333,15 @@
                     "
                     :label="dataRow.displayName"
                     :placeholder="dataRow.displayName"
+                    :slug="dataRow.relation.destinationTable"
+                    :coluna="dataRow.relation.destinationTableDisplayColumn"
                     v-model="dataRow.value"
+                    :multiple="true"
                     size="12"
                     :alert="
                       errors[$caseConvert.stringSnakeToCamel(dataRow.field)]
                     "
-                    :items="
-                      relationData[
-                        $caseConvert.stringSnakeToCamel(
-                          dataRow.relation.destinationTable
-                        )
-                      ]
-                    "
-                  ></badaso-select-multiple>
+                  ></badaso-multiple-select>
                 </template>
               </vs-col>
             </vs-row>

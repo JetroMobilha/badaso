@@ -287,35 +287,29 @@
                       errors[$caseConvert.stringSnakeToCamel(dataRow.field)]
                     " 
                   ></badaso-code-editor>
-                  <badaso-select
+                  <badaso-multiple-select
                     v-if="
-                      dataRow.type == 'relation' && 
+                      dataRow.type == 'relation' &&
                       dataRow.relation != undefined &&
-                      dataRow.relation.relationType == 'belongs_to' && 
-                      seShow(dataRow)
+                      dataRow.relation.relationType == 'belongs_to'
                     "
                     :label="dataRow.displayName"
                     :placeholder="dataRow.displayName"
+                    :slug="dataRow.relation.destinationTable"
+                    :coluna="dataRow.relation.destinationTableDisplayColumn"
                     v-model="dataRow.value"
+                    :multiple="false"
                     size="12"
-                    :items="
-                      relationData[
-                        $caseConvert.stringSnakeToCamel(
-                          dataRow.relation.destinationTable
-                        )
-                      ]
-                    "
                     :alert="
                       errors[$caseConvert.stringSnakeToCamel(dataRow.field)]
-                    " 
-                  ></badaso-select>
+                    "
+                  ></badaso-multiple-select>
                   <badaso-text
                     v-if="
                       dataRow.type == 'relation' &&
                       dataRow.relation != undefined &&
                       dataRow.relation.relationType !== 'belongs_to' &&
-                      dataRow.relation.relationType !== 'belongs_to_many'&& 
-                      seShow(dataRow)
+                      dataRow.relation.relationType !== 'belongs_to_many'
                     "
                     :label="dataRow.displayName"
                     :placeholder="dataRow.displayName"
@@ -325,26 +319,23 @@
                       errors[$caseConvert.stringSnakeToCamel(dataRow.field)]
                     "
                   ></badaso-text>
-                  <badaso-select-multiple 
-                    v-if="dataRow.type == 'relation' &&
-                    dataRow.relation != undefined &&
-                    dataRow.relation.relationType == 'belongs_to_many'" 
+                  <badaso-multiple-select
+                    v-if="
+                      dataRow.type == 'relation' &&
+                      dataRow.relation != undefined &&
+                      dataRow.relation.relationType == 'belongs_to_many'
+                    "
                     :label="dataRow.displayName"
-                    :placeholder="dataRow.displayName" 
-                    v-model="dataRow.value" 
-                    size="12" 
+                    :placeholder="dataRow.displayName"
+                    :slug="dataRow.relation.destinationTable"
+                    :coluna="dataRow.relation.destinationTableDisplayColumn"
+                    v-model="dataRow.value"
+                    :multiple="true"
+                    size="12"
                     :alert="
                       errors[$caseConvert.stringSnakeToCamel(dataRow.field)]
-                    " 
-                    :items="
-                      relationData[
-                        $caseConvert.stringSnakeToCamel(
-                          dataRow.relation.destinationTable
-                        )
-                      ]
                     "
-                    v-show="seShow(dataRow)"
-                  ></badaso-select-multiple>
+                  ></badaso-multiple-select>
                 </template>
               </vs-col>
             </vs-row>
