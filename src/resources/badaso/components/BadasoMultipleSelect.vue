@@ -81,7 +81,7 @@ export default {
       default:"",
     },
     value: {
-      type: String,
+      type: String|Number,
       default:"",
     },
     multiple: {
@@ -90,6 +90,7 @@ export default {
     },
   },
   mounted() {
+    this.val=this.value;
     this.getRelation();
   },
   methods: {

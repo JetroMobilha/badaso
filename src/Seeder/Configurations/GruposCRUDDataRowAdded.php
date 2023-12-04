@@ -73,7 +73,7 @@ class GruposCRUDDataRowAdded extends Seeder
                         "size":"4",
                         "scope":"empresa"
                     }',
-                    'relation' => '{"relation_type":"belongs_to","model":"Uasoft\\Badaso\\Models\\User","destination_table":"'.config('badaso.database.prefix').'users","destination_table_column":"id","destination_table_display_column":"name"}',
+                    'relation' => '{"relation_type":"belongs_to","model":"Uasoft\\\\Badaso\\\\Models\\\\User","destination_table":"'.config('badaso.database.prefix').'users","destination_table_column":"id","destination_table_display_column":"name"}',
                     'order' => 3,
                 ),
                 3 => 
@@ -89,7 +89,7 @@ class GruposCRUDDataRowAdded extends Seeder
                     'add' => 1,
                     'delete' => 1,
                     'details' => '{"scope":"empresa"}',
-                    'relation' => '{"relation_type":"belongs_to_many","model":"Uasoft\\Badaso\\Models\\User","destination_table":"badaso_users","destination_table_column":"id","destination_table_display_column":"name","destination_table_display_more_column":[]}',
+                    'relation' => '{"relation_type":"belongs_to_many","model":"Uasoft\\\\Badaso\\\\Models\\\\User","destination_table":"badaso_users","destination_table_column":"id","destination_table_display_column":"name","destination_table_display_more_column":[]}',
                     'order' => 4,
                 ),
                 4 => 
@@ -131,11 +131,11 @@ class GruposCRUDDataRowAdded extends Seeder
                     'type' => 'empresa',
                     'display_name' => 'Empresa',
                     'required' => 0,
-                    'browse' => 1,
-                    'read' => 1,
-                    'edit' => 1,
+                    'browse' => 0,
+                    'read' => 0,
+                    'edit' => 0,
                     'add' => 1,
-                    'delete' => 1,
+                    'delete' => 0,
                     'details' => '{}',
                     'relation' => NULL,
                     'order' => 7,
