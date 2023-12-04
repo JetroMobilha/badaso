@@ -453,7 +453,8 @@ export default {
           (row.value==null||row.value=='') &&
           !(row.type == "hidden") &&
           row.add &&
-          !(row.type == "empresa")
+          !(row.type == "empresa")&&
+          !(row.type == "data_identifier")
         ) {
           this.errors[row.field]= this.$t("vuelidate.rowsRequired")
         }
