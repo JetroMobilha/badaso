@@ -45,6 +45,7 @@ export default {
   data: () => ({
     val:'',
     options:[],
+    isLoading:false,
   }),
   props: {
     size: {
