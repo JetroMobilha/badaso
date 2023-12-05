@@ -34,7 +34,7 @@
                 :key="rowIndex"
                 :vs-lg="dataRow.details.size ? dataRow.details.size : '12'"
               >
-                <template v-if="dataRow.read">
+                <template v-if="dataRow.read && dataRow.type != 'hidden' && dataRow.field != 'models'">
                   <table class="badaso-table">
                     <tr>
                       <td class="badaso-table__label">
@@ -170,9 +170,27 @@
                             ]
                           }}
                         </div>
-                        <span v-else-if="dataRow.type == 'relation'">{{
-                          displayRelationData(record, dataRow)
-                        }}</span>
+                        <div  v-else-if="dataRow.type == 'relation'">
+                          <template v-for="(content,index) in displayRelationData(record, dataRow)">
+                            <span
+                              v-html="content"
+                            ></span>
+                            <vs-button
+                              v-if="idRelationData(record, dataRow)[index]!=null"
+                              color="dark"
+                              type="flat"
+                              size="small"
+                              :to="{
+                                name: 'CrudGeneratedRead',
+                                params: { 
+                                  id:idRelationData(record, dataRow)[index],
+                                slug:dataRow.relation.destinationTable,
+                                },
+                              }"
+                              ><vs-icon icon="link"></vs-icon>
+                            </vs-button>
+                          </template>
+                        </div>
                         <span v-else-if="dataRow.type == 'hidden'|| dataRow.field == 'models'">{{
                            
                         }}</span>
@@ -316,6 +334,7 @@ export default {
       }
     },
     displayRelationData(record, dataRow) {
+     var retorno = [];
       const table = this.$caseConvert.stringSnakeToCamel(
         dataRow.relation.destinationTable
       );
@@ -330,19 +349,21 @@ export default {
 
       if (dataRow.relation.relationType == "has_one") {
         const list = record[table];
-        return list[displayColumn];
+        return [list[displayColumn]];
       } else if (dataRow.relation.relationType == "has_many") {
         const list = record[table];
         const flatList = list.map((ls) => {
           return ls[displayColumn];
         });
-        return flatList.join(", ");
+        console.log(list);
+        return flatList;
       } else if (dataRow.relation.relationType == "belongs_to") {
         const lists = record[table];
         const field = this.$caseConvert.stringSnakeToCamel(dataRow.field);
         for (const list of lists) {
           if (list.id == record[field]) {
-            return list[displayColumn];
+            retorno.push(list[displayColumn]);
+            return retorno;
           }
         }
       } else if (dataRow.relation.relationType == "belongs_to_many") {
@@ -352,11 +373,63 @@ export default {
         Object.keys(lists).forEach(function (ls, key) {
           flatList.push(lists[ls][displayColumn]);
         });
-        console.log(record);
-        return flatList.join(",").replace(",", ", ");
+        return flatList;
       } else {
-        return record[table] ? record[table][displayColumn] : null;
+        return record[table] ? [record[table][displayColumn]] : [];
       }
+    },
+    idRelationData(record, dataRow) {
+      var retorno =[];
+      const table = this.$caseConvert.stringSnakeToCamel(
+        dataRow.relation.destinationTable
+      );
+
+      const destinationColumn = this.$caseConvert.stringSnakeToCamel(
+        dataRow.relation.destinationTableColumn
+      );
+
+      const displayColumn = this.$caseConvert.stringSnakeToCamel(
+        dataRow.relation.destinationTableDisplayColumn
+      );
+
+      if (dataRow.relation.relationType == "has_one") {
+        const list = record[table];
+         
+         if(list.hasOwnProperty('id'))
+          retorno.push(list['id']);
+
+          return retorno;  
+      } else if (dataRow.relation.relationType == "has_many") {
+        const list = record[table];
+        const flatList = list.map((ls) => {
+          
+          if(ls.hasOwnProperty('id'))
+           return ls['id'];
+          else
+            return null;
+            
+        });
+       retorno= flatList;
+      } else if (dataRow.relation.relationType == "belongs_to") {
+        const lists = record[table];
+        const field = this.$caseConvert.stringSnakeToCamel(dataRow.field);
+        for (const list of lists) {
+          if (list.id == record[field]) {
+              retorno.push(list[destinationColumn]);
+          }
+        }
+      } else if (dataRow.relation.relationType == "belongs_to_many") {
+        const field = this.$caseConvert.stringSnakeToCamel(dataRow.field);
+        const lists = record[field];
+        const flatList = [];
+        Object.values(lists).forEach(function (ls) {
+          flatList.push(ls[table +'Id']);
+        });
+        retorno= flatList;
+      } else {
+        record[table] ? record[table][displayColumn] : null;
+      }
+      return retorno;
     },
   },
 };
