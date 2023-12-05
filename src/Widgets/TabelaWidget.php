@@ -39,8 +39,10 @@ class TabelaWidget implements WidgetInterface
     public function getModel($model)
     {
         return  $model->whereIn('id',function($query){
-            $query->select('caleventos_id')->from('user_caleventos')->where('badaso_users_id',auth()->id());
-        })->orWhere('autor',auth()->id());   
+            $query->select('caleventos_id')->from('user_caleventos')->where('badaso_users_id',auth()->id())->where('status','!=','concluido');
+        })->orWhereIn('id',function($query){
+            $query->select('id')->from('caleventos')->where('autor',auth()->id())->where('status','!=','concluido');
+        });     
     }
 
 

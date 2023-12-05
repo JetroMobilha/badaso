@@ -266,7 +266,7 @@ class EventosCRUDDataRowAdded extends Seeder
                     'display_name' => 'Empresa',
                     'required' => 0,
                     'browse' => 0,
-                    'read' => 1,
+                    'read' => 0,
                     'edit' => 0,
                     'add' => 1,
                     'delete' => 0,
