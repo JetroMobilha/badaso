@@ -82,6 +82,7 @@ export default {
       default:"",
     },
     value: {
+      type: String|Number|Array,
       default:"",
     },
     multiple: {
@@ -96,6 +97,7 @@ export default {
   methods: {
      
     handleInput(val) {
+
       var retornArray=[];
       if (this.multiple) {
         this.val.forEach(element => {
@@ -123,6 +125,26 @@ export default {
         
         this.options = response.data;
         this.isLoading = false;
+         
+        if (searchQuery==" " && !this.multiple) {
+          for (const valu of this.options) {
+            if (valu.id==this.value) {
+              this.val= valu;
+            }
+          }
+        }
+
+        if (searchQuery==" " && this.multiple) {
+          var retornArray=[];
+          for (const valu of this.options) {
+            for (const valu2 of this.value) {
+              if(valu2 ==valu.id)
+              retornArray.push(valu);
+            }
+          }
+          this.val =retornArray;
+        }
+         
       } catch (error) {
         this.isLoading = false;
       }

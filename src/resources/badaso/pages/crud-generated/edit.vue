@@ -227,8 +227,7 @@
                   <badaso-hidden
                     v-if="
                       dataRow.type == 'hidden' ||
-                      dataRow.type == 'data_identifier' ||
-                      dataRow.type == 'relation'
+                      dataRow.type == 'data_identifier'
                     "
                     :label="dataRow.displayName"
                     :placeholder="dataRow.displayName"
@@ -569,7 +568,9 @@ export default {
             ) {
               const record =
                 this.record[this.$caseConvert.stringSnakeToCamel(data.field)];
-              const destinationTableId = data.relation.destinationTable + "Id";
+
+               
+              const destinationTableId = this.$caseConvert.stringSnakeToCamel(data.relation.destinationTable)  + "Id";
               data.value = [];
               Object.entries(record).filter(function (item, key) {
                 return (data.value[key] = item[1][destinationTableId]);
