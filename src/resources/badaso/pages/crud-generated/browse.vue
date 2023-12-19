@@ -194,7 +194,7 @@
                             v-else-if="dataRow.type == 'editor'"
                             v-html="
                               record[
-                                $caseConvert.stringSnakeToCamel(dataRow.field).slice(0, 50)
+                                $caseConvert.stringSnakeToCamel(dataRow.field)
                               ]
                             "
                           ></span>
