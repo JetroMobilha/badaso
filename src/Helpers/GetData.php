@@ -615,10 +615,12 @@ class GetData
                         }
                     });
                 } else {
-                    $relation_datas = DB::table($destination_table)->select($arr_query_select)
-                        ->get();
+                   
                     switch ($relation_type) {
                         case 'belongs_to':
+                            $relation_datas = DB::table($destination_table)->select($arr_query_select)
+                            ->where($destination_table_column,$row->{$field->field})
+                            ->get();
                             if (isset($row->{$destination_table})) {
                                 try {
                                     array_push($row->{$destination_table}, collect($relation_datas)->first());
@@ -630,6 +632,8 @@ class GetData
                             break;
 
                         case 'has_many':
+                            $relation_datas = DB::table($destination_table)->select($arr_query_select)
+                                ->get();
                             $row->{$destination_table} = [];
                             foreach ($relation_datas as $key => $relation_data) {
                                 if ($relation_data->{$destination_table_column} == $row->id) {
@@ -644,6 +648,8 @@ class GetData
                             break;
 
                         case 'has_one':
+                            $relation_datas = DB::table($destination_table)->select($arr_query_select)
+                                ->get();
                             $row->{$destination_table} = collect();
                             foreach ($relation_datas as $key => $relation_data) {
                                 if ($relation_data->{$destination_table_column} == $row->id) {
