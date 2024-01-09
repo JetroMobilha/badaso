@@ -17,7 +17,7 @@ class BadasoUserController extends Controller
     public function browse(Request $request)
     {
         try {
-            $users = User::where('empresa_id',auth()->id())->get();
+            $users = User::where('empresa_id',auth()->user()->id())->get();
 
             $data['users'] = $users;
 
@@ -71,8 +71,10 @@ class BadasoUserController extends Controller
             $user->email = $request->email;
             $user->avatar = $request->avatar;
             $user->gender = $request->gender;
-            $user->empresa_id = $request->empresa_id;
             $user->additional_info = $request->additional_info;
+            if ($request->empresa_id && $request->empresa_id != '') {
+                $user->empresa_id = $request->empresa_id;
+            }
             if ($request->password && $request->password != '') {
                 $user->password = Hash::make($request->password);
             }
