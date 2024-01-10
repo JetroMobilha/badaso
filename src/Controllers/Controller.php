@@ -251,8 +251,7 @@ abstract class Controller extends BaseController
     {
         $data_type = $this->getDataType($slug);
         $data_rows = collect($data_type->dataRows);
-        $fields = collect($data_type->dataRows)->where('read', 1)->pluck('field')->all();
-        $ids = collect($data_type->dataRows)->where('field', 'id')->pluck('field')->all();
+        $fields = collect($data_type->dataRows)->pluck('field')->all();
         $field_other_relation = [];
 
         foreach ($data_rows as $key => $data_row) {
@@ -261,7 +260,7 @@ abstract class Controller extends BaseController
             }
         }
 
-        $fields = array_diff(array_merge($fields, $ids), $field_other_relation);
+        $fields = array_diff($fields, $field_other_relation);
         $data = null;
         $record = null;
         if ($data_type->model_name) {
