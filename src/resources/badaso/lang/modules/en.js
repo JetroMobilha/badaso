@@ -1222,4 +1222,11 @@ export default {
       restore: "Restore",
     },
   },
+  caleventos: {
+    years: "Years",
+    year: "Year",
+    month: "Month",
+    week: "Week",
+    day: "Day",
+  },
 };

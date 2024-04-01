@@ -183,7 +183,7 @@ export default {
 
   alert: {
     success: "Sucesso",
-    danger: "Perigo",
+    danger: "Atenção",
     error: "Erro",
   },
 
@@ -1209,5 +1209,12 @@ export default {
     crudGenerator: {
       restore: "Restaurar",
     },
+  },
+  caleventos: {
+    years: "Anos",
+    year: "Ano",
+    month: "Mês",
+    week: "Semana",
+    day: "Dia",
   },
 };

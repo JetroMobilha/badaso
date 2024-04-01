@@ -15,7 +15,7 @@ class GetData
     public static function serverSideWithModel($data_type, $builder_params, $only_data_soft_delete = false)
     {
         $fields_data_identifier = collect($data_type->dataRows)->where('type', 'data_identifier')->pluck('field')->all();
-        $fields = collect($data_type->dataRows)->where('browse', 1)->pluck('field')->all();
+        $fields = collect($data_type->dataRows)->pluck('field')->all();
         $ids = collect($data_type->dataRows)->where('field', 'id')->pluck('field')->all();
         $fields = array_merge($fields, $ids, $fields_data_identifier);
         $data_rows = collect($data_type->dataRows);
@@ -69,7 +69,7 @@ class GetData
             }
         }
 
-        $fields = array_diff(array_merge($fields, $ids, $fields_data_identifier), $field_other_relation);
+        $fields = array_diff($fields, $field_other_relation);
 
         $records = [];
          
@@ -106,6 +106,10 @@ class GetData
             }
         }
 
+        if (isset($builder_params['filters'])) {
+            self::setFilter($query,$builder_params['filters'],$fields);
+        }
+
         if ($order_field) {
             $query->orderBy($order_field, $order_direction);
         }
@@ -136,7 +140,7 @@ class GetData
     public static function clientSideWithModel($data_type, $builder_params, $only_data_soft_delete = false)
     {
         $fields_data_identifier = collect($data_type->dataRows)->where('type', 'data_identifier')->pluck('field')->all();
-        $fields = collect($data_type->dataRows)->where('browse', 1)->pluck('field')->all();
+        $fields = collect($data_type->dataRows)->pluck('field')->all();
         $ids = collect($data_type->dataRows)->where('field', 'id')->pluck('field')->all();
         $data_rows = collect($data_type->dataRows);
         $field_other_relation = [];
@@ -182,7 +186,7 @@ class GetData
             }
         }
 
-        $fields = array_diff(array_merge($fields, $ids, $fields_data_identifier), $field_other_relation);
+        $fields = array_diff($fields, $field_other_relation);
 
         $model = app($data_type->model_name);
         $order_field = $builder_params['order_field'];
@@ -231,6 +235,11 @@ class GetData
                 }
             }
         }
+
+        if (isset($builder_params['filters'])) {
+            self::setFilter($query,$builder_params['filters'],$fields);
+        }
+
         // end
         $data = $query->get();
 
@@ -281,7 +290,7 @@ class GetData
     public static function serverSideWithQueryBuilder($data_type, $builder_params, $only_data_soft_delete = false)
     {
         $fields_data_identifier = collect($data_type->dataRows)->where('type', 'data_identifier')->pluck('field')->all();
-        $fields = collect($data_type->dataRows)->where('browse', 1)->pluck('field')->all();
+        $fields = collect($data_type->dataRows)->pluck('field')->all();
         $ids = collect($data_type->dataRows)->where('field', 'id')->pluck('field')->all();
         $fields = array_merge($fields, $ids, $fields_data_identifier);
         $data_rows = collect($data_type->dataRows);
@@ -334,7 +343,7 @@ class GetData
         }
 
         $is_field = in_array($field_identify_related_user, array_merge($fields, $fields_data_identifier));
-        $fields = array_diff(array_merge($fields, $ids, $fields_data_identifier), $field_other_relation);
+        $fields = array_diff($fields, $field_other_relation);
         $query = DB::table($data_type->name)->select($fields);
 
         if (! $is_roles) {
@@ -365,6 +374,11 @@ class GetData
                 }
             }
         }
+
+        if (isset($builder_params['filters'])) {
+            self::setFilter($query,$builder_params['filters'],$fields);
+        }
+
         $paginate = $query;
         $total = $query->count();
 
@@ -403,7 +417,7 @@ class GetData
     {
         $fields_data_identifier = collect($data_type->dataRows)->where('type', 'data_identifier')->pluck('field')->all();
         $data_rows = collect($data_type->dataRows);
-        $fields = $data_rows->where('browse', 1)->pluck('field')->all();
+        $fields = $data_rows->pluck('field')->all();
         $ids = $data_rows->where('field', 'id')->pluck('field')->all();
         $field_other_relation = [];
         $is_roles = false;
@@ -446,7 +460,7 @@ class GetData
         }
 
         $is_field = in_array($field_identify_related_user, array_merge($fields, $fields_data_identifier));
-        $fields = array_diff(array_merge($fields, $ids, $fields_data_identifier), $field_other_relation);
+        $fields = array_diff($fields, $field_other_relation);
         $order_field = $builder_params['order_field'];
         $order_direction = $builder_params['order_direction'];
         $filter_key = $builder_params['filter_key'];
@@ -479,6 +493,10 @@ class GetData
                      $records->orWhere($field, 'LIKE', "%{$filter_value}%");
                 }
             }
+        }
+
+        if (isset($builder_params['filters'])) {
+            self::setFilter($query,$builder_params['filters'],$fields);
         }
 
         $records = $records->get()->map(function ($record) use ($data_rows) {
@@ -688,5 +706,34 @@ class GetData
        } catch (\Throwable $th) {}
         
         return $query;
+    }
+
+      protected static function setFilter(&$query,$builder_params,$fields)
+    {    
+        if(is_array($builder_params))
+            foreach ($builder_params as $value) {
+                if (isset($value['filter_value']) && isset($value['filter_key']) && isset($value['filter_operator'])) {
+                    if ( !isset($value['metodo'])) {
+                        $query->where($value['filter_key'],$value['filter_operator'],$value['filter_value']);
+                    }else{
+                        $query->{$value['metodo']}($value['filter_key'],$value['filter_operator'],$value['filter_value']);
+                    }
+                
+                }else  if (isset($value['filter_value']) && isset($value['filter_key'])) {
+                    if (!isset($value['metodo'])) {
+                        $query->where($value['filter_key'],$value['filter_value']);
+                    }else{
+                        $query->{$value['metodo']}($value['filter_key'],$value['filter_value']);
+                    }
+                }else if (isset($value['filter_value'])) {
+                    foreach ($fields as $index => $field) {
+                        if ($index == 0) {
+                            $query->where($field, 'LIKE', "%{$value['filter_value']}%");
+                        } else {
+                            $query->orWhere($field, 'LIKE', "%{$value['filter_value']}%");
+                        }
+                    }
+                }
+            } 
     }
 }

@@ -227,7 +227,8 @@ abstract class Controller extends BaseController
             'order_direction' => isset($request['order_direction']) ? $request['order_direction'] : $data_type->order_direction,
             'filter_key'      => isset($request['filter_key']) ? $request['filter_key'] : null,
             'filter_operator' => isset($request['filter_operator']) ? $request['filter_operator'] : 'containts',
-            'filter_value'    => isset($request['filter_value']) ? $request['filter_value'] : '',
+            'filter_value'    => isset($request['filter_value']) ? $request['filter_value'] : null,
+            'filters'         => isset($request['filters']) ? $request['filters'] : null,
         ];
 
         if ($data_type->model_name) {

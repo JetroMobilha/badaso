@@ -1206,4 +1206,11 @@ export default {
       restore: "Mengembalikan",
     },
   },
+  caleventos: {
+    years: "Years",
+    year: "Year",
+    month: "Month",
+    week: "Week",
+    day: "Day",
+  },
 };
