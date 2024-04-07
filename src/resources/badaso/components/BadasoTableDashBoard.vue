@@ -1,9 +1,8 @@
 <template>
   <vs-row>   
     <vs-col vs-lg="12">
-      <vs-card :style="{ height:'400px'}">
+      <vs-card :style=" $constants.DESKTOP ==viewType?{ height:'380px'}:{ height:'445px'}">
         <badaso-widget-table
-            v-if="dataType.serverSide !== 1"
             v-model="selected"
             pagination
             :max-items="descriptionItems[0]"
@@ -16,7 +15,6 @@
             :description-title="$t('crudGenerated.footer.descriptionTitle')"
             :description-connector="$t('crudGenerated.footer.descriptionConnector')"
             :description-body="$t('crudGenerated.footer.descriptionBody')"
-            ref="widgettable"
             >
             <template slot="thead">
               <vs-th
@@ -28,7 +26,6 @@
                   {{ dataRow.displayName }}
                 </template>
               </vs-th>
-              <vs-th> {{ $t("crudGenerated.header.action") }} </vs-th>
             </template>
 
             <template slot-scope="{ data }">
@@ -36,75 +33,20 @@
                 :data="record"
                 :key="index"
                 v-for="(record, index) in data"
-                :state="idsOfflineDeleteRecord.includes(record.id.toString())?'danger':'default'"
               >
-                <template
-                  v-if="!idsOfflineDeleteRecord.includes(record.id.toString()) || !isOnline"
-                >
-                  <vs-td
+                <template >
+                  <vs-td :style="{ padding:'7px'}"
                     v-for="(dataRow, indexColumn) in getRowBrowse(dataType.dataRows)"
                     :key="indexColumn"
                     :data="data[index][$caseConvert.stringSnakeToCamel(dataRow.field)]"
                   >
-                    <template v-if="dataRow.browse == 1">
-                      <img
-                        v-if="dataRow.type == 'upload_image'"
-                        :src="`${record[$caseConvert.stringSnakeToCamel(dataRow.field)]}`"
-                        width="20%"
-                        alt=""
-                      />
-                      <div
-                        v-else-if="dataRow.type == 'upload_image_multiple'"
-                        class="crud-generated__item--upload-image-multiple"
-                      >
-                        <img
-                          v-for="(image, indexImage) in stringToArray(
-                            record[$caseConvert.stringSnakeToCamel(dataRow.field)]
-                          )"
-                          :key="indexImage"
-                          :src="`${image}`"
-                          width="20%"
-                          alt=""
-                          class="crud-generated__item--image"
-                        />
-                      </div>
-                      <span
-                        v-else-if="dataRow.type == 'editor'"
-                        v-html="record[$caseConvert.stringSnakeToCamel(dataRow.field)]"
-                      ></span>
-                      <a
-                        v-else-if="dataRow.type == 'url'"
-                        :href="record[$caseConvert.stringSnakeToCamel(dataRow.field)]"
-                        target="_blank"
-                      >
-                        {{ record[ $caseConvert.stringSnakeToCamel(dataRow.field) ] }}
-                      </a>
-                      <a
-                        v-else-if="dataRow.type == 'upload_file'"
-                        :href="`${record[$caseConvert.stringSnakeToCamel(dataRow.field)]}`"
-                        target="_blank"
-                      >
-                        {{record[$caseConvert.stringSnakeToCamel(dataRow.field)]}}
-                      </a>
-                      <div
-                        v-else-if="dataRow.type == 'upload_file_multiple'"
-                        class="crud-generated__item--upload-file-multiple"
-                      >
-                        <p
-                          v-for="(file, indexFile) in stringToArray(record[$caseConvert.stringSnakeToCamel(dataRow.field)])"
-                          :key="indexFile"
-                        >
-                          <a :href="`${file}`" target="_blank">
-                            {{file}}
-                          </a>
-                        </p>
-                      </div>
-                      <p
-                        v-else-if="dataRow.type == 'radio' || dataRow.type == 'select'"
+                    <template>
+                      <p @click="readItem(data[index].id)"
+                        v-if="dataRow.type == 'radio' || dataRow.type == 'select'"
                       >
                         {{ bindSelection(dataRow.details.items,record[$caseConvert.stringSnakeToCamel(dataRow.field)])}}
                       </p>
-                      <div
+                      <div @click="readItem(data[index].id)"
                         v-else-if="dataRow.type == 'select_multiple' || dataRow.type == 'checkbox'"
                         class="crud-generated__item--select-multiple"
                       >
@@ -115,55 +57,12 @@
                           {{ bindSelection(dataRow.details.items, selected) }}
                         </p>
                       </div>
-                      <div v-else-if="dataRow.type == 'color_picker'">
-                        <div
-                          class="crud-generated__item--color-picker"
-                          :style="`background-color: ${record[$caseConvert.stringSnakeToCamel(dataRow.field)]}`"
-                        ></div>
-                            {{record[ $caseConvert.stringSnakeToCamel(dataRow.field)]}}
-                      </div>
-                      <span v-else-if="dataRow.type == 'relation'">
-                        {{ displayRelationData(record, dataRow) }}
+                      <span v-else-if="dataRow.type == 'relation'" @click="readItem(data[index].id)">
+                        
+                        {{truncarTexto(displayRelationData(record, dataRow),20)}} 
                       </span>
-                      <span v-else>{{record[$caseConvert.stringSnakeToCamel(dataRow.field)]}}</span>
+                      <span @click="readItem(data[index].id)" v-else>{{truncarTexto(removeTags(record[$caseConvert.stringSnakeToCamel(dataRow.field)]),20)}}</span>
                     </template>
-                  </vs-td>
-                  <vs-td class="crud-generated__button">
-                    <badaso-dropdown vs-trigger-click>
-                      <vs-button
-                        size="large"
-                        type="flat"
-                        icon="more_vert"
-                      ></vs-button>
-                      <vs-dropdown-menu>
-                        <badaso-dropdown-item
-                          :to="{
-                            name:'CrudGeneratedRead',
-                            params:{
-                              id: data[index].id,
-                              slug: table,
-                            },
-                          }"
-                          v-if="isCanRead && $helper.isAllowedToModifyGeneratedCRUD( 'read', dataType.name ) && !isShowDataRecycle"
-                          icon="visibility"
-                        >
-                          Detail
-                        </badaso-dropdown-item>
-                        <badaso-dropdown-item
-                          :to="{
-                            name: 'CrudGeneratedEdit',
-                            params: {
-                              id: data[index].id,
-                              slug: table,
-                            },
-                          }"
-                          v-if="isCanEdit && $helper.isAllowedToModifyGeneratedCRUD('edit', dataType ) && !isShowDataRecycle"
-                          icon="edit"
-                        >
-                          Edit
-                        </badaso-dropdown-item>
-                      </vs-dropdown-menu>
-                    </badaso-dropdown>
                   </vs-td>
                 </template>
               </vs-tr>
@@ -176,11 +75,8 @@
 
 <script>
 import * as _ from "lodash";
-import downloadExcel from "vue-json-excel";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
 export default {
-  components: { downloadExcel },
+  components: {},
   name: "BadasoTableDashBoard",
   props: {
     nome:'',
@@ -192,7 +88,7 @@ export default {
   data: () => ({
     errors: {},
     data: {},
-    descriptionItems: [4],
+    descriptionItems: [6],
     selected: [],
     records: [],
     dataType: [],
@@ -216,17 +112,23 @@ export default {
     showMaintenancePage: false,
     isShowDataRecycle: false,
     widgettable:'',
+    windowWidth: window.innerWidth,
+    viewType: "",
+    activeLoading:false,
+    types:[
+      'default',
+      'point',
+      'radius',
+      'corners',
+      'border',
+      'sound',
+      'material',
+    ],
   }),
   watch: {
     $route: function (to, from) {
       this.getEntity();
     },
-    // page: function(to, from) {
-    //   this.handleChangePage(to);
-    // },
-    // limit: function(to, from) {
-    //   this.handleChangeLimit(to);
-    // },
   },
   mounted() {
     if (this.$route.query.search || this.$route.query.page) {
@@ -235,55 +137,55 @@ export default {
       this.show = this.$route.query.show;
     }
     this.getEntity();
-    this.loadIdsOfflineDelete();
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.handleWindowResize);
+    });
+
+    this.setViewType();
+    this.types.forEach((type)=>{
+      console.log(type)
+      this.$vs.loading({
+        container: `#loading-${type}`,
+        type,
+        text:type
+      })
+    })
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.handleWindowResize);
   },
   methods: {
-    getDownloadUrl(item) {
-      if (item == null || item == undefined) return;
-
-      return item.split("storage").pop();
+    truncarTexto(texto, limite) {
+      if (texto.length > limite) {
+        return texto.substring(0, limite) + '...';
+      } else {
+        return texto;
+      }
     },
-    confirmDeleteDataPending(id) {
-      this.willDeleteId = id;
-      this.$vs.dialog({
-        type: "confirm",
-        color: "danger",
-        title: this.$t("action.delete.title"),
-        text: this.$t("action.delete.text"),
-        accept: () => this.deleteRecordDataPending(id),
-        acceptText: this.$t("action.delete.accept"),
-        cancelText: this.$t("action.delete.cancel"),
-        cancel: () => {
-          this.willDeleteId = null;
-        },
-      });
+    removeTags(html) {
+      return html.replace(/<[^>]*>/g, '');
     },
-    confirmDelete(id) {
-      this.willDeleteId = id;
-      this.$vs.dialog({
-        type: "confirm",
-        color: "danger",
-        title: this.$t("action.delete.title"),
-        text: this.$t("action.delete.text"),
-        accept: this.deleteRecord,
-        acceptText: this.$t("action.delete.accept"),
-        cancelText: this.$t("action.delete.cancel"),
-        cancel: () => {
-          this.willDeleteId = null;
-        },
-      });
+    openLoading(type){
+      this.activeLoading = true
+      this.$vs.loading({
+        type:type,
+      })
+      setTimeout( ()=> {
+        this.activeLoading = false
+        this.$vs.loading.close()
+      }, 3000);
     },
-    confirmDeleteMultiple(id) {
-      this.$vs.dialog({
-        type: "confirm",
-        color: "danger",
-        title: this.$t("action.delete.title"),
-        text: this.$t("action.delete.text"),
-        accept: this.deleteRecords,
-        acceptText: this.$t("action.delete.accept"),
-        cancelText: this.$t("action.delete.cancel"),
-        cancel: () => {},
-      });
+    handleWindowResize(event) {
+      //window.innerWidth
+      this.windowWidth = event.currentTarget.innerWidth;
+      this.setViewType();
+    },
+    setViewType() {
+      if (this.windowWidth < 768) {
+        this.viewType = this.$constants.MOBILE;
+      } else {
+        this.viewType = this.$constants.DESKTOP;
+      }
     },
     async getEntity() {
       this.$openLoader();
@@ -320,11 +222,7 @@ export default {
         if (this.dataType.orderColumn && this.dataType.orderDisplayColumn) {
           this.isCanSort = true;
         }
-        this.prepareExcelExporter();
       } catch (error) {
-        if (error.status == 503) {
-          this.showMaintenancePage = true;
-        }
         this.$closeLoader();
         this.$vs.notify({
           title: this.$t("alert.danger"),
@@ -339,105 +237,6 @@ export default {
       }else{
         return [];
       }
-    },
-    deleteRecordDataPending(id) {
-      try {
-        const keyStore = window.location.pathname;
-        this.$readObjectStore(keyStore).then((store) => {
-          if (store.result) {
-            const data = store.result.data;
-            const newData = [];
-
-            for (const indexData in data) {
-              const itemData = data[indexData].requestData.data;
-              for (const indexItem in itemData) {
-                const fieldData = itemData[indexItem];
-                if (fieldData.field == "ids") {
-                  let valueIds = fieldData.value.split(",");
-                  valueIds = valueIds.filter((valueId, index) => valueId != id);
-                  if (valueIds.length != 0) {
-                    data[indexData].requestData.data[indexItem].value =
-                      valueIds.join(",");
-
-                    newData[newData.length] = data[indexData];
-                  }
-                } else {
-                  const valueId = fieldData.value;
-                  if (valueId.toString() != id.toString()) {
-                    newData[newData.length] = data[indexData];
-                  }
-                }
-              }
-            }
-
-            this.$setObjectStore(keyStore, { data: newData });
-
-            this.idsOfflineDeleteRecord = this.idsOfflineDeleteRecord.filter(
-              (itemId, index) => itemId != id
-            );
-          }
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    deleteRecord() {
-      this.$openLoader();
-      this.$api.badasoEntity
-        .delete({
-          slug: this.$route.params.slug,
-          data: [
-            {
-              field: "id",
-              value: this.willDeleteId,
-            },
-          ],
-        })
-        .then((response) => {
-          this.$closeLoader();
-          this.getEntity();
-        })
-        .catch((error) => {
-          this.loadIdsOfflineDelete();
-
-          this.errors = error.errors;
-          this.$closeLoader();
-          this.$vs.notify({
-            title: this.$t("alert.danger"),
-            text: error.message,
-            color: "danger",
-          });
-        });
-    },
-    deleteRecords() {
-      const ids = this.selected.map((item) => item.id);
-      this.$openLoader();
-      this.$api.badasoEntity
-        .deleteMultiple({
-          slug: this.$route.params.slug,
-          data: [
-            {
-              field: "ids",
-              value: ids.join(","),
-            },
-          ],
-        })
-        .then((response) => {
-          this.$closeLoader();
-          this.getEntity();
-        })
-        .catch((error) => {
-          this.selected = [];
-          this.loadIdsOfflineDelete();
-
-          this.errors = error.errors;
-          this.$closeLoader();
-          this.$vs.notify({
-            title: this.$t("alert.danger"),
-            text: error.message,
-            color: "danger",
-          });
-        });
     },
     bindSelection(items, value) {
       const selected = _.find(items, ["value", value]);
@@ -549,133 +348,14 @@ export default {
         return null;
       }
     },
-    prepareExcelExporter() {
-      for (const iterator of this.dataType.dataRows) {
-        this.fieldsForExcel[iterator.displayName] =
-          this.$caseConvert.stringSnakeToCamel(iterator.field);
-      }
-
-      for (const iterator of this.dataType.dataRows) {
-        const string = this.$caseConvert.stringSnakeToCamel(iterator.field);
-        if (iterator.browse == 1) {
-          this.fieldsForPdf.push(
-            string.charAt(0).toUpperCase() + string.slice(1)
-          );
-        }
-      }
-    },
-    openMaintenanceDialog() {
-      this.maintenanceDialog = true;
-    },
-    removerLinhas() {
-      this.maintenanceDialog = true;
-    },
-    saveMaintenanceState() {
-      this.$api.badasoEntity
-        .maintenance({
-          slug: this.$route.params.slug,
-          is_maintenance: this.isMaintenance,
-        })
-        .then((response) => {
-          this.maintenanceDialog = false;
-        })
-        .catch((error) => {
-          this.errors = error.errors;
-          this.$closeLoader();
-          this.$vs.notify({
-            title: this.$t("alert.danger"),
-            text: error.message,
-            color: "danger",
-          });
-        });
-    },
-    generatePdf() {
-      let data = this.records;
-
-      const result = data.map(Object.values);
-
-      // eslint-disable-next-line new-cap
-      const doc = new jsPDF("l");
-
-      // Dynamic table title
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(28);
-      doc.text(this.dataType.displayNameSingular, 149, 20, "center");
-
-      // Data table
-      doc.autoTable({
-        head: [this.fieldsForPdf],
-        body: result,
-        startY: 30,
-        // Default for all columns
-        styles: { valign: "middle" },
-        headStyles: { fillColor: [6, 187, 211] },
-        // Override the default above for the text column
-        columnStyles: { text: { cellWidth: "wrap" } },
+    readItem(mId) {
+      this.$router.push({
+        name:'CrudGeneratedRead',
+        params:{
+          id: mId,
+          slug: this.table,
+        },
       });
-
-      // Output Table title and data table in new tab
-      const output = doc.output("blob");
-
-      data = window.URL.createObjectURL(output);
-      window.open(data, "_blank");
-
-      setTimeout(function () {
-        // For Firefox it is necessary to delay revoking the ObjectURL
-        window.URL.revokeObjectURL(data);
-      }, 100);
-    },
-    loadIdsOfflineDelete() {
-      try {
-        const keyStore = window.location.pathname;
-        this.$readObjectStore(keyStore).then((store) => {
-          let dataResult = store.result;
-          if (dataResult) {
-            dataResult = dataResult.data;
-            const newDataResult = [];
-            for (const index in dataResult) {
-              const { requestMethod, requestData } = dataResult[index];
-              if (requestMethod == "delete" && requestData.slug != undefined) {
-                newDataResult[newDataResult.length] = dataResult[index];
-              }
-            }
-
-            let ids = [];
-            for (const index in newDataResult) {
-              const dataRequest = newDataResult[index].requestData.data;
-              for (const indexDataRequest in dataRequest) {
-                if (
-                  dataRequest[indexDataRequest].field == "id" ||
-                  dataRequest[indexDataRequest].field == "ids"
-                ) {
-                  const valueIds = dataRequest[indexDataRequest].value
-                    .toString()
-                    .split(",");
-                  ids.push(...valueIds);
-                }
-              }
-            }
-            ids = ids.filter((itemIds, indexIds, self) => {
-              return self.indexOf(itemIds) == indexIds;
-            });
-
-            this.idsOfflineDeleteRecord = ids;
-          }
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    async onSwitchChangeDataShow() {
-      await this.getEntity();
-    },
-  },
-  computed: {
-    isOnline: {
-      get() {
-        const isOnline = this.$store.getters["badaso/getGlobalState"].isOnline;
-        return isOnline;
-      },
     },
   },
 };

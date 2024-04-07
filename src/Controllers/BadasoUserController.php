@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Uasoft\Badaso\Helpers\ApiResponse;
 use Uasoft\Badaso\Models\User;
 use Uasoft\Badaso\Traits\FileHandler;
+use Illuminate\Support\Facades\Auth;
 
 class BadasoUserController extends Controller
 {
@@ -17,7 +18,7 @@ class BadasoUserController extends Controller
     public function browse(Request $request)
     {
         try {
-            $users = User::where('empresa_id',auth()->user()->empresa_id)->get();
+            $users = User::where('empresa_id',Auth::user()->empresa_id)->get();
 
             $data['users'] = $users;
 

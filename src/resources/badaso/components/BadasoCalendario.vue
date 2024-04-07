@@ -31,40 +31,21 @@
           <vs-button color="primary" icon="aspect_ratio" @click="popupActivoExpande=true"></vs-button>
           <vs-popup fullscreen title="Calendário" :active.sync="popupActivoExpande" :style="{ MarginTop:'150px'}">
             <vs-row>   
-              <vs-col vs-lg="2" >
+              <vs-col vs-lg="12" >
                 <vue-cal
-                  xsmall
-                  :time="false"
-                  hide-view-selector
-                  events-count-on-year-view
-                  active-view="month"
-                  locale="pt-br"
-                  :disable-views="['week', 'day']"
-                  @cell-focus="selectedDate = $event"
-                  class="vuecal--blue-theme vuecal--rounded-theme"
-                  style="max-height: 400px"
-                  :events="events">
-                </vue-cal>
-              </vs-col>
-
-              <vs-col vs-lg="10" >
-                <vue-cal
-                  hide-view-selector
                   active-view="week"
                   locale="pt-br"
                   events-on-month-view = "short" 
-                  :disable-views="['years', 'year', 'month']"
-                  :selected-date="selectedDate"
                   class="vuecal--blue-theme"
                   :events="events"
                   :split-days="splitDays"
                   :sticky-split-labels="stickySplitLabels"
                   :min-split-width="minSplitWidth"
                   :on-event-dblclick="onEventClick"
+                  style="min-height: 400px"
                 >
                 </vue-cal>
               </vs-col>
-
             </vs-row>
           </vs-popup>
         </vs-row>
