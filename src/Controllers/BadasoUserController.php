@@ -19,7 +19,7 @@ class BadasoUserController extends Controller
     {
         try {
             //$users = User::where('empresa_id',Auth::user()->empresa_id)->get();
-            $users = User::all()->get();
+            $users = User::all();
 
             $data['users'] = $users;
 
