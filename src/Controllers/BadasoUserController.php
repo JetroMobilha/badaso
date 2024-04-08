@@ -18,7 +18,8 @@ class BadasoUserController extends Controller
     public function browse(Request $request)
     {
         try {
-            $users = User::where('empresa_id',Auth::user()->empresa_id)->get();
+            //$users = User::where('empresa_id',Auth::user()->empresa_id)->get();
+            $users = User::all()->get();
 
             $data['users'] = $users;
 
