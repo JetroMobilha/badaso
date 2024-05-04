@@ -6,7 +6,7 @@
     <!-- header -->
     <header class="header-table vs-table--header">
       <vs-row class="badaso-table__table-header">
-        <vs-col vs-lg="6" vs-md="6" vs-sm="6" vs-xs="12" v-if="pagination">
+        <vs-col vs-lg="6" vs-md="6" vs-sm="6" vs-xs="12"  v-if="label!=''">
           <div class="badaso-table__header-dropdown">
             <h3><b>{{label}}</b></h3>
           </div>
@@ -134,7 +134,7 @@ export default {
       type: String,
     },
     label: {
-      default: 'BadasoWidgetTable',
+      default: '',
       type: String,
     },
     currentPage: {
