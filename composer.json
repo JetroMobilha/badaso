@@ -1,6 +1,6 @@
 {
   "name": "bamfura/core",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "The API & platform builder, build your apps 10x faster even more, it's open source & 100% free !",
   "keywords": [
     "laravel",
@@ -58,7 +58,7 @@
       "email": "geral@bamfura.com"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "prefer-stable": true,
   "autoload": {
     "psr-4": {
